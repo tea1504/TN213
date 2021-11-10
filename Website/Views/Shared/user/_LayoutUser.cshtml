@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <link rel="shortcut icon" href="~/Content/user/assets/images/x-icon.png" type="image/x-icon">
+
+    <link rel="stylesheet" href="~/Content/user/assets/css/animate.css">
+    <link rel="stylesheet" href="~/Content/user/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/user/assets/css/icofont.min.css">
+    <link rel="stylesheet" href="~/Content/user/assets/css/swiper.min.css">
+    <link rel="stylesheet" href="~/Content/user/assets/css/lightcase.css">
+    <link rel="stylesheet" href="~/Content/user/assets/css/style.css">
+
+    @RenderSection("Style", false)
+</head>
+<body>
+
+    <!-- preloader start here -->
+    <div class="preloader">
+        <div class="preloader-inner">
+            <div class="preloader-icon">
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+    <!-- preloader ending here -->
+    <!-- scrollToTop start here -->
+    <a href="#" class="scrollToTop"><i class="icofont-rounded-up"></i></a>
+    <!-- scrollToTop ending here -->
+    @Html.Partial("~/Views/Shared/user/_header.cshtml")
+    <!-- Page Header section start here -->
+    <div class="pageheader-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="pageheader-content text-center">
+                        <h2>@ViewBag.Title</h2>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb justify-content-center">
+                                @RenderSection("breadcrumb", false)
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Page Header section ending here -->
+    <div class="contact-section padding-tb">
+        <div class="container">
+            @RenderBody()
+        </div>
+    </div>
+    @Html.Partial("~/Views/Shared/user/_footer.cshtml")
+
+    <script src="~/Content/user/assets/js/jquery.js"></script>
+    <script src="~/Content/user/assets/js/bootstrap.min.js"></script>
+    <script src="~/Content/user/assets/js/swiper.min.js"></script>
+    <script src="~/Content/user/assets/js/progress.js"></script>
+    <script src="~/Content/user/assets/js/lightcase.js"></script>
+    <script src="~/Content/user/assets/js/counter-up.js"></script>
+    <script src="~/Content/user/assets/js/isotope.pkgd.js"></script>
+    <script src="~/Content/user/assets/js/functions.js"></script>
+    @RenderSection("Scripts", false)
+</body>
+</html>

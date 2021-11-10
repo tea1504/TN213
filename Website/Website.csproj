@@ -1101,6 +1101,9 @@
     <Content Include="Content\admin\assets\plugins\notifications\sounds\sound4.ogg" />
     <Content Include="Content\admin\assets\plugins\notifications\sounds\sound5.ogg" />
     <Content Include="Content\admin\assets\plugins\notifications\sounds\sound6.ogg" />
+    <Content Include="Areas\Admin\Views\Shared\_sidebar.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_header.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_footer.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -1126,15 +1129,14 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Shared\user\_LayoutUser.cshtml" />
-    <Content Include="Views\Shared\user\_header.cshtml" />
-    <Content Include="Views\Shared\user\_footer.cshtml" />
-    <Content Include="Views\Shared\admin\_LayoutAdmin.cshtml" />
+    <Content Include="Views\Shared\_LayoutUser.cshtml" />
+    <Content Include="Views\Shared\_header.cshtml" />
+    <Content Include="Views\Shared\_footer.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_LayoutAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

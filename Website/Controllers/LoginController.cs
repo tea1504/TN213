@@ -19,15 +19,29 @@ namespace Website.Controllers
         [HttpPost]
         public ActionResult DangNhap(LoginModel login)
         {
-            LoginDAO dao = new LoginDAO();
-            var res = dao.CheckLogin(login);
+            LoginDAO loginDAO = new LoginDAO();
+            var res = loginDAO.CheckLogin(login);
             if (res && ModelState.IsValid)
             {
-
+                NguoiDungDAO nguoiDungDAO = new NguoiDungDAO();
+                var nguoiDung = nguoiDungDAO.LayNguoiDungTheoTaiKhoan(login.taikhoan);
+                UserLoginModel userLoginModel = new UserLoginModel();
+                userLoginModel.ma_nd = nguoiDung.ma_nd;
+                userLoginModel.ma_vt = nguoiDung.ma_vt;
+                userLoginModel.ten_nd = nguoiDung.ten_nd;
+                userLoginModel.holot_nd = nguoiDung.holot_nd;
+                userLoginModel.anh_nd = nguoiDung.anh_nd;
+                userLoginModel.taikhoan = nguoiDung.taikhoan;
+                Session.Add("USER_LOGIN", userLoginModel);
                 return RedirectToAction("Index", "Dashboard", new { Area = "Admin" });
             }
             ModelState.AddModelError("", "Sai tài khoản hoặc mật khẩu");
             return View("Index", login);
+        }
+        public ActionResult DangXuat()
+        {
+            Session.Remove("USER_LOGIN");
+            return RedirectToAction("Index", "Login");
         }
     }
 }

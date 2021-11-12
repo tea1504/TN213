@@ -1,4 +1,5 @@
 ﻿<!-- header section start here -->
+@using Website.Models
 <header class="header-section header-shadow">
     <div class="header-top">
         <div class="container">
@@ -73,12 +74,27 @@
                                 </ul>
                             </li>
                             <li><a href="contact.html">Contact</a></li>
+                            @if (HttpContext.Current.Session["USER_LOGIN"] != null)
+                            {
+                                var user = (UserLoginModel)HttpContext.Current.Session["USER_LOGIN"];
+                                if (user.ma_vt == 1)
+                                {
+                                    <li><a href="@Url.Action("Index", "Dashboard", new { Area ="Admin" })">Dashboard</a></li>
+}
+                            }
                         </ul>
                     </div>
-
-                    <a href="login.html" class="login"><i class="icofont-user"></i> <span>LOG IN</span> </a>
-                    <a href="signup.html" class="signup"><i class="icofont-users"></i> <span>SIGN UP</span> </a>
-
+                    @if (HttpContext.Current.Session["USER_LOGIN"] == null)
+                    {
+                        <a href="@Url.Action("Index", "Login", new { Area = "" })" class="login"><i class="icofont-login"></i> <span>LOG IN</span> </a>
+                        <a href="signup.html" class="signup"><i class="icofont-edit"></i> <span>SIGN UP</span> </a>
+                    }
+                    else
+                    {
+                        var user = (UserLoginModel)HttpContext.Current.Session["USER_LOGIN"];
+                        <a href="#" class="login"><i class="icofont-user"></i> <span>@user.holot_nd @user.ten_nd</span> </a>
+                        <a href="@Url.Action("Dangxuat", "Login", new { Area = "" })" class="signup"><i class="icofont-logout"></i> <span>Đăng xuất</span> </a>
+                    }
                     <!-- toggle icons -->
                     <div class="header-bar d-lg-none">
                         <span></span>

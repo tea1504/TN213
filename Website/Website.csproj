@@ -45,10 +45,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -122,10 +130,34 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\CheckAdminController.cs" />
+    <Compile Include="Controllers\CheckLoginController.cs" />
+    <Compile Include="Controllers\CheckUserController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="DAO\LoginDAO.cs" />
+    <Compile Include="DAO\NguoiDungDAO.cs" />
+    <Compile Include="EF\AnhNhaTro.cs" />
+    <Compile Include="EF\BaoCaoNguoiDung.cs" />
+    <Compile Include="EF\BaoCaoNhaTro.cs" />
+    <Compile Include="EF\CoGia.cs" />
+    <Compile Include="EF\CoTienDienNuoc.cs" />
+    <Compile Include="EF\DanhGia.cs" />
+    <Compile Include="EF\KhuVuc.cs" />
+    <Compile Include="EF\LoaiBaoCao.cs" />
+    <Compile Include="EF\LoaiPhong.cs" />
+    <Compile Include="EF\MauSac.cs" />
+    <Compile Include="EF\Ngay.cs" />
+    <Compile Include="EF\NguoiDung.cs" />
+    <Compile Include="EF\NhaTro.cs" />
+    <Compile Include="EF\NhaTroDBContext.cs" />
+    <Compile Include="EF\TruongHoc.cs" />
+    <Compile Include="EF\VaiTro.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\UserLoginModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1133,11 +1165,14 @@
     <Content Include="Views\Shared\_header.cshtml" />
     <Content Include="Views\Shared\_footer.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_LayoutAdmin.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Models\" />
+    <Folder Include="Views\CheckAdmin\" />
+    <Folder Include="Views\CheckLogin\" />
+    <Folder Include="Views\CheckUser\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

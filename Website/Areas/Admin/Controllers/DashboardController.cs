@@ -7,7 +7,7 @@ using Website.Controllers;
 
 namespace Website.Areas.Admin.Controllers
 {
-    public class DashboardController : CheckLoginController
+    public class DashboardController : CheckAdminController
     {
         // GET: Admin/Dashboard
         public ActionResult Index()

@@ -74,6 +74,14 @@
                                 </ul>
                             </li>
                             <li><a href="contact.html">Contact</a></li>
+                            @if (HttpContext.Current.Session["USER_LOGIN"] != null)
+                            {
+                                var user = (UserLoginModel)HttpContext.Current.Session["USER_LOGIN"];
+                                if (user.ma_vt == 1)
+                                {
+                                    <li><a href="@Url.Action("Index", "Dashboard", new { Area ="Admin" })">Dashboard</a></li>
+}
+                            }
                         </ul>
                     </div>
                     @if (HttpContext.Current.Session["USER_LOGIN"] == null)

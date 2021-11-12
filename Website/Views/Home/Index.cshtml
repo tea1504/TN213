@@ -1,39 +1,631 @@
 ﻿@{
     ViewBag.Title = "Home Page";
-    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+    Layout = null;
 }
-@section breadcrumb {
-    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Contact Us</li>
-}
-@section Style {
-}
-@section Scripts {
-}
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+@using Website.Models
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edukon</title>
+    <link rel="shortcut icon" href="~/Content/user/assets/images/x-icon.png" type="image/x-icon">
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+    <link rel="stylesheet" href="~/Content/user/assets/css/animate.css">
+    <link rel="stylesheet" href="~/Content/user/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/user/assets/css/icofont.min.css">
+    <link rel="stylesheet" href="~/Content/user/assets/css/swiper.min.css">
+    <link rel="stylesheet" href="~/Content/user/assets/css/lightcase.css">
+    <link rel="stylesheet" href="~/Content/user/assets/css/style.css">
+</head>
+<body>
+
+    <!-- preloader start here -->
+    <div class="preloader">
+        <div class="preloader-inner">
+            <div class="preloader-icon">
+                <span></span>
+                <span></span>
+            </div>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+    <!-- preloader ending here -->
+    <!-- scrollToTop start here -->
+    <a href="#" class="scrollToTop yellow-color"><i class="icofont-rounded-up"></i></a>
+    <!-- scrollToTop ending here -->
+    <!-- menu-search-form start here -->
+    <div class="menu-search-form">
+        <form>
+            <input type="text" name="search" placeholder="Search here...">
+            <button type="submit"><i class="icofont-search"></i></button>
+        </form>
     </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    <!-- menu-search-form ending here -->
+    <!-- header section start here -->
+    <header class="header-section style-4">
+        <div class="header-top d-md-none">
+            <div class="container">
+                <div class="header-top-area">
+                    <a href="login.html" class="lab-btn me-3"><span>Create Account</span></a>
+                    <a href="login.html">Log In</a>
+                </div>
+            </div>
+        </div>
+        <div class="header-bottom">
+            <div class="container">
+                <div class="header-wrapper">
+                    <div class="logo-search-acte">
+                        <div class="logo">
+                            <a href="@Url.Action("Index", "Home", new { Area = ""})"><img src="~/Content/user/assets/images/logo/01.png" alt="logo"></a>
+                        </div>
+                    </div>
+                    <div class="menu-area">
+                        <div class="menu">
+                            <ul class="lab-ul">
+                                <li class="active">
+                                    <a href="#0">Home</a>
+                                    <ul class="lab-ul">
+                                        <li><a href="index.html">Home One</a></li>
+                                        <li><a href="index-2.html">Home Two</a></li>
+                                        <li><a href="index-3.html">Home Three</a></li>
+                                        <li><a href="index-4.html" class="active">Home Four</a></li>
+                                        <li><a href="index-5.html">Home Five</a></li>
+                                        <li><a href="index-6.html">Home Six</a></li>
+                                        <li><a href="index-7.html">Home Seven</a></li>
+                                    </ul>
+                                </li>
+
+                                <li>
+                                    <a href="#0">Courses</a>
+                                    <ul class="lab-ul">
+                                        <li><a href="course.html">Course</a></li>
+                                        <li><a href="course-single.html">Course Details</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#0">Blog</a>
+                                    <ul class="lab-ul">
+                                        <li><a href="blog.html">Blog Grid</a></li>
+                                        <li><a href="blog-2.html">Blog Style 2</a></li>
+                                        <li><a href="blog-3.html">Blog Style 3</a></li>
+                                        <li><a href="blog-single.html">Blog Single</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#0">Pages</a>
+                                    <ul class="lab-ul">
+                                        <li><a href="about.html">About</a></li>
+                                        <li><a href="team.html">Team</a></li>
+                                        <li><a href="instructor.html">Instructor</a></li>
+                                        <li>
+                                            <a href="#0">Shop Pages</a>
+                                            <ul class="lab-ul">
+                                                <li><a href="shop.html">Shop Page</a></li>
+                                                <li><a href="shop-single.html">Shop Details Page</a></li>
+                                                <li><a href="cart-page.html">Shop Cart Page</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="search-page.html">Search Page</a></li>
+                                        <li><a href="search-none.html">Search None</a></li>
+                                        <li><a href="404.html">404</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="contact.html">Contact</a></li>
+                                @if (HttpContext.Current.Session["USER_LOGIN"] != null)
+                                {
+                                    var user = (UserLoginModel)HttpContext.Current.Session["USER_LOGIN"];
+                                    if (user.ma_vt == 1)
+                                    {
+                                        <li><a href="@Url.Action("Index", "Dashboard", new { Area ="Admin" })">Dashboard</a></li>
+                                    }
+                                }
+                            </ul>
+                        </div>
+                        @if (HttpContext.Current.Session["USER_LOGIN"] == null)
+                        {
+                            <a href="@Url.Action("Index", "Login", new { Area = "" })" class="login"><i class="icofont-login"></i> <span>LOG IN</span> </a>
+                            <a href="signup.html" class="signup"><i class="icofont-edit"></i> <span>SIGN UP</span> </a>
+                        }
+                        else
+                        {
+                            var user = (UserLoginModel)HttpContext.Current.Session["USER_LOGIN"];
+                            <a href="#" class="login"><i class="icofont-user"></i> <span>@user.holot_nd @user.ten_nd</span> </a>
+                            <a href="@Url.Action("Dangxuat", "Login", new { Area = "" })" class="signup"><i class="icofont-logout"></i> <span>Đăng xuất</span> </a>
+                        }
+                        <div class="header-bar d-lg-none">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <div class="ellepsis-bar d-md-none">
+                            <i class="icofont-info-square"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- header section ending here -->
+    <!-- Banner Section Start Here -->
+    <div class="banner-section style-4">
+        <div class="container">
+            <div class="banner-content">
+                <h2>Search Your One From <span>150+</span> Online Courses</h2>
+                <form>
+                    <select>
+                        <option>Categories</option>
+                        <option>Web Development</option>
+                        <option>Graphic Design</option>
+                        <option>Python Proramming</option>
+                        <option>JavaScript</option>
+                        <option>PHP</option>
+                    </select>
+                    <input type="text" name="search" placeholder="Search your theme">
+                    <button type="submit"><i class="icofont-search"></i></button>
+                </form>
+                <p>We Have The Largest Collection of Courses</p>
+                <ul class="lab-ul">
+                    <li><i class="icofont-users-alt-4"></i> 1.5 Million Students</li>
+                    <li><i class="icofont-notification"></i> More then 2000 Courses</li>
+                    <li><i class="icofont-globe"></i> Learn Anything Online</li>
+                </ul>
+            </div>
+        </div>
     </div>
-</div>
+    <!-- Banner Section Ending Here -->
+    <!-- course section start here -->
+    <div class="course-section style-3 padding-tb">
+        <div class="course-shape one"><img src="~/Content/user/assets/images/shape-img/icon/01.png" alt="education"></div>
+        <div class="course-shape two"><img src="~/Content/user/assets/images/shape-img/icon/02.png" alt="education"></div>
+        <div class="container">
+            <div class="section-header">
+                <h2 class="title">Our Courses</h2>
+                <div class="course-filter-group">
+                    <ul class="lab-ul">
+                        <li class="active" data-filter="*">All</li>
+                        <li data-filter=".english">English</li>
+                        <li data-filter=".software">Software</li>
+                        <li data-filter=".design">Design</li>
+                        <li data-filter=".photography">Photography</li>
+                        <li data-filter=".music">Music</li>
+                        <li data-filter=".marketing">Marketing</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="section-wrapper">
+                <div class="row g-4 justify-content-center row-cols-xl-4 row-cols-lg-3 row-cols-md-2 row-cols-1 course-filter">
+                    <div class="col english">
+                        <div class="course-item style-4">
+                            <div class="course-inner">
+                                <div class="course-thumb">
+                                    <img src="~/Content/user/assets/images/course/16.jpg" alt="course">
+                                    <div class="course-category">
+                                        <div class="course-cate">
+                                            <a href="#">English</a>
+                                        </div>
+                                        <div class="course-reiew">
+                                            <span class="ratting">
+                                                <i class="icofont-ui-rating"></i>
+                                                <i class="icofont-ui-rating"></i>
+                                                <i class="icofont-ui-rating"></i>
+                                                <i class="icofont-ui-rating"></i>
+                                                <i class="icofont-ui-rating"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="course-content">
+                                    <a href="course-single.html"><h5>Basic English Spoken and Writing</h5></a>
+                                    <div class="course-footer">
+                                        <div class="course-author">
+                                            <img src="~/Content/user/assets/images/course/author/01.jpg" alt="course author">
+                                            <a href="team-single.html" class="ca-name">William Smith</a>
+                                        </div>
+                                        <div class="course-price">$19.00</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col software">
+                        <div class="course-item style-4">
+                            <div class="course-inner">
+                                <div class="course-thumb">
+                                    <img src="~/Content/user/assets/images/course/17.jpg" alt="course">
+                                    <div class="course-category">
+                                        <div class="course-cate">
+                                            <a href="#">Software</a>
+                                        </div>
+                                        <div class="course-reiew">
+                                            <span class="ratting">
+                                                <i class="icofont-ui-rating"></i>
+                                                <i class="icofont-ui-rating"></i>
+                                                <i class="icofont-ui-rating"></i>
+                                                <i class="icofont-ui-rating"></i>
+                                                <i class="icofont-ui-rating"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="course-content">
+                                    <a href="course-single.html"><h5>Learn Advance with PHP Language</h5></a>
+                                    <div class="course-footer">
+                                        <div class="course-author">
+                                            <img src="~/Content/user/assets/images/course/author/02.jpg" alt="course author">
+                                            <a href="team-single.html" class="ca-name">Zarina Bobro</a>
+                                        </div>
+                                        <div class="course-price">$19.00</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col design">
+                        <div class="course-item style-4">
+                            <div class="course-inner">
+                                <div class="course-thumb">
+                                    <img src="~/Content/user/assets/images/course/18.jpg" alt="course">
+                                    <div class="course-category">
+                                        <div class="course-cate">
+                                            <a href="#">Design</a>
+                                        </div>
+                                        <div class="course-reiew">
+                                            <span class="ratting">
+                                                <i class="icofont-ui-rating"></i>
+                                                <i class="icofont-ui-rating"></i>
+                                                <i class="icofont-ui-rating"></i>
+                                                <i class="icofont-ui-rating"></i>
+                                                <i class="icofont-ui-rating"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="course-content">
+                                    <a href="course-single.html"><h5>Logo Design in Adobe Illustrator</h5></a>
+                                    <div class="course-footer">
+                                        <div class="course-author">
+                                            <img src="~/Content/user/assets/images/course/author/03.jpg" alt="course author">
+                                            <a href="team-single.html" class="ca-name">Nestor Maslov</a>
+                                        </div>
+                                        <div class="course-price">$19.00</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col photography">
+                        <div class="course-item style-4">
+                            <div class="course-inner">
+                                <div class="course-thumb">
+                                    <img src="~/Content/user/assets/images/course/19.jpg" alt="course">
+                                    <div class="course-category">
+                                        <div class="course-cate">
+                                            <a href="#">Photography</a>
+                                        </div>
+                                        <div class="course-reiew">
+                                            <span class="ratting">
+                                                <i class="icofont-ui-rating"></i>
+                                                <i class="icofont-ui-rating"></i>
+                                                <i class="icofont-ui-rating"></i>
+                                                <i class="icofont-ui-rating"></i>
+                                                <i class="icofont-ui-rating"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="course-content">
+                                    <a href="course-single.html"><h5>Digital Photography for Beginner</h5></a>
+                                    <div class="course-footer">
+                                        <div class="course-author">
+                                            <img src="~/Content/user/assets/images/course/author/04.jpg" alt="course author">
+                                            <a href="team-single.html" class="ca-name">Rose Repina</a>
+                                        </div>
+                                        <div class="course-price">$19.00</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col marketing">
+                        <div class="course-item style-4">
+                            <div class="course-inner">
+                                <div class="course-thumb">
+                                    <img src="~/Content/user/assets/images/course/20.jpg" alt="course">
+                                    <div class="course-category">
+                                        <div class="course-cate">
+                                            <a href="#">Marketing</a>
+                                        </div>
+                                        <div class="course-reiew">
+                                            <span class="ratting">
+                                                <i class="icofont-ui-rating"></i>
+                                                <i class="icofont-ui-rating"></i>
+                                                <i class="icofont-ui-rating"></i>
+                                                <i class="icofont-ui-rating"></i>
+                                                <i class="icofont-ui-rating"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="course-content">
+                                    <a href="course-single.html"><h5>Advance Social  Media Marketing</h5></a>
+                                    <div class="course-footer">
+                                        <div class="course-author">
+                                            <img src="~/Content/user/assets/images/course/author/05.jpg" alt="course author">
+                                            <a href="team-single.html" class="ca-name">Muslim Voronk</a>
+                                        </div>
+                                        <div class="course-price">$19.00</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col music">
+                        <div class="course-item style-4">
+                            <div class="course-inner">
+                                <div class="course-thumb">
+                                    <img src="~/Content/user/assets/images/course/21.jpg" alt="course">
+                                    <div class="course-category">
+                                        <div class="course-cate">
+                                            <a href="#">Music</a>
+                                        </div>
+                                        <div class="course-reiew">
+                                            <span class="ratting">
+                                                <i class="icofont-ui-rating"></i>
+                                                <i class="icofont-ui-rating"></i>
+                                                <i class="icofont-ui-rating"></i>
+                                                <i class="icofont-ui-rating"></i>
+                                                <i class="icofont-ui-rating"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="course-content">
+                                    <a href="course-single.html"><h5>A Guidelines Complete Guitar System</h5></a>
+                                    <div class="course-footer">
+                                        <div class="course-author">
+                                            <img src="~/Content/user/assets/images/course/author/06.jpg" alt="course author">
+                                            <a href="team-single.html" class="ca-name">Zoe Muravyova</a>
+                                        </div>
+                                        <div class="course-price">$19.00</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col design">
+                        <div class="course-item style-4">
+                            <div class="course-inner">
+                                <div class="course-thumb">
+                                    <img src="~/Content/user/assets/images/course/22.jpg" alt="course">
+                                    <div class="course-category">
+                                        <div class="course-cate">
+                                            <a href="#">Design</a>
+                                        </div>
+                                        <div class="course-reiew">
+                                            <span class="ratting">
+                                                <i class="icofont-ui-rating"></i>
+                                                <i class="icofont-ui-rating"></i>
+                                                <i class="icofont-ui-rating"></i>
+                                                <i class="icofont-ui-rating"></i>
+                                                <i class="icofont-ui-rating"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="course-content">
+                                    <a href="course-single.html"><h5>Learn Piano Guidelines System A to Z</h5></a>
+                                    <div class="course-footer">
+                                        <div class="course-author">
+                                            <img src="~/Content/user/assets/images/course/author/01.jpg" alt="course author">
+                                            <a href="team-single.html" class="ca-name">William Smith</a>
+                                        </div>
+                                        <div class="course-price">$19.00</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col software">
+                        <div class="course-item style-4">
+                            <div class="course-inner">
+                                <div class="course-thumb">
+                                    <img src="~/Content/user/assets/images/course/23.jpg" alt="course">
+                                    <div class="course-category">
+                                        <div class="course-cate">
+                                            <a href="#">Software</a>
+                                        </div>
+                                        <div class="course-reiew">
+                                            <span class="ratting">
+                                                <i class="icofont-ui-rating"></i>
+                                                <i class="icofont-ui-rating"></i>
+                                                <i class="icofont-ui-rating"></i>
+                                                <i class="icofont-ui-rating"></i>
+                                                <i class="icofont-ui-rating"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="course-content">
+                                    <a href="course-single.html"><h5>Advance Professional Graphic Design</h5></a>
+                                    <div class="course-footer">
+                                        <div class="course-author">
+                                            <img src="~/Content/user/assets/images/course/author/02.jpg" alt="course author">
+                                            <a href="team-single.html" class="ca-name">Nora Yurieva</a>
+                                        </div>
+                                        <div class="course-price">$19.00</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- course section ending here -->
+    <!-- Register Start Here -->
+    <section class="register-section padding-tb pb-0">
+        <div class="container">
+            <div class="row g-4 row-cols-lg-2 row-cols-1 align-items-center">
+                <div class="col">
+                    <div class="section-header">
+                        <span class="subtitle">Save The Day</span>
+                        <h2 class="title">Join on Day Long Free Workshop for <b>Advance</b> <span>PHP</span> <b>Language</b></h2>
+                        <p>Limited Time Offer! Hurry Up</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="section-wrapper">
+                        <h4>Register Now</h4>
+                        <form class="register-form">
+                            <input type="text" name="username" placeholder="Username" class="reg-input">
+                            <input type="email" name="email" placeholder="Email" class="reg-input">
+                            <input type="text" name="phone" placeholder="Phone" class="reg-input">
+                            <button type="submit" class="lab-btn"><span>Register Now</span></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Register End Here -->
+    <!-- Footer Section Start Here -->
+    <footer class="style-2">
+        <div class="footer-top dark-view padding-tb">
+            <div class="container">
+                <div class="row g-4 row-cols-xl-4 row-cols-sm-2 row-cols-1 justify-content-center">
+                    <div class="col">
+                        <div class="footer-item our-address">
+                            <div class="footer-inner">
+                                <div class="footer-content">
+                                    <div class="title">
+                                        <h4>About Edukon</h4>
+                                    </div>
+                                    <div class="content">
+                                        <p>Eduaid theme number one world class university in the world There are student are studing always in this university for all time.</p>
+                                        <ul class="lab-ul office-address">
+                                            <li><i class="icofont-google-map"></i>New Elefent Road, Dhaka.</li>
+                                            <li><i class="icofont-phone"></i>+880 123 456 789</li>
+                                            <li><i class="icofont-envelope"></i>info@Edukon.com</li>
+                                        </ul>
+                                        <ul class="lab-ul social-icons">
+                                            <li>
+                                                <a href="#" class="facebook"><i class="icofont-facebook"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="twitter"><i class="icofont-twitter"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="linkedin"><i class="icofont-linkedin"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="instagram"><i class="icofont-instagram"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="pinterest"><i class="icofont-pinterest"></i></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="footer-item">
+                            <div class="footer-inner">
+                                <div class="footer-content">
+                                    <div class="title">
+                                        <h4>Courses</h4>
+                                    </div>
+                                    <div class="content">
+                                        <ul class="lab-ul">
+                                            <li><a href="#">All Courses</a></li>
+                                            <li><a href="#">Forms and Admision materials</a></li>
+                                            <li><a href="#">Professional Courses</a></li>
+                                            <li><a href="#">Course Outline</a></li>
+                                            <li><a href="#">Policy</a></li>
+                                            <li><a href="#">FAQs</a></li>
+                                            <li><a href="#">Online Course</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="footer-item">
+                            <div class="footer-inner">
+                                <div class="footer-content">
+                                    <div class="title">
+                                        <h4>Quick Links</h4>
+                                    </div>
+                                    <div class="content">
+                                        <ul class="lab-ul">
+                                            <li><a href="#">Summer Sessions</a></li>
+                                            <li><a href="#">Events</a></li>
+                                            <li><a href="#">Gallery</a></li>
+                                            <li><a href="#">Forums</a></li>
+                                            <li><a href="#">Privacy Policy</a></li>
+                                            <li><a href="#">Terms of Use</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="footer-item twitter-post">
+                            <div class="footer-inner">
+                                <div class="footer-content">
+                                    <div class="title">
+                                        <h4>Recent Tweets</h4>
+                                    </div>
+                                    <div class="content">
+                                        <ul class="lab-ul">
+                                            <li>
+                                                <i class="icofont-twitter"></i>
+                                                <p>Somrat islam <a href="#">CodexCoder Edukon #HTML_Template</a> Grab your item, 50% Big Sale Offer !!</p>
+                                            </li>
+                                            <li>
+                                                <i class="icofont-twitter"></i>
+                                                <p>Somrat islam <a href="#">CodexCoder Edukon #HTML_Template</a> Grab your item, 50% Big Sale Offer !!</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="section-wrapper">
+                    <p>&copy; 2021 <a href="index.html">Edukon</a> Designed by <a href="https://themeforest.net/user/CodexCoder" target="_blank">CodexCoder</a> </p>
+                    <div class="footer-bottom-list">
+                        <a href="#">Faculty</a>
+                        <a href="#">Staff</a>
+                        <a href="#">Students</a>
+                        <a href="#">Alumni</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer Section Ending Here -->
+
+
+
+
+    <script src="~/Content/user/assets/js/jquery.js"></script>
+    <script src="~/Content/user/assets/js/bootstrap.min.js"></script>
+    <script src="~/Content/user/assets/js/swiper.min.js"></script>
+    <script src="~/Content/user/assets/js/progress.js"></script>
+    <script src="~/Content/user/assets/js/lightcase.js"></script>
+    <script src="~/Content/user/assets/js/counter-up.js"></script>
+    <script src="~/Content/user/assets/js/isotope.pkgd.js"></script>
+    <script src="~/Content/user/assets/js/functions.js"></script>
+</body>
+</html>

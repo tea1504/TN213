@@ -39,14 +39,19 @@
                 <h3 class="title">Login</h3>
                 @using (Html.BeginForm("DangNhap", "Login", FormMethod.Post, new { @class = "account-form" }))
                 {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     <div class="form-group">
                         @Html.TextBoxFor(m => m.taikhoan, new { @placeholder = "Tài khoản" })
                         <div>
-                            <small>@Html.ValidationMessageFor(m=>m.taikhoan)</small>
+                            <small>@Html.ValidationMessageFor(m => m.taikhoan, "", new { @class = "text-danger" })</small>
                         </div>
                     </div>
                     <div class="form-group">
                         @Html.PasswordFor(m => m.matkhau, new { @placeholder = "Mật khẩu" })
+                        <div>
+                            <small>@Html.ValidationMessageFor(m => m.matkhau, "", new { @class = "text-danger" })</small>
+                        </div>
                     </div>
                     <div class="form-group">
                         <div class="d-flex justify-content-between flex-wrap pt-sm-2">
@@ -98,5 +103,7 @@
     <script src="~/Content/user/assets/js/counter-up.js"></script>
     <script src="~/Content/user/assets/js/isotope.pkgd.js"></script>
     <script src="~/Content/user/assets/js/functions.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 </body>
 </html>

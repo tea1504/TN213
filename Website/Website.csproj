@@ -132,6 +132,7 @@
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="DAO\LoginDAO.cs" />
     <Compile Include="EF\AnhNhaTro.cs" />
     <Compile Include="EF\BaoCaoNguoiDung.cs" />
     <Compile Include="EF\BaoCaoNhaTro.cs" />
@@ -1164,7 +1165,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="DAO\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

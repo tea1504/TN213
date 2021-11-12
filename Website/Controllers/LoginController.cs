@@ -15,7 +15,7 @@ namespace Website.Controllers
             return View();
         }
         [ValidateAntiForgeryToken]
-        [HttpPost, ActionName("Index")]
+        [HttpPost]
         public ActionResult DangNhap(LoginModel login)
         {
             ModelState.AddModelError("", "Lỗi");

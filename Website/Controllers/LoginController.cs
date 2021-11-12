@@ -23,6 +23,7 @@ namespace Website.Controllers
             var res = dao.CheckLogin(login);
             if (res && ModelState.IsValid)
             {
+
                 return RedirectToAction("Index", "Dashboard", new { Area = "Admin" });
             }
             ModelState.AddModelError("", "Sai tài khoản hoặc mật khẩu");

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Website.DAO;
 using Website.Models;
 
 namespace Website.Controllers
@@ -18,7 +19,13 @@ namespace Website.Controllers
         [HttpPost]
         public ActionResult DangNhap(LoginModel login)
         {
-            ModelState.AddModelError("", "Lỗi");
+            LoginDAO dao = new LoginDAO();
+            var res = dao.CheckLogin(login);
+            if (res && ModelState.IsValid)
+            {
+                return RedirectToAction("Index", "Dashboard", new { Area = "Admin" });
+            }
+            ModelState.AddModelError("", "Sai tài khoản hoặc mật khẩu");
             return View("Index", login);
         }
     }

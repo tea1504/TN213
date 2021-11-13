@@ -111,7 +111,7 @@
                                         <li><a href="404.html">404</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="contact.html">Contact</a></li>
+                                <li><a href="@Url.Action("Index", "DSNhaTro", new { Area = "" })">Nhà trọ</a></li>
                                 @if (HttpContext.Current.Session["USER_LOGIN"] != null)
                                 {
                                     var user = (UserLoginModel)HttpContext.Current.Session["USER_LOGIN"];

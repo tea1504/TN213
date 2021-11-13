@@ -168,6 +168,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\WebNhaTro_TN213.sql" />
     <Content Include="Content\admin\assets\css\animate.css" />
     <Content Include="Content\admin\assets\css\app.css" />
     <Content Include="Content\admin\assets\css\bootstrap.css" />
@@ -1176,7 +1177,6 @@
     <Content Include="Views\DSNhaTro\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Views\CheckAdmin\" />
     <Folder Include="Views\CheckLogin\" />

@@ -15,7 +15,7 @@ namespace Website.DAO
         {
             db = new NhaTroDBContext();
         }
-        public List<DSNhaTroModel> FilterNhaTro(FilterNhaTroModel f)
+        public List<DSNhaTroModel> FilterNhaTro(FilterNhaTroModel f, int page, ref int total)
         {
             List<DSNhaTroModel> res = new List<DSNhaTroModel>();
             object[] sqlParams =
@@ -26,7 +26,9 @@ namespace Website.DAO
                 new SqlParameter("@giaphong", (object)f.giaphong??DBNull.Value),
             };
             var list = db.Database.SqlQuery<NhaTro>("sp_filter_nha_tro @ma_kv, @tiendien, @tiennuoc, @giaphong", sqlParams).ToList();
-            foreach (NhaTro nt in list)
+            total = list.Count;
+            var dsnt = list.Skip(6 * (page - 1)).Take(6);
+            foreach (NhaTro nt in dsnt)
             {
                 KhuVuc kv = new KhuVucDAO().LayKhuVuc(nt.ma_kv);
                 NguoiDung nd = new NguoiDungDAO().LayNguoiDung(nt.ma_nd);

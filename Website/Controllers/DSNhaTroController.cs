@@ -10,13 +10,17 @@ namespace Website.Controllers
 {
     public class DSNhaTroController : Controller
     {
-        // GET: DSNhaTro
-        public ActionResult Index(FilterNhaTroModel f)
+        public ActionResult Index(int? ma_kv, float? tiendien, float? tiennuoc, float? giaphong, int page = 1)
         {
+            FilterNhaTroModel f = new FilterNhaTroModel(ma_kv, tiendien, tiennuoc, giaphong);
             var khuVuc = new KhuVucDAO().GetAllKhuVuc();
             SelectList khuVucList = new SelectList(khuVuc, "ma_kv", "ten_kv");
             ViewBag.khuVucList = khuVucList;
-            var res = new NhaTroDAO().FilterNhaTro(f);
+            int total = 0;
+            var res = new NhaTroDAO().FilterNhaTro(f, page, ref total);
+            ViewBag.total = total;
+            ViewBag.maxpage = (int)(total / 6) + ((total % 6 > 0) ? 1 : 0);
+            ViewBag.page = page;
             return View(res);
         }
     }

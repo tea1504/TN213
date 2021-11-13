@@ -26,13 +26,13 @@ namespace Website.DAO
                 new SqlParameter("@giaphong", (object)f.giaphong??DBNull.Value),
             };
             var list = db.Database.SqlQuery<NhaTro>("sp_filter_nha_tro @ma_kv, @tiendien, @tiennuoc, @giaphong", sqlParams).ToList();
-            foreach (NhaTro item in list)
+            foreach (NhaTro nt in list)
             {
-                KhuVuc kv = new KhuVucDAO().LayKhuVuc(item.ma_kv);
-                NguoiDung nd = new NguoiDungDAO().LayNguoiDung(item.ma_nd);
-                DSNhaTroModel temp = new DSNhaTroModel();
-                temp.nhaTro = item;
-
+                KhuVuc kv = new KhuVucDAO().LayKhuVuc(nt.ma_kv);
+                NguoiDung nd = new NguoiDungDAO().LayNguoiDung(nt.ma_nd);
+                float ss = new DanhGiaDAO().TBSoSaoTheoNhaTro(nt.ma_nt);
+                int dg = new DanhGiaDAO().DemSoDanhGiaTheoNhaTro(nt.ma_nt);
+                DSNhaTroModel temp = new DSNhaTroModel(nt, nd, kv, ss, dg);
                 res.Add(temp);
             }
             return res;

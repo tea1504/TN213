@@ -10,15 +10,17 @@ namespace Website.Models
     {
         public NhaTro nhaTro { set; get; }
         public NguoiDung nguoiDung { set; get; }
-        public KhuVuc khuVuc { set; get; } 
-        public float soSao { set; get; } 
+        public KhuVuc khuVuc { set; get; }
+        public float soSao { set; get; }
         public int soDanhGia { set; get; }
+        public AnhNhaTro anhNhaTro { set; get; }
         public DSNhaTroModel() { }
-        public DSNhaTroModel(NhaTro nt, NguoiDung nd, KhuVuc kv, float ss, int dg)
+        public DSNhaTroModel(NhaTro nt, NguoiDung nd, KhuVuc kv, AnhNhaTro anh, float ss, int dg)
         {
             nhaTro = nt;
             nguoiDung = nd;
             khuVuc = kv;
+            anhNhaTro = anh;
             soSao = ss;
             soDanhGia = dg;
         }

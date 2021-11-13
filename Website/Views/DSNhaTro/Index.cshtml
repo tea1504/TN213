@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Website.EF.NhaTro>
+﻿@model IEnumerable<Website.Models.DSNhaTroModel>
 @{
     ViewBag.Title = "Nhà trọ";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
@@ -73,27 +73,51 @@
             <div class="row g-4 justify-content-center row-cols-xl-3 row-cols-md-2 row-cols-1">
                 @foreach (var m in Model)
                 {
-                <div class="col">
-                    <div class="course-item">
-                        <div class="course-inner">
-                            <div class="course-thumb">
-                                <img src="~/Content/user/assets/images/course/01.jpg" alt="course">
-                            </div>
-                            <div class="course-content">
-                                <a href="course-single.html"><h5>@m.ten_nt</h5></a>
-                                <div class="course-details">
-                                    <div class="couse-count"><i class="icofont-video-alt"></i> @m.diachi_nt</div>
-                                    <div class="couse-topic"><i class="icofont-signal"></i> @m.sdt_nt</div>
+                    <div class="col">
+                        <div class="course-item">
+                            <div class="course-inner">
+                                <div class="course-thumb">
+                                    <img src="~/Content/user/assets/images/course/01.jpg" alt="course">
                                 </div>
-                                <div class="course-footer">
-                                    <div class="course-btn">
-                                        <a href="course-single.html" class="lab-btn-text">Read More <i class="icofont-external-link"></i></a>
+                                <div class="course-content">
+                                    <div class="course-category">
+                                        <div class="course-cate">
+                                            <a href="#" style='background-color: #@m.khuVuc.ma_ms;'>@m.khuVuc.ten_kv</a>
+                                        </div>
+                                        <div class="course-reiew">
+                                            <span class="ratting">
+                                                @for (int i = 1; i <= (int)m.soSao; i++)
+                                                {
+                                                    <i class="icofont-ui-rating"></i>
+                                                }
+                                                @for (int i = 1; i <= 5-(int)m.soSao; i++)
+                                                {
+                                                    <i class="icofont-ui-rating" style="color: #808080"></i>
+                                                }
+                                                </span>
+                                            <span class="ratting-count">
+                                                @m.soDanhGia reviews
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <a href="course-single.html"><h5>@m.nhaTro.ten_nt</h5></a>
+                                    <div class="course-details">
+                                        <div class="couse-count"><i class="icofont-google-map"></i> @m.nhaTro.diachi_nt</div>
+                                        <div class="couse-topic"><i class="icofont-phone"></i> @m.nhaTro.sdt_nt</div>
+                                    </div>
+                                    <div class="course-footer">
+                                        <div class="course-author">                                            
+                                            <img src="~/Content/@m.nguoiDung.anh_nd" style="height: 30px" alt="course author">
+                                            <a href="team-single.html" class="ca-name">@m.nguoiDung.holot_nd @m.nguoiDung.ten_nd</a>
+                                        </div>
+                                        <div class="course-btn">
+                                            <a href="course-single.html" class="lab-btn-text">Xem thêm <i class="icofont-external-link"></i></a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 }
             </div>
             <ul class="default-pagination lab-ul">

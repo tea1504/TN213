@@ -13,12 +13,10 @@ namespace Website.Controllers
         // GET: DSNhaTro
         public ActionResult Index(FilterNhaTroModel f)
         {
-            NhaTroDAO nhaTroDAO = new NhaTroDAO();
-            KhuVucDAO khuVucDAO = new KhuVucDAO();
-            var khuVuc = khuVucDAO.GetAllKhuVuc();
+            var khuVuc = new KhuVucDAO().GetAllKhuVuc();
             SelectList khuVucList = new SelectList(khuVuc, "ma_kv", "ten_kv");
             ViewBag.khuVucList = khuVucList;
-            var res = nhaTroDAO.FilterNhaTro(f);
+            var res = new NhaTroDAO().FilterNhaTro(f);
             return View(res);
         }
     }

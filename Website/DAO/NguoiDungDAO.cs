@@ -23,5 +23,10 @@ namespace Website.DAO
             var res = db.Database.SqlQuery<NguoiDung>("sp_get_nguoi_dung @taikhoan", sqlParams).SingleOrDefault();
             return res;
         }
+        public NguoiDung LayNguoiDung(int ma_nd)
+        {
+            var res = db.NguoiDungs.Find(ma_nd);
+            return res;
+        }
     }
 }

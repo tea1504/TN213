@@ -19,10 +19,10 @@ namespace Website.DAO
         {
             object[] sqlParams =
             {
-                new SqlParameter("@ma_kv", f.ma_kv),
-                new SqlParameter("@tiendien", f.tiendien),
-                new SqlParameter("@tiennuoc", f.tiennuoc),
-                new SqlParameter("@giaphong", f.giaphong),
+                new SqlParameter("@ma_kv", (object)f.ma_kv??DBNull.Value),
+                new SqlParameter("@tiendien", (object)f.tiendien??DBNull.Value),
+                new SqlParameter("@tiennuoc", (object)f.tiennuoc??DBNull.Value),
+                new SqlParameter("@giaphong", (object)f.giaphong??DBNull.Value),
             };
             var res = db.Database.SqlQuery<NhaTro>("sp_filter_nha_tro @ma_kv, @tiendien, @tiennuoc, @giaphong", sqlParams).ToList();
             return res;

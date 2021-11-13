@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<Website.EF.NhaTro>
 @{
     ViewBag.Title = "Nhà trọ";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
@@ -14,15 +14,14 @@
 <!-- group select section start here -->
 <div class="group-select-section">
     <div class="container">
-        @using (Html.BeginForm())
+        @using (Html.BeginForm("Index", "DSNhaTro", FormMethod.Post, new { Area = "" }))
         {
             <div class="section-wrapper">
                 <div class="row align-items-center g-4">
 
                     <div class="col-md-1">
                         <div class="group-select-left">
-                            <i class="icofont-abacus-alt"></i>
-                            <span>Filters</span>
+                            <button type="submit">Lọc</button>
                         </div>
                     </div>
                     <div class="col-md-11">
@@ -30,13 +29,13 @@
                             <div class="row g-2 row-cols-lg-4 row-cols-sm-2 row-cols-1">
                                 <div class="col">
                                     <div class="select-item">
-                                        <select>
-                                            <option value="">All Categories</option>
-                                            <option value="uncategorized">Uncategorized</option>
-                                            <option value="academy">Academy</option>
-                                            <option value="agency">Agency</option>
-                                            <option value="app">App</option>
-                                            <option value="bar">Bar</option>
+                                        <select name="f.ma_kv">
+                                            <option value="1">All Categories</option>
+                                            <option value="2">Uncategorized</option>
+                                            <option value="3">Academy</option>
+                                            <option value="4">Agency</option>
+                                            <option value="5">App</option>
+                                            <option value="6">Bar</option>
                                         </select>
                                         <div class="select-icon">
                                             <i class="icofont-rounded-down"></i>
@@ -45,17 +44,17 @@
                                 </div>
                                 <div class="col">
                                     <div class="select-item">
-                                        <input type="text" />
+                                        <input type="text" name="f.tiendien"/>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="select-item">
-                                        <input type="text" />
+                                        <input type="text" name="f.tiennuoc"/>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="select-item">
-                                        <input type="text" />
+                                        <input type="text" name="f.giaphong"/>
                                     </div>
                                 </div>
                             </div>

@@ -7,9 +7,9 @@ namespace Website.Models
 {
     public class FilterNhaTroModel
     {
-        int? ma_kv { set; get; }
-        float? tiendien { set; get; }
-        float? tiennuoc { set; get; }
-        float? giaphong { set; get; }
+        public int? ma_kv { set; get; }
+        public float? tiendien { set; get; }
+        public float? tiennuoc { set; get; }
+        public float? giaphong { set; get; }
     }
 }

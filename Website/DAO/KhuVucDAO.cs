@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using Website.EF;
@@ -16,6 +17,11 @@ namespace Website.DAO
         public List<KhuVuc> GetAllKhuVuc()
         {
             var res = db.KhuVucs.ToList();
+            return res;
+        }
+        public KhuVuc LayKhuVuc(int ma_kv)
+        {
+            KhuVuc res = db.KhuVucs.Find(ma_kv);
             return res;
         }
     }

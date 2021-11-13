@@ -30,9 +30,10 @@ namespace Website.DAO
             {
                 KhuVuc kv = new KhuVucDAO().LayKhuVuc(nt.ma_kv);
                 NguoiDung nd = new NguoiDungDAO().LayNguoiDung(nt.ma_nd);
+                List<AnhNhaTro> anh = new AnhNhaTroDAO().GetAnhNhaTroTheoMaNhaTro(nt.ma_nt);
                 float ss = new DanhGiaDAO().TBSoSaoTheoNhaTro(nt.ma_nt);
                 int dg = new DanhGiaDAO().DemSoDanhGiaTheoNhaTro(nt.ma_nt);
-                DSNhaTroModel temp = new DSNhaTroModel(nt, nd, kv, ss, dg);
+                DSNhaTroModel temp = new DSNhaTroModel(nt, nd, kv, anh, ss, dg);
                 res.Add(temp);
             }
             return res;

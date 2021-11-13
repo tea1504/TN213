@@ -13,9 +13,9 @@ namespace Website.Models
         public KhuVuc khuVuc { set; get; }
         public float soSao { set; get; }
         public int soDanhGia { set; get; }
-        public AnhNhaTro anhNhaTro { set; get; }
+        public List<AnhNhaTro> anhNhaTro { set; get; }
         public DSNhaTroModel() { }
-        public DSNhaTroModel(NhaTro nt, NguoiDung nd, KhuVuc kv, AnhNhaTro anh, float ss, int dg)
+        public DSNhaTroModel(NhaTro nt, NguoiDung nd, KhuVuc kv, List<AnhNhaTro> anh, float ss, int dg)
         {
             nhaTro = nt;
             nguoiDung = nd;

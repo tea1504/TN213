@@ -13,7 +13,7 @@ namespace Website.DAO
         {
             db = new NhaTroDBContext();
         }
-        public List<AnhNhaTro> GetAnhNhaTro(int ma_nt)
+        public List<AnhNhaTro> GetAnhNhaTroTheoMaNhaTro(int ma_nt)
         {
             var res = db.AnhNhaTroes.Where(anh => anh.ma_nt == ma_nt).ToList();
             return res;

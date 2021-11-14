@@ -137,6 +137,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="DAO\AnhNhaTroDAO.cs" />
+    <Compile Include="DAO\CoTienDienNuocDAO.cs" />
     <Compile Include="DAO\DanhGiaDAO.cs" />
     <Compile Include="DAO\KhuVucDAO.cs" />
     <Compile Include="DAO\LoginDAO.cs" />

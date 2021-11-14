@@ -1,59 +1,287 @@
 ﻿@model Website.EF.NhaTro
 
 @{
-    ViewBag.Title = "NhaTro";
+    ViewBag.Title = Model.ten_nt;
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
+    float soSao = 0;
+    int count = 0;
+    int total = 0;
+    foreach (var item in Model.DanhGias)
+    {
+        count += item.sosao;
+        total++;
+    }
+    soSao = (total > 0) ? count / total : soSao;
 }
-
-<h2>NhaTro</h2>
-
-<div>
-    <h4>NhaTro</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ma_nd)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ma_nd)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ma_kv)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ma_kv)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ten_nt)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ten_nt)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.diachi_nt)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.diachi_nt)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.sdt_nt)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.sdt_nt)
-        </dd>
-
-    </dl>
+@section style{
+}
+@section scripts{
+    <script>
+        $(".pageheader-section").hide();
+        $(".pageheader-section.style-2").show();
+    </script>
+}
+@section  breadcrumb{
+    <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home", new { Area = "" })">Home</a></li>
+    <li class="breadcrumb-item" aria-current="page"><a href="@Url.Action("Index", "DSNhaTro", new { Area = "" })">Nhà trọ</a></li>
+    <li class="breadcrumb-item active" aria-current="page">@ViewBag.Title</li>
+}
+<!-- Page Header section start here -->
+<div class="pageheader-section style-2">
+    <div class="container">
+        <div class="row justify-content-center justify-content-lg-between align-items-center flex-row-reverse">
+            <div class="col-lg-7 col-12">
+                <div class="pageheader-thumb">
+                    <img src="~/Content/user/assets/images/pageheader/02.jpg" alt="rajibraj91" class="w-100">
+                </div>
+            </div>
+            <div class="col-lg-5 col-12">
+                <div class="pageheader-content">
+                    <div class="course-category">
+                        <a href="#" class="course-cate" style="background-color: #@Model.KhuVuc.ma_ms">@Model.KhuVuc.ten_kv</a>
+                    </div>
+                    <h2 class="phs-title">@Model.ten_nt</h2>
+                    <p class="phs-desc">@Model.diachi_nt</p>
+                    <div class="phs-thumb">
+                        <img src="/Content/@Model.NguoiDung.anh_nd" alt="@Model.NguoiDung.ten_nd">
+                        <span>@Model.NguoiDung.holot_nd @Model.NguoiDung.ten_nd</span>
+                        <div class="course-reiew">
+                            <span class="ratting">
+                                @for (int i = 1; i <= (int)soSao; i++)
+                                {
+                                    <i class="icofont-ui-rating"></i>
+                                }
+                                @for (int i = 1; i <= 5 - (int)soSao; i++)
+                                {
+                                    <i class="icofont-ui-rating" style="color:#808080"></i>
+                                }
+                            </span>
+                            <span class="ratting-count">
+                                @total đánh giá
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ma_nt }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<!-- Page Header section ending here -->
+<!-- course section start here -->
+<div class="course-single-section padding-tb section-bg">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="main-part">
+                    <div class="course-item">
+                        <div class="course-inner">
+                            <div class="course-content">
+                                <div id="map"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="authors">
+                        <div class="author-thumb">
+                            <img src="~/Content/@Model.NguoiDung.anh_nd" alt="@Model.NguoiDung.ten_nd">
+                        </div>
+                        <div class="author-content">
+                            <h5>@Model.NguoiDung.holot_nd @Model.NguoiDung.ten_nd</h5>
+                            <span>Chủ nhà trọ</span>
+                            <table width="100%">
+                                <tr>
+                                    <td>@Html.LabelFor(m => m.NguoiDung.sdt_nd)</td>
+                                    <td>@Model.NguoiDung.sdt_nd</td>
+                                </tr>
+                                <tr>
+                                    <td>@Html.LabelFor(m => m.NguoiDung.diachi)</td>
+                                    <td>@Model.NguoiDung.diachi</td>
+                                </tr>
+                                <tr>
+                                    <td>@Html.LabelFor(m => m.NguoiDung.email)</td>
+                                    <td>@Model.NguoiDung.email</td>
+                                </tr>
+                            </table>
+                            <ul class="lab-ul social-icons">
+                                <li>
+                                    <a href="#" class="facebook"><i class="icofont-facebook"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#" class="twitter"><i class="icofont-twitter"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#" class="linkedin"><i class="icofont-linkedin"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#" class="instagram"><i class="icofont-instagram"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#" class="pinterest"><i class="icofont-pinterest"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div id="comments" class="comments">
+                        <h4 class="title-border">@total đánh giá</h4>
+                        <ul class="comment-list">
+                            @foreach (var cmt in Model.DanhGias)
+                            {
+                                <li class="comment">
+                                    <div class="com-thumb">
+                                        <img alt="@cmt.NguoiDung.ten_nd" src="~/Content/@cmt.NguoiDung.anh_nd">
+                                    </div>
+                                    <div class="com-content">
+                                        <div class="com-title">
+                                            <div class="com-title-meta">
+                                                <h6>@cmt.NguoiDung.holot_nd @cmt.NguoiDung.ten_nd</h6>
+                                                <span> @cmt.ngay </span>
+                                            </div>
+                                            <span class="ratting">
+                                                @for (int i = 1; i <= cmt.sosao; i++)
+                                                {
+                                                    <i class="icofont-ui-rating"></i>
+                                                }
+                                                @for (int i = 1; i <= 5 - cmt.sosao; i++)
+                                                {
+                                                    <i class="icofont-ui-rating" style="color:#808080"></i>
+                                                }
+                                            </span>
+                                        </div>
+                                        <p>@cmt.danhgia1</p>
+                                        <hr />
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+
+                    <div id="respond" class="comment-respond mb-lg-0">
+                        <h4 class="title-border">Leave a Comment</h4>
+                        <div class="add-comment">
+                            <form action="#" method="post" id="commentform" class="comment-form">
+                                <input type="text" placeholder="review title">
+                                <input type="text" placeholder="reviewer name">
+                                <input type="email" placeholder="reviewer email">
+                                <textarea rows="5" placeholder="review summary"></textarea>
+                                <button type="submit" class="lab-btn"><span>Submit Review</span></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="sidebar-part">
+                    <div class="course-side-detail">
+                        <div class="csd-title">
+                            <div class="csdt-left">
+                                <h4 class="mb-0">Thông tin nhà trọ</h4>
+                            </div>
+                        </div>
+                        <div class="csd-content">
+                            <div class="csdc-lists">
+                                <ul class="lab-ul">
+                                    <li>
+                                        <div class="csdc-left"><i class="icofont-ui-alarm"></i>@Html.LabelFor(m=>m.sdt_nt)</div>
+                                        <div class="csdc-right">@Model.sdt_nt</div>
+                                    </li>
+                                    <li>
+                                        <div class="csdc-left"><i class="icofont-book-alt"></i>Tiền diện</div>
+                                        <div class="csdc-right">10 week</div>
+                                    </li>
+                                    <li>
+                                        <div class="csdc-left"><i class="icofont-signal"></i>Tiền nước</div>
+                                        <div class="csdc-right">08</div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="sidebar-payment">
+                                <div class="sp-title">
+                                    <h6>Secure Payment:</h6>
+                                </div>
+                                <div class="sp-thumb">
+                                    <img src="~/Content/user/assets/images/pyment/01.jpg" alt="CodexCoder">
+                                </div>
+                            </div>
+                            <div class="sidebar-social">
+                                <div class="ss-title">
+                                    <h6>Share This Course:</h6>
+                                </div>
+                                <div class="ss-content">
+                                    <ul class="lab-ul">
+                                        <li><a href="#" class="twitter"><i class="icofont-twitter"></i></a></li>
+                                        <li><a href="#" class="vimeo"><i class="icofont-vimeo"></i></a></li>
+                                        <li><a href="#" class="rss"><i class="icofont-rss"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="course-enroll">
+                                <a href="#" class="lab-btn"><span>Enrolled Now</span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="course-side-cetagory">
+                        <div class="csc-title">
+                            <h5 class="mb-0">Course Categories</h5>
+                        </div>
+                        <div class="csc-content">
+                            <div class="csdc-lists">
+                                <ul class="lab-ul">
+                                    <li>
+                                        <div class="csdc-left"><a href="#">Personal Development</a></div>
+                                        <div class="csdc-right">30</div>
+                                    </li>
+                                    <li>
+                                        <div class="csdc-left"><a href="#">Photography</a></div>
+                                        <div class="csdc-right">20</div>
+                                    </li>
+                                    <li>
+                                        <div class="csdc-left"><a href="#">Teaching and Academics</a></div>
+                                        <div class="csdc-right">93</div>
+                                    </li>
+                                    <li>
+                                        <div class="csdc-left"><a href="#">Art and Design</a></div>
+                                        <div class="csdc-right">32</div>
+                                    </li>
+                                    <li>
+                                        <div class="csdc-left"><a href="#">Business</a></div>
+                                        <div class="csdc-right">26</div>
+                                    </li>
+                                    <li>
+                                        <div class="csdc-left"><a href="#">Data Science</a></div>
+                                        <div class="csdc-right">27</div>
+                                    </li>
+                                    <li>
+                                        <div class="csdc-left"><a href="#">Development</a></div>
+                                        <div class="csdc-right">28</div>
+                                    </li>
+                                    <li>
+                                        <div class="csdc-left"><a href="#">Finance</a></div>
+                                        <div class="csdc-right">36</div>
+                                    </li>
+                                    <li>
+                                        <div class="csdc-left"><a href="#">Health & Fitness</a></div>
+                                        <div class="csdc-right">39</div>
+                                    </li>
+                                    <li>
+                                        <div class="csdc-left"><a href="#">Lifestyle</a></div>
+                                        <div class="csdc-right">37</div>
+                                    </li>
+                                    <li>
+                                        <div class="csdc-left"><a href="#">Marketing</a></div>
+                                        <div class="csdc-right">18</div>
+                                    </li>
+                                    <li>
+                                        <div class="csdc-left"><a href="#">Music</a></div>
+                                        <div class="csdc-right">20</div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- course section ending here -->

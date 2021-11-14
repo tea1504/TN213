@@ -30,6 +30,9 @@ namespace Website.Controllers
                 return RedirectToAction("Index");
             }
             var res = new NhaTroDAO().GetNhaTro(id ?? 1);
+            res.KhuVuc = new KhuVucDAO().LayKhuVuc(res.ma_kv);
+            ViewBag.tiendien;
+            ViewBag.tiennuoc;
             return View(res);
         }
     }

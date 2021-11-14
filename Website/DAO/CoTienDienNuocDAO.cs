@@ -20,8 +20,17 @@ namespace Website.DAO
             {
                 new SqlParameter("@ma_nt", ma_nt)
             };
-            var res = db.Database.SqlQuery<float>("dbo.fn_tim_tien_dien(@ma_nt)", sqpParams).SingleOrDefault();
-            return res;
+            var res = db.Database.SqlQuery<double>("SELECT dbo.fn_tim_tien_dien(@ma_nt)", sqpParams).SingleOrDefault();
+            return (float)res;
+        }
+        public float GetTienNuoc(int ma_nt)
+        {
+            object[] sqpParams =
+            {
+                new SqlParameter("@ma_nt", ma_nt)
+            };
+            var res = db.Database.SqlQuery<double>("SELECT dbo.fn_tim_tien_nuoc(@ma_nt)", sqpParams).SingleOrDefault();
+            return (float)res;
         }
     }
 }

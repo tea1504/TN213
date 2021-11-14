@@ -12,13 +12,25 @@
         total++;
     }
     soSao = (total > 0) ? count / total : soSao;
+    string UrlImage = "/Content/user/assets/images/course/01.jpg";
+    if (Model.AnhNhaTroes.Count > 0)
+    {
+        UrlImage = "/Content/" + Model.AnhNhaTroes.ElementAt(0).ten_anh;
+    }
 }
 @section style{
 }
 @section scripts{
     <script>
-        $(".pageheader-section").hide();
-        $(".pageheader-section.style-2").show();
+        $(document).ready(() => {
+            $(".pageheader-section").hide();
+            $(".pageheader-section.style-2").show();
+            $('.money').each((i, e) => {
+                var html = e.innerHTML;
+                console.log(html);
+                e.innerHTML = new Intl.NumberFormat('vi-VN', { maximumSignificantDigits: 3 }).format(html) + "đ / tháng";
+            })
+        })
     </script>
 }
 @section  breadcrumb{
@@ -32,7 +44,7 @@
         <div class="row justify-content-center justify-content-lg-between align-items-center flex-row-reverse">
             <div class="col-lg-7 col-12">
                 <div class="pageheader-thumb">
-                    <img src="~/Content/user/assets/images/pageheader/02.jpg" alt="rajibraj91" class="w-100">
+                    <img src="@UrlImage" alt="rajibraj91" class="w-100">
                 </div>
             </div>
             <div class="col-lg-5 col-12">
@@ -186,43 +198,20 @@
                                         <div class="csdc-right">@Model.sdt_nt</div>
                                     </li>
                                     <li>
-                                        <div class="csdc-left"><i class="icofont-book-alt"></i>Tiền diện</div>
-                                        <div class="csdc-right">10 week</div>
+                                        <div class="csdc-left"><i class="icofont-book-alt"></i>Tiền điện</div>
+                                        <div class="csdc-right money">@ViewBag.tiendien</div>
                                     </li>
                                     <li>
                                         <div class="csdc-left"><i class="icofont-signal"></i>Tiền nước</div>
-                                        <div class="csdc-right">08</div>
+                                        <div class="csdc-right money">@ViewBag.tiennuoc</div>
                                     </li>
                                 </ul>
-                            </div>
-                            <div class="sidebar-payment">
-                                <div class="sp-title">
-                                    <h6>Secure Payment:</h6>
-                                </div>
-                                <div class="sp-thumb">
-                                    <img src="~/Content/user/assets/images/pyment/01.jpg" alt="CodexCoder">
-                                </div>
-                            </div>
-                            <div class="sidebar-social">
-                                <div class="ss-title">
-                                    <h6>Share This Course:</h6>
-                                </div>
-                                <div class="ss-content">
-                                    <ul class="lab-ul">
-                                        <li><a href="#" class="twitter"><i class="icofont-twitter"></i></a></li>
-                                        <li><a href="#" class="vimeo"><i class="icofont-vimeo"></i></a></li>
-                                        <li><a href="#" class="rss"><i class="icofont-rss"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="course-enroll">
-                                <a href="#" class="lab-btn"><span>Enrolled Now</span></a>
                             </div>
                         </div>
                     </div>
                     <div class="course-side-cetagory">
                         <div class="csc-title">
-                            <h5 class="mb-0">Course Categories</h5>
+                            <h5 class="mb-0">Khu vực khác</h5>
                         </div>
                         <div class="csc-content">
                             <div class="csdc-lists">

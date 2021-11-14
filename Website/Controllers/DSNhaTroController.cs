@@ -23,5 +23,14 @@ namespace Website.Controllers
             ViewBag.page = page;
             return View(res);
         }
+        public ActionResult NhaTro(int? id)
+        {
+            if(id == null)
+            {
+                return RedirectToAction("Index");
+            }
+            var res = new NhaTroDAO().GetNhaTro(id ?? 1);
+            return View(res);
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using Website.EF;
@@ -13,6 +14,14 @@ namespace Website.DAO
         {
             db = new NhaTroDBContext();
         }
-
+        public float GetTienDien(int ma_nt)
+        {
+            object[] sqpParams =
+            {
+                new SqlParameter("@ma_nt", ma_nt)
+            };
+            var res = db.Database.SqlQuery<float>("dbo.fn_tim_tien_dien(@ma_nt)", sqpParams).SingleOrDefault();
+            return res;
+        }
     }
 }

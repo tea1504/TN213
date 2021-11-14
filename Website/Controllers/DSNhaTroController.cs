@@ -31,8 +31,7 @@ namespace Website.Controllers
             }
             var res = new NhaTroDAO().GetNhaTro(id ?? 1);
             res.KhuVuc = new KhuVucDAO().LayKhuVuc(res.ma_kv);
-            ViewBag.tiendien;
-            ViewBag.tiennuoc;
+            ViewBag.tiendien = new CoTienDienNuocDAO().GetTienDien(res.ma_nt);
             return View(res);
         }
     }

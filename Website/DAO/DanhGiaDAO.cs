@@ -23,5 +23,11 @@ namespace Website.DAO
             var res = db.DanhGias.Where(dg => dg.ma_nt == ma_nt).Count();
             return res;
         }
+        public DanhGia AddDanhGia(DanhGia dg)
+        {
+            var res = db.DanhGias.Add(dg);
+            db.SaveChanges();
+            return res;
+        }
     }
 }

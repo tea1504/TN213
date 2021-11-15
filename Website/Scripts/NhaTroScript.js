@@ -23,7 +23,7 @@
 
     var nhaTroMarker = L.marker([lat, lng]).addTo(map);
     nhaTroMarker.bindPopup(
-    `
+        `
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
@@ -75,5 +75,70 @@
                 e.style.color = '#f16126';
         });
     })
-}) 
+
+    $('#comment').click(e => {
+        e.preventDefault();
+        if (form_cmt.danhgia1.value) {
+            var data = {
+                'ma_nd': form_cmt.ma_nd.value,
+                'ma_nt': form_cmt.ma_nt.value,
+                'sosao': form_cmt.sosao.value,
+                'danhgia1': form_cmt.danhgia1.value,
+            };
+
+            $.ajax({
+                url: '/DanhGia/GuiDanhGia',
+                type: 'POST',
+                data: data,
+                success: res => {
+                    console.log(res);
+
+                    var rank = 5;
+                    $('#sosao').val(rank);
+                    $('.ranking i').each((i, e) => {
+                        e.style.color = '#808080';
+                        if (i < rank)
+                            e.style.color = '#f16126';
+                    });
+                    form_cmt.danhgia1.value = "";
+
+                    var rank = "";
+
+                    for (var i = 1; i <= res.sosao; i++)
+                        rank += '<i class="icofont-ui-rating"></i>';
+                    for (var i = 1; i <= 5 - res.sosao; i++)
+                        rank += '<i class="icofont-ui-rating" style="color:#808080"></i>';
+
+                    $('.comment-list').prepend(
+                        `
+                        <li class="comment">
+                            <div class="com-thumb">
+                                <img alt="${res.hoten}" src="~/Content/${res.anh}">
+                            </div>
+                            <div class="com-content">
+                                <div class="com-title">
+                                    <div class="com-title-meta">
+                                        <h6>${res.hoten}</h6>
+                                        <span> ${res.ngay} </span>
+                                    </div>
+                                    <span class="ratting">
+                                        ${rank}
+                                    </span>
+                                </div>
+                                <p>${res.danhgia}</p>
+                                <hr />
+                            </div>
+                        </li>
+                    `
+                    )
+                }
+            });
+        }
+        else {
+            alert(1);
+        }
+
+    })
+
+})
 

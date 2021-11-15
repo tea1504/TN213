@@ -869,6 +869,12 @@
     <Content Include="Content\leaflet\js\leaflet.js" />
     <Content Include="Content\leaflet\js\Leaflet.TileLayer.MBTiles.js" />
     <Content Include="Content\leaflet\js\tile_zoom_levels.png" />
+    <Content Include="Content\sweetalert2\sweetalert2.all.js" />
+    <Content Include="Content\sweetalert2\sweetalert2.all.min.js" />
+    <Content Include="Content\sweetalert2\sweetalert2.css" />
+    <Content Include="Content\sweetalert2\sweetalert2.js" />
+    <Content Include="Content\sweetalert2\sweetalert2.min.css" />
+    <Content Include="Content\sweetalert2\sweetalert2.min.js" />
     <Content Include="Content\user\assets\css\animate.css" />
     <Content Include="Content\user\assets\css\bootstrap.min.css" />
     <Content Include="Content\user\assets\css\fonts\icofont.svg" />

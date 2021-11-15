@@ -130,10 +130,38 @@
                         </div>
                     </div>
 
+                    <div id="respond" class="comment-respond mb-lg-0">
+                        <h4 class="title-border">Để lại bình luận</h4>
+                        <div class="add-comment">
+                            @if (HttpContext.Current.Session["USER_LOGIN"] != null)
+                            {
+                                var nd = (Website.Models.UserLoginModel)HttpContext.Current.Session["USER_LOGIN"];
+                                <form name="form_cmt" id="form_cmt" class="comment-form">
+                                    <input type="hidden" id="sosao" name="sosao" value="5" />
+                                    <input type="hidden" name="ma_nd" value="@nd.ma_nd" />
+                                    <input type="hidden" name="ma_nt" value="@Model.ma_nt" />
+                                    <div class="ranking mb-3">
+                                        <i class="icofont-ui-rating" style="color:#f16126" data-rank="1"></i>
+                                        <i class="icofont-ui-rating" style="color:#f16126" data-rank="2"></i>
+                                        <i class="icofont-ui-rating" style="color:#f16126" data-rank="3"></i>
+                                        <i class="icofont-ui-rating" style="color:#f16126" data-rank="4"></i>
+                                        <i class="icofont-ui-rating" style="color:#f16126" data-rank="5"></i>
+                                    </div>
+                                    <textarea rows="5" placeholder="review summary" name="danhgia1"></textarea>
+                                    <button type="submit" class="lab-btn" id="comment"><span>Gửi đánh giá</span></button>
+                                </form>
+                            }
+                            else
+                            {
+                                <strong>Bạn phải <a href="@Url.Action("Index", "Login", new { Area = "", path = @HttpContext.Current.Request.Url.AbsolutePath })" style="color: #f16126">đăng nhập</a> mới có thể bình luận</strong>
+                            }
+                        </div>
+                    </div>
+
                     <div id="comments" class="comments">
                         <h4 class="title-border">@total đánh giá</h4>
                         <ul class="comment-list">
-                            @foreach (var cmt in Model.DanhGias)
+                            @foreach (var cmt in Model.DanhGias.OrderByDescending(dg => dg.ngay))
                             {
                                 <li class="comment">
                                     <div class="com-thumb">
@@ -164,30 +192,6 @@
                         </ul>
                     </div>
 
-                    <div id="respond" class="comment-respond mb-lg-0">
-                        <h4 class="title-border">Để lại bình luận</h4>
-                        <div class="add-comment">
-                            @if (HttpContext.Current.Session["USER_LOGIN"] != null)
-                            {
-                                using (Html.BeginForm("GuiDanhGia", "DanhGia", FormMethod.Post)){
-                                        <div class="ranking">
-                                            <i class="icofont-ui-rating" style="color:#f16126" data-rank="1"></i>
-                                            <i class="icofont-ui-rating" style="color:#808080" data-rank="2"></i>
-                                            <i class="icofont-ui-rating" style="color:#808080" data-rank="3"></i>
-                                            <i class="icofont-ui-rating" style="color:#808080" data-rank="4"></i>
-                                            <i class="icofont-ui-rating" style="color:#808080" data-rank="5"></i>
-                                            <input type="hidden" id="sosao" name="sosao" value="1" />
-                                        </div>
-                                        <textarea rows="5" placeholder="review summary"></textarea>
-                                        <button type="submit" class="lab-btn"><span>Gửi đánh giá</span></button>
-                                }
-                            }
-                            else
-                            {
-                                <strong>Bạn phải <a href="@Url.Action("Index", "Login", new { Area = "", path = @HttpContext.Current.Request.Url.AbsolutePath })" style="color: #f16126">đăng nhập</a> mới có thể bình luận</strong>
-                            }
-                        </div>
-                    </div>
                 </div>
             </div>
             <div class="col-lg-4">

@@ -16,10 +16,12 @@ namespace Website.EF
         }
 
         [Key]
+        [Display(Name = "Mã vai trò")]
         public int ma_vt { get; set; }
 
         [Required]
         [StringLength(50)]
+        [Display(Name = "Tên vai trò")]
         public string ten_vt { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -194,7 +194,7 @@
                             <div class="csdc-lists">
                                 <ul class="lab-ul">
                                     <li>
-                                        <div class="csdc-left"><i class="icofont-ui-alarm"></i>@Html.LabelFor(m=>m.sdt_nt)</div>
+                                        <div class="csdc-left"><i class="icofont-ui-alarm"></i>@Html.LabelFor(m => m.sdt_nt)</div>
                                         <div class="csdc-right">@Model.sdt_nt</div>
                                     </li>
                                     <li>
@@ -205,6 +205,13 @@
                                         <div class="csdc-left"><i class="icofont-signal"></i>Tiền nước</div>
                                         <div class="csdc-right money">@ViewBag.tiennuoc</div>
                                     </li>
+                                    @foreach (var item in Model.CoGias)
+                                    {
+                                        <li>
+                                            <div class="csdc-left"><i class="icofont-signal"></i>@item.LoaiPhong.ten_lp</div>
+                                            <div class="csdc-right money">@item.giaphong</div>
+                                        </li>
+                                    }
                                 </ul>
                             </div>
                         </div>
@@ -219,50 +226,6 @@
                                     <li>
                                         <div class="csdc-left"><a href="#">Personal Development</a></div>
                                         <div class="csdc-right">30</div>
-                                    </li>
-                                    <li>
-                                        <div class="csdc-left"><a href="#">Photography</a></div>
-                                        <div class="csdc-right">20</div>
-                                    </li>
-                                    <li>
-                                        <div class="csdc-left"><a href="#">Teaching and Academics</a></div>
-                                        <div class="csdc-right">93</div>
-                                    </li>
-                                    <li>
-                                        <div class="csdc-left"><a href="#">Art and Design</a></div>
-                                        <div class="csdc-right">32</div>
-                                    </li>
-                                    <li>
-                                        <div class="csdc-left"><a href="#">Business</a></div>
-                                        <div class="csdc-right">26</div>
-                                    </li>
-                                    <li>
-                                        <div class="csdc-left"><a href="#">Data Science</a></div>
-                                        <div class="csdc-right">27</div>
-                                    </li>
-                                    <li>
-                                        <div class="csdc-left"><a href="#">Development</a></div>
-                                        <div class="csdc-right">28</div>
-                                    </li>
-                                    <li>
-                                        <div class="csdc-left"><a href="#">Finance</a></div>
-                                        <div class="csdc-right">36</div>
-                                    </li>
-                                    <li>
-                                        <div class="csdc-left"><a href="#">Health & Fitness</a></div>
-                                        <div class="csdc-right">39</div>
-                                    </li>
-                                    <li>
-                                        <div class="csdc-left"><a href="#">Lifestyle</a></div>
-                                        <div class="csdc-right">37</div>
-                                    </li>
-                                    <li>
-                                        <div class="csdc-left"><a href="#">Marketing</a></div>
-                                        <div class="csdc-right">18</div>
-                                    </li>
-                                    <li>
-                                        <div class="csdc-left"><a href="#">Music</a></div>
-                                        <div class="csdc-right">20</div>
                                     </li>
                                 </ul>
                             </div>

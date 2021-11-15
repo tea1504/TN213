@@ -20,7 +20,11 @@ namespace Website.DAO
             {
                 new SqlParameter("@ma_nt", ma_nt),
             };
-            var res = db.Database.SqlQuery<CoGia>("", sqlParams).ToList();
+            var res = db.Database.SqlQuery<CoGia>("sp_get_gia_phong_hien_tai @ma_nt", sqlParams).ToList();
+            for(var i=0; i< res.Count; i++)
+            {
+                res[i].LoaiPhong = new Loa
+            }
             return res;
         }
     }

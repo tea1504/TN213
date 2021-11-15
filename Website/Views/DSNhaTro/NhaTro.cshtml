@@ -244,10 +244,10 @@
                                         <div class="csdc-left"><i class="icofont-water-drop"></i>Tiền nước</div>
                                         <div class="csdc-right money">@ViewBag.tiennuoc</div>
                                     </li>
-                                    @foreach (var item in Model.CoGias)
+                                    @foreach (var item in (new Website.DAO.CoGiaDAO().GetGiaPhongGanDayTheoNhaTro(Model.ma_nt)))
                                     {
                                         <li>
-                                            <div class="csdc-left"><i class="icofont-ui-home"></i>@item.LoaiPhong.ten_lp</div>
+                                            <div class="csdc-left"><i class="icofont-ui-home"></i>@item.ma_nt</div>
                                             <div class="csdc-right money">@item.giaphong</div>
                                         </li>
                                     }

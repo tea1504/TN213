@@ -93,7 +93,7 @@
                     {
                         var user = (UserLoginModel)HttpContext.Current.Session["USER_LOGIN"];
                         <a href="#" class="login"><i class="icofont-user"></i> <span>@user.holot_nd @user.ten_nd</span> </a>
-                        <a href="@Url.Action("Dangxuat", "Login", new { Area = "" })" class="signup"><i class="icofont-logout"></i> <span>Đăng xuất</span> </a>
+                        <a href="@Url.Action("Dangxuat", "Login", new { Area = "", HttpContext.Current.Request.Url.AbsolutePath })" class="signup"><i class="icofont-logout"></i> <span>Đăng xuất</span> </a>
                     }
                     <!-- toggle icons -->
                     <div class="header-bar d-lg-none">

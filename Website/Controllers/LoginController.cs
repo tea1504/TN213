@@ -17,7 +17,7 @@ namespace Website.Controllers
         }
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public ActionResult DangNhap(LoginModel login, string url)
+        public ActionResult DangNhap(LoginModel login, string path)
         {
             LoginDAO loginDAO = new LoginDAO();
             var res = loginDAO.CheckLogin(login);
@@ -33,15 +33,19 @@ namespace Website.Controllers
                 userLoginModel.anh_nd = nguoiDung.anh_nd;
                 userLoginModel.taikhoan = nguoiDung.taikhoan;
                 Session.Add("USER_LOGIN", userLoginModel);
+                if (!String.IsNullOrEmpty(path))
+                {
+                    return Redirect(Server.UrlDecode(path));
+                }
                 return RedirectToAction("Index", "Dashboard", new { Area = "Admin" });
             }
             ModelState.AddModelError("", "Sai tài khoản hoặc mật khẩu");
             return View("Index", login);
         }
-        public ActionResult DangXuat()
+        public ActionResult DangXuat(string path)
         {
             Session.Remove("USER_LOGIN");
-            return RedirectToAction("Index", "Login");
+            return RedirectToAction("Index", "Home", new { Area = "" });
         }
     }
 }

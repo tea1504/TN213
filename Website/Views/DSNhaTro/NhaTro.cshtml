@@ -179,7 +179,7 @@
                             }
                             else
                             {
-                                <span>Bạn phải <a href="@Url.Action("Index", "Login", new { Area = "", url = @HttpContext.Current.Request.Url.AbsolutePath })" style="color: #f16126">đăng nhập</a> mới có thể bình luận</span>
+                                <span>Bạn phải <a href="@Url.Action("Index", "Login", new { Area = "", path = @HttpContext.Current.Request.Url.AbsolutePath })" style="color: #f16126">đăng nhập</a> mới có thể bình luận</span>
                                 <p>url: @HttpContext.Current.Request.Url.AbsolutePath</p>  
                             }
                         </div>

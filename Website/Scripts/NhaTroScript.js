@@ -76,6 +76,10 @@
         });
     })
 
+    Fancybox.bind("[data-fancybox]", {
+        
+    });
+
     $('#comment').click(e => {
         e.preventDefault();
         if (form_cmt.danhgia1.value) {
@@ -101,6 +105,9 @@
                             e.style.color = '#f16126';
                     });
                     form_cmt.danhgia1.value = "";
+                    var total = $('#tong_dg').data('total') + 1;
+                    console.log(total, $('#tong_dg').data('total'));
+                    $('#tong_dg').html(total + ' đánh giá');
 
                     var rank = "";
 
@@ -113,7 +120,7 @@
                         `
                         <li class="comment">
                             <div class="com-thumb">
-                                <img alt="${res.hoten}" src="~/Content/${res.anh}">
+                                <img alt="${res.hoten}" src="/Content/${res.anh}">
                             </div>
                             <div class="com-content">
                                 <div class="com-title">
@@ -133,9 +140,30 @@
                     )
                 }
             });
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+
+            Toast.fire({
+                icon: 'success',
+                title: 'Đánh giá thành công'
+            })
         }
         else {
-            alert(1);
+            Swal.fire({
+                icon: 'error',
+                title: 'Bạn chưa nhập nội dung đánh giá',
+                showConfirmButton: false,
+                timer: 1000
+            })
         }
 
     })

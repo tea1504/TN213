@@ -75,6 +75,33 @@
     </div>
 </div>
 <!-- Page Header section ending here -->
+<!-- sponsor section start here -->
+@if (Model.AnhNhaTroes.Count > 0)
+{
+    <div class="sponsor-section section-bg">
+        <div class="container">
+            <div class="section-wrapper">
+                <div class="sponsor-slider pt-5">
+                    <div class="swiper-wrapper">
+                        @foreach (var item in Model.AnhNhaTroes)
+                        {
+                            <div class="swiper-slide">
+                                <div class="sponsor-iten">
+                                    <div class="sponsor-thumb">
+                                        <div data-src="/Content/@item.ten_anh" data-fancybox="gallery" data-caption="@item.NhaTro.ten_nt @item.STT">
+                                            <img src="/Content/@item.ten_anh" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<!-- sponsor section ending here -->
 <!-- course section start here -->
 <div class="course-single-section padding-tb section-bg">
     <div class="container">
@@ -136,7 +163,7 @@
                             @if (HttpContext.Current.Session["USER_LOGIN"] != null)
                             {
                                 var nd = (Website.Models.UserLoginModel)HttpContext.Current.Session["USER_LOGIN"];
-                                <form name="form_cmt" id="form_cmt" class="comment-form">
+                                <form name="form_cmt" id="form_cmt" method="post" class="comment-form">
                                     <input type="hidden" id="sosao" name="sosao" value="5" />
                                     <input type="hidden" name="ma_nd" value="@nd.ma_nd" />
                                     <input type="hidden" name="ma_nt" value="@Model.ma_nt" />
@@ -148,7 +175,7 @@
                                         <i class="icofont-ui-rating" style="color:#f16126" data-rank="5"></i>
                                     </div>
                                     <textarea rows="5" placeholder="review summary" name="danhgia1"></textarea>
-                                    <button type="submit" class="lab-btn" id="comment"><span>Gửi đánh giá</span></button>
+                                    <button class="lab-btn" id="comment"><span>Gửi đánh giá</span></button>
                                 </form>
                             }
                             else
@@ -159,8 +186,8 @@
                     </div>
 
                     <div id="comments" class="comments">
-                        <h4 class="title-border">@total đánh giá</h4>
-                        <ul class="comment-list">
+                        <h4 class="title-border" id="tong_dg" data-total="@total">@total đánh giá</h4>
+                        <ul class="comment-list" style="max-height: 500px; overflow: auto;">
                             @foreach (var cmt in Model.DanhGias.OrderByDescending(dg => dg.ngay))
                             {
                                 <li class="comment">

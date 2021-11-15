@@ -1205,6 +1205,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Content\css\" />
+    <Folder Include="Scripts\js\" />
     <Folder Include="Views\CheckAdmin\" />
     <Folder Include="Views\CheckLogin\" />
     <Folder Include="Views\CheckUser\" />

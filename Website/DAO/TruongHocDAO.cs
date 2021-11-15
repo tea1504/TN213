@@ -18,5 +18,10 @@ namespace Website.DAO
             var res = db.TruongHocs.ToList();
             return res;
         }
+        public TruongHoc GetTruongHoc(int ma_th)
+        {
+            var res = db.TruongHocs.Find(ma_th);
+            return res;
+        }
     }
 }

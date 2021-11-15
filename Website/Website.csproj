@@ -170,6 +170,7 @@
     <Compile Include="Models\DSNhaTroModel.cs" />
     <Compile Include="Models\FilterNhaTroModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\TruongHocJsonModel.cs" />
     <Compile Include="Models\UserLoginModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

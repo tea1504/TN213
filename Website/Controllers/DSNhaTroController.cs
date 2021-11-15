@@ -36,6 +36,7 @@ namespace Website.Controllers
             }
             ViewBag.tiendien = new CoTienDienNuocDAO().GetTienDien(res.ma_nt);
             ViewBag.tiennuoc = new CoTienDienNuocDAO().GetTienNuoc(res.ma_nt);
+            ViewBag.khuvuc = new KhuVucDAO().GetAllKhuVuc();
             return View(res);
         }
     }

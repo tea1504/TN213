@@ -223,10 +223,13 @@
                         <div class="csc-content">
                             <div class="csdc-lists">
                                 <ul class="lab-ul">
-                                    <li>
-                                        <div class="csdc-left"><a href="#">Personal Development</a></div>
-                                        <div class="csdc-right">30</div>
-                                    </li>
+                                    @foreach (var item in new Website.DAO.KhuVucDAO().GetAllKhuVuc())
+                                    {
+                                        <li>
+                                            <div class="csdc-left"><a href="@Url.Action("Index", "DSNhaTro", new { Area = "", ma_kv = item.ma_kv})">@item.ten_kv</a></div>
+                                            <div class="csdc-right">@item.NhaTroes.Count()</div>
+                                        </li>
+                                    }
                                 </ul>
                             </div>
                         </div>

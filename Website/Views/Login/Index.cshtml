@@ -41,6 +41,7 @@
                 {
                     @Html.AntiForgeryToken()
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <input type="hidden" value="@HttpContext.Current.Request.QueryString" name="url"/>
                     <div class="form-group">
                         @Html.TextBoxFor(m => m.taikhoan, new { @placeholder = "Tài khoản" })
                         <div>

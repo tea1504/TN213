@@ -22,23 +22,18 @@
     <link href="~/Content/css/NhaTroStyle.css" rel="stylesheet" />
 }
 @section scripts{
-    <script>
-        $(document).ready(() => {
-            $(".pageheader-section").hide();
-            $(".pageheader-section.style-2").show();
-            $('.money').each((i, e) => {
-                var html = e.innerHTML;
-                console.log(html);
-                e.innerHTML = new Intl.NumberFormat('vi-VN', { maximumSignificantDigits: 3 }).format(html) + "đ / tháng";
-            })
-        })
-    </script>
+    <script src="~/Scripts/NhaTroScript.js"></script>
 }
 @section  breadcrumb{
     <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home", new { Area = "" })">Home</a></li>
     <li class="breadcrumb-item" aria-current="page"><a href="@Url.Action("Index", "DSNhaTro", new { Area = "" })">Nhà trọ</a></li>
     <li class="breadcrumb-item active" aria-current="page">@ViewBag.Title</li>
 }
+<input type="hidden" value="@Model.toado_nt.XCoordinate" id="_lng" />
+<input type="hidden" value="@Model.toado_nt.YCoordinate" id="_lat" />
+<input type="hidden" value="@Model.ten_nt" id="_ten" />
+<input type="hidden" value="@Model.diachi_nt" id="_diachi" />
+<input type="hidden" value="@UrlImage" id="_img" />
 <!-- Page Header section start here -->
 <div class="pageheader-section style-2">
     <div class="container">
@@ -89,7 +84,7 @@
                     <div class="course-item">
                         <div class="course-inner">
                             <div class="course-content">
-                                <div id="map"></div>
+                                <div id="zoomcontrol"><div id="map"></div></div>
                             </div>
                         </div>
                     </div>
@@ -170,15 +165,23 @@
                     </div>
 
                     <div id="respond" class="comment-respond mb-lg-0">
-                        <h4 class="title-border">Leave a Comment</h4>
+                        <h4 class="title-border">Để lại bình luận</h4>
                         <div class="add-comment">
-                            <form action="#" method="post" id="commentform" class="comment-form">
-                                <input type="text" placeholder="review title">
-                                <input type="text" placeholder="reviewer name">
-                                <input type="email" placeholder="reviewer email">
-                                <textarea rows="5" placeholder="review summary"></textarea>
-                                <button type="submit" class="lab-btn"><span>Submit Review</span></button>
-                            </form>
+                            @if (HttpContext.Current.Session["USER_LOGIN"] != null)
+                            {
+                                <form action="#" method="post" id="commentform" class="comment-form">
+                                    <input type="text" placeholder="review title">
+                                    <input type="text" placeholder="reviewer name">
+                                    <input type="email" placeholder="reviewer email">
+                                    <textarea rows="5" placeholder="review summary"></textarea>
+                                    <button type="submit" class="lab-btn"><span>Submit Review</span></button>
+                                </form>
+                            }
+                            else
+                            {
+                                <span>Bạn phải <a href="@Url.Action("Index", "Login", new { Area = "", url = @HttpContext.Current.Request.Url.AbsolutePath })" style="color: #f16126">đăng nhập</a> mới có thể bình luận</span>
+                                <p>url: @HttpContext.Current.Request.Url.AbsolutePath</p>  
+                            }
                         </div>
                     </div>
                 </div>
@@ -195,21 +198,21 @@
                             <div class="csdc-lists">
                                 <ul class="lab-ul">
                                     <li>
-                                        <div class="csdc-left"><i class="icofont-ui-alarm"></i>@Html.LabelFor(m => m.sdt_nt)</div>
+                                        <div class="csdc-left"><i class="icofont-phone"></i>@Html.LabelFor(m => m.sdt_nt)</div>
                                         <div class="csdc-right">@Model.sdt_nt</div>
                                     </li>
                                     <li>
-                                        <div class="csdc-left"><i class="icofont-book-alt"></i>Tiền điện</div>
+                                        <div class="csdc-left"><i class="icofont-electron"></i>Tiền điện</div>
                                         <div class="csdc-right money">@ViewBag.tiendien</div>
                                     </li>
                                     <li>
-                                        <div class="csdc-left"><i class="icofont-signal"></i>Tiền nước</div>
+                                        <div class="csdc-left"><i class="icofont-water-drop"></i>Tiền nước</div>
                                         <div class="csdc-right money">@ViewBag.tiennuoc</div>
                                     </li>
                                     @foreach (var item in Model.CoGias)
                                     {
                                         <li>
-                                            <div class="csdc-left"><i class="icofont-signal"></i>@item.LoaiPhong.ten_lp</div>
+                                            <div class="csdc-left"><i class="icofont-ui-home"></i>@item.LoaiPhong.ten_lp</div>
                                             <div class="csdc-right money">@item.giaphong</div>
                                         </li>
                                     }

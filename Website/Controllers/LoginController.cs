@@ -17,7 +17,7 @@ namespace Website.Controllers
         }
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public ActionResult DangNhap(LoginModel login)
+        public ActionResult DangNhap(LoginModel login, string url)
         {
             LoginDAO loginDAO = new LoginDAO();
             var res = loginDAO.CheckLogin(login);

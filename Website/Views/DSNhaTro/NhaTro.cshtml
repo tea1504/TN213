@@ -169,18 +169,22 @@
                         <div class="add-comment">
                             @if (HttpContext.Current.Session["USER_LOGIN"] != null)
                             {
-                                <form action="#" method="post" id="commentform" class="comment-form">
-                                    <input type="text" placeholder="review title">
-                                    <input type="text" placeholder="reviewer name">
-                                    <input type="email" placeholder="reviewer email">
-                                    <textarea rows="5" placeholder="review summary"></textarea>
-                                    <button type="submit" class="lab-btn"><span>Submit Review</span></button>
-                                </form>
+                                using (Html.BeginForm("GuiDanhGia", "DanhGia", FormMethod.Post)){
+                                        <div class="ranking">
+                                            <i class="icofont-ui-rating" style="color:#f16126" data-rank="1"></i>
+                                            <i class="icofont-ui-rating" style="color:#808080" data-rank="2"></i>
+                                            <i class="icofont-ui-rating" style="color:#808080" data-rank="3"></i>
+                                            <i class="icofont-ui-rating" style="color:#808080" data-rank="4"></i>
+                                            <i class="icofont-ui-rating" style="color:#808080" data-rank="5"></i>
+                                            <input type="hidden" id="sosao" name="sosao" value="1" />
+                                        </div>
+                                        <textarea rows="5" placeholder="review summary"></textarea>
+                                        <button type="submit" class="lab-btn"><span>Gửi đánh giá</span></button>
+                                }
                             }
                             else
                             {
-                                <span>Bạn phải <a href="@Url.Action("Index", "Login", new { Area = "", path = @HttpContext.Current.Request.Url.AbsolutePath })" style="color: #f16126">đăng nhập</a> mới có thể bình luận</span>
-                                <p>url: @HttpContext.Current.Request.Url.AbsolutePath</p>  
+                                <strong>Bạn phải <a href="@Url.Action("Index", "Login", new { Area = "", path = @HttpContext.Current.Request.Url.AbsolutePath })" style="color: #f16126">đăng nhập</a> mới có thể bình luận</strong>
                             }
                         </div>
                     </div>

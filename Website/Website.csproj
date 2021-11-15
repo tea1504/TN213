@@ -133,6 +133,7 @@
     <Compile Include="Controllers\CheckAdminController.cs" />
     <Compile Include="Controllers\CheckLoginController.cs" />
     <Compile Include="Controllers\CheckUserController.cs" />
+    <Compile Include="Controllers\DanhGiaController.cs" />
     <Compile Include="Controllers\DSNhaTroController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -1211,6 +1212,7 @@
     <Folder Include="Views\CheckAdmin\" />
     <Folder Include="Views\CheckLogin\" />
     <Folder Include="Views\CheckUser\" />
+    <Folder Include="Views\DanhGia\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

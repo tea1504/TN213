@@ -65,4 +65,15 @@
             map.panTo([lat, lng])
         }, 400);
     })
-})
+
+    $('.ranking i').click(e => {
+        var rank = e.target.getAttribute('data-rank');
+        $('#sosao').val(rank);
+        $('.ranking i').each((i, e) => {
+            e.style.color = '#808080';
+            if (i < rank)
+                e.style.color = '#f16126';
+        });
+    })
+}) 
+

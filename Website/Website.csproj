@@ -136,6 +136,8 @@
     <Compile Include="Controllers\DanhGiaController.cs" />
     <Compile Include="Controllers\DSNhaTroController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SchoolController.cs" />
+    <Compile Include="DAO\LoaiPhongDAO.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="DAO\AnhNhaTroDAO.cs" />
     <Compile Include="DAO\CoGiaDAO.cs" />
@@ -1220,6 +1222,7 @@
     <Folder Include="Views\CheckLogin\" />
     <Folder Include="Views\CheckUser\" />
     <Folder Include="Views\DanhGia\" />
+    <Folder Include="Views\School\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using Website.EF;
 
-namespace Website.Controllers
+namespace Website.DAO
 {
     public class LoaiPhongDAO
     {

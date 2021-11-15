@@ -23,7 +23,8 @@ namespace Website.DAO
             var res = db.Database.SqlQuery<CoGia>("sp_get_gia_phong_hien_tai @ma_nt", sqlParams).ToList();
             for(var i=0; i< res.Count; i++)
             {
-                res[i].LoaiPhong = new Loa
+                res[i].LoaiPhong = new LoaiPhongDAO().GetLoaiPhong(res[i].ma_lp);
+                res[i].NhaTro = new NhaTroDAO().GetNhaTro(res[i].ma_nt);
             }
             return res;
         }

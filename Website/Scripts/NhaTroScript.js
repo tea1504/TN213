@@ -248,11 +248,19 @@ $(document).ready(() => {
 
     $('.modal-close').click(e => {
         $('#baocaonguoidung').modal('hide');
+        $('#baocaonhatro').modal('hide');
+        $('#lydobaocaonguoidung').val("")
+        $('#lydobaocaonhatro').val("")
     })
 
 })
 
 
+function fbaocaonhatro(ma_nt, ma_nd) {
+    $('#baocaonhatro').modal('show');
+    $('#nguoi_bao_cao_nha_tro').val(ma_nd);
+    $('#ma_nha_tro_bi_bao_cao').val(ma_nt);
+}
 function fbaocaonguoidung(baocao, bibaocao, ten) {
     $('#baocaonguoidung').modal('show');
     $('#ten_nguoi_dung').html(ten);
@@ -273,7 +281,47 @@ function guibaocaonguoidung() {
             type: 'post',
             data: data,
             success: res => {
-                console.log(res)
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Đã báo cáo cho quản trị viên',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+                $('#lydobaocaonguoidung').val("")
+            }
+        })
+    }
+    else {
+        Swal.fire({
+            icon: 'error',
+            title: 'Bạn chưa nhập lý do báo cáo',
+            showConfirmButton: false,
+            timer: 1000
+        })
+    }
+}
+
+function guibaocaonhatro() {
+    var data = {
+        'ma_nd': $('#nguoi_bao_cao_nha_tro').val(),
+        'ma_nt': $('#ma_nha_tro_bi_bao_cao').val(),
+        'malbc': $('#ma_lbc_nt').val(),
+        'lydo': $('#lydobaocaonhatro').val(),
+    }
+    console.log(data);
+    if (data.lydo) {
+        $.ajax({
+            url: '/BaoCao/NhaTro',
+            type: 'post',
+            data: data,
+            success: res => {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Đã báo cáo cho quản trị viên',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+                $('#lydobaocaonguoidung').val("")
             }
         })
     }

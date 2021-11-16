@@ -72,7 +72,11 @@
                         <div class="mt-3">
                             @if (HttpContext.Current.Session["USER_LOGIN"] != null)
                             {
-                                <button class="btn btn-warning">Báo cáo nhà trọ này</button>
+                                var nd = (Website.Models.UserLoginModel)HttpContext.Current.Session["USER_LOGIN"];
+                                if (nd.ma_nd != Model.ma_nd)
+                                {
+                                    <button class="btn btn-warning" onclick="fbaocaonhatro(@Model.ma_nt, @nd.ma_nd)">Báo cáo nhà trọ này</button>
+                                }
                             }
                         </div>
                     </div>
@@ -310,8 +314,8 @@
             </div>
             <div class="modal-body">
                 <form name="baocaonguoidung" method="post">
-                    <input type="text" name="nguoi_bao_cao" id="nguoi_bao_cao" />
-                    <input type="text" name="nguoi_bi_bao_cao" id="nguoi_bi_bao_cao" />
+                    <input type="hidden" name="nguoi_bao_cao" id="nguoi_bao_cao" />
+                    <input type="hidden" name="nguoi_bi_bao_cao" id="nguoi_bi_bao_cao" />
                     <div class="form-group">
                         <label>Loại báo cáo</label>
                         @Html.DropDownList("ma_lbc", (IEnumerable<SelectListItem>)ViewBag.loaiBaoCaoList, new { @class = "form-control" })
@@ -325,6 +329,37 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary modal-close" data-dismiss="modal">Hủy báo cáo</button>
                 <button type="button" class="btn btn-primary" onclick="guibaocaonguoidung()">Báo cáo</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="baocaonhatro" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Báo cáo @Model.ten_nt</h5>
+                <button type="button" class="close modal-close" data-dismiss="modal" style="background-color: white;" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form name="baocaonguoidung" method="post">
+                    <input type="hidden" name="nguoi_bao_cao_nha_tro" id="nguoi_bao_cao_nha_tro" />
+                    <input type="hidden" name="ma_nha_tro_bi_bao_cao" id="ma_nha_tro_bi_bao_cao" />
+                    <div class="form-group">
+                        <label>Loại báo cáo</label>
+                        @Html.DropDownList("ma_lbc_nt", (IEnumerable<SelectListItem>)ViewBag.loaiBaoCaoList, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label>Lý do báo cáo</label>
+                        <textarea class="form-control" name="lydobaocaonhatro" id="lydobaocaonhatro"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary modal-close" data-dismiss="modal">Hủy báo cáo</button>
+                <button type="button" class="btn btn-primary" onclick="guibaocaonhatro()">Báo cáo</button>
             </div>
         </div>
     </div>

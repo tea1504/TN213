@@ -13,5 +13,11 @@ namespace Website.DAO
         {
             db = new NhaTroDBContext();
         }
+        public BaoCaoNguoiDung AddBaoCaoNguoiDung(BaoCaoNguoiDung bc)
+        {
+            var res = db.BaoCaoNguoiDungs.Add(bc);
+            db.SaveChanges();
+            return res;
+        }
     }
 }

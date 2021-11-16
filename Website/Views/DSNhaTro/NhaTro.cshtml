@@ -197,7 +197,8 @@
                         <ul class="comment-list" style="max-height: 500px; overflow: auto;">
                             @foreach (var cmt in Model.DanhGias.OrderByDescending(dg => dg.ngay))
                             {
-                                <li class="comment">
+                                string id = cmt.ma_nd + "_" + cmt.ma_nt + "_" + cmt.ngay.ToString("yyyy-MM-ddTHH:mm:ss.fff");
+                                <li class="comment" id="@id">
                                     <div class="com-thumb">
                                         <img alt="@cmt.NguoiDung.ten_nd" src="~/Content/@cmt.NguoiDung.anh_nd">
                                     </div>
@@ -228,7 +229,7 @@
                                             }
                                             if (nd.ma_vt == 1 || Model.ma_nd == nd.ma_nd || cmt.ma_nd == nd.ma_nd)
                                             {
-                                                <button class="btn btn-sm btn-danger del-cmt" data-toggle="tooltip" title="Xóa đánh giá này" data-ma_nd="@cmt.ma_nd" data-ma_nt="@cmt.ma_nt" data-ngay="@cmt.ngay.ToString("yyyy-MM-ddTHH:mm:ss.fff")"><i class="icofont-ui-delete"></i></button>
+                                                <button class="btn btn-sm btn-danger del-cmt" data-toggle="tooltip" title="Xóa đánh giá này" data-ma_nd="@cmt.ma_nd" data-ma_nt="@cmt.ma_nt" data-ngay="@cmt.ngay.ToString("yyyy-MM-ddTHH:mm:ss.fff")" data-danhgia="@cmt.danhgia1" data-sosao="@cmt.sosao"><i class="icofont-ui-delete"></i></button>
                                             }
                                         }
                                         <hr />

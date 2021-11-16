@@ -29,13 +29,20 @@ namespace Website.DAO
             db.SaveChanges();
             return res;
         }
-        public DanhGia XoaDanhGia(int ma_nt, int ma_nd, string ngay)
+        public DanhGia XoaDanhGia(int ma_nt, int ma_nd, DateTime ngay, string danhgia, int? sosao)
         {
-            string ngayTemp = ngay.Substring(0, ngay.Length - 4);
-            var danhGia = db.DanhGias.Where(dg => dg.ma_nt == ma_nt && dg.ma_nd == ma_nd && (dg.ngay.ToString("yyyy-MM-ddTHH:mm:ss")).Equals(ngayTemp)).SingleOrDefault();
-            var res = db.DanhGias.Remove(danhGia);
-            db.SaveChanges();
-            return res;
+            var danhGia = db.DanhGias.Where(dg => dg.ma_nt == ma_nt && dg.ma_nd == ma_nd && dg.ngay == ngay).SingleOrDefault();
+            if(danhGia == null)
+            {
+                danhGia = db.DanhGias.Where(dg => dg.ma_nt == ma_nt && dg.ma_nd == ma_nd && dg.sosao == sosao && dg.danhgia1.Contains(danhgia)).SingleOrDefault();
+            }
+            if (danhGia != null)
+            {
+                var res = db.DanhGias.Remove(danhGia);
+                db.SaveChanges();
+                return res;
+            }
+            return new DanhGia();
         }
     }
 }

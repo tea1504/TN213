@@ -27,10 +27,24 @@ namespace Website.Controllers
             };
             return Json(data, JsonRequestBehavior.AllowGet);
         }
-        public JsonResult XoaDanhGia(int ma_nd, int ma_nt, string ngay)
+        public JsonResult XoaDanhGia(int ma_nd, int ma_nt, string ngay, string danhgia, int? sosao)
         {
-
-            return Json(1, JsonRequestBehavior.AllowGet);
+            var d = new DateTime();
+            d = DateTime.Parse(ngay, null, System.Globalization.DateTimeStyles.RoundtripKind);
+            var res = new DanhGiaDAO().XoaDanhGia(ma_nt, ma_nd, d, danhgia, sosao);
+            var nd = new NguoiDungDAO().LayNguoiDung(res.ma_nd);
+            var data = new
+            {
+                ngay = res.ngay.ToString("dd/MM/yyyy h:mm:ss tt"),
+                ngayiso = res.ngay.ToString("yyyy-MM-ddTHH:mm:ss.fff"),
+                sosao = res.sosao,
+                danhgia = res.danhgia1,
+                anh = nd.anh_nd,
+                hoten = nd.holot_nd + " " + nd.ten_nd,
+                ma_nt = res.ma_nt,
+                ma_nd = res.ma_nd,
+            };
+            return Json(data, JsonRequestBehavior.AllowGet);
         }
     }
 }

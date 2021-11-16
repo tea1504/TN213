@@ -1,4 +1,16 @@
-﻿$(document).ready(() => {
+﻿const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 1000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+});
+
+$(document).ready(() => {
     $('[data-toggle="tooltip"]').tooltip()
     $(".pageheader-section").hide();
     $(".pageheader-section.style-2").show();
@@ -104,7 +116,6 @@
                 type: 'POST',
                 data: data,
                 success: res => {
-                    console.log(res);
 
                     var rank = 5;
                     $('#sosao').val(rank);
@@ -117,17 +128,18 @@
                     var total = $('#tong_dg').data('total') + 1;
                     console.log(total, $('#tong_dg').data('total'));
                     $('#tong_dg').html(total + ' đánh giá');
+                    $('.ratting-count').html(total + ' đánh giá');
 
                     var rank = "";
 
                     for (var i = 1; i <= res.sosao; i++)
-                        rank += '<i class="icofont-ui-rating"></i>';
+                        rank += '<i class="icofont-ui-rating"></i> ';
                     for (var i = 1; i <= 5 - res.sosao; i++)
-                        rank += '<i class="icofont-ui-rating" style="color:#808080"></i>';
-
+                        rank += '<i class="icofont-ui-rating" style="color:#808080"></i> ';
+                    var id = res.ma_nd + "_" + res.ma_nt + "_" + res.ngayiso;
                     $('.comment-list').prepend(
                         `
-                        <li class="comment">
+                        <li class="comment" id="${id}">
                             <div class="com-thumb">
                                 <img alt="${res.hoten}" src="/Content/${res.anh}">
                             </div>
@@ -142,7 +154,7 @@
                                     </span>
                                 </div>
                                 <p>${res.danhgia}</p>
-                                <button class="btn btn-sm btn-danger" data-toggle="tooltip" title="Xóa đánh giá này" data-ma_nd="${res.ma_nd}" data-ma_nt="${res.ma_nt}" data-ngay="${res.ngayiso}"><i class="icofont-ui-delete"></i></button>
+                                <button class="btn btn-sm btn-danger" onClick="deletecmt(${res.ma_nd}, ${res.ma_nt}, '${res.ngayiso}', '${res.danhgia}', ${res.sosao})" data-toggle="tooltip" title="Xóa đánh giá này" data-ma_nd="${res.ma_nd}" data-ma_nt="${res.ma_nt}" data-ngay="${res.ngayiso}" data-danhgia="${res.danhgia}" data-sosao="${res.sosao}"><i class="icofont-ui-delete"></i></button>
                                 <hr />
                             </div>
                         </li>
@@ -150,17 +162,6 @@
                     )
                 }
             });
-            const Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 3000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                }
-            })
 
             Toast.fire({
                 icon: 'success',
@@ -220,6 +221,8 @@
             'ma_nd': el.getAttribute('data-ma_nd'),
             'ma_nt': el.getAttribute('data-ma_nt'),
             'ngay': el.getAttribute('data-ngay'),
+            'danhgia': el.getAttribute('data-danhgia'),
+            'sosao': el.getAttribute('data-sosao'),
         };
         $.ajax({
             url: '/DanhGia/XoaDanhGia',
@@ -227,9 +230,50 @@
             data: data,
             success: res => {
                 console.log(res);
+                var selector = data.ma_nd + "_" + data.ma_nt + "_" + data.ngay;
+                console.log(selector)
+                var li = document.getElementById(selector)
+                li.remove();
+                var total = $('#tong_dg').data('total') - 1;
+                console.log(total, $('#tong_dg').data('total'));
+                $('#tong_dg').html(total + ' đánh giá');
+                $('.ratting-count').html(total + ' đánh giá');
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Xóa đánh giá thành công'
+                })
             }
         })
     })
 
-})
 
+})
+function deletecmt(ma_nd, ma_nt, ngayiso, danhgia, sosao) {
+    console.log(1);
+    var data = {
+        'ma_nd': ma_nd,
+        'ma_nt': ma_nt,
+        'ngay': ngayiso,
+        'danhgia': danhgia,
+        'sosao': sosao,
+    };
+    $.ajax({
+        url: '/DanhGia/XoaDanhGia',
+        type: 'post',
+        data: data,
+        success: res => {
+            console.log(res);
+            var selector = data.ma_nd + "_" + data.ma_nt + "_" + data.ngay;
+            var li = document.getElementById(selector)
+            li.remove();
+            var total = $('#tong_dg').data('total') - 1;
+            console.log(total, $('#tong_dg').data('total'));
+            $('#tong_dg').html(total + ' đánh giá');
+            $('.ratting-count').html(total + ' đánh giá');
+            Toast.fire({
+                icon: 'success',
+                title: 'Xóa đánh giá thành công'
+            })
+        }
+    })
+}

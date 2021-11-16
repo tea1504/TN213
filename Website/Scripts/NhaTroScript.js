@@ -253,8 +253,12 @@ $(document).ready(() => {
 })
 
 
-function baocao(baocao, bibaocao) {
+function baocao(baocao, bibaocao, ten) {
     $('#baocaonguoidung').modal('show');
+    $('#ten_nguoi_dung').html(ten);
+    var data = {
+
+    }
 }
 
 function deletecmt(ma_nd, ma_nt, ngayiso, danhgia, sosao) {

@@ -130,6 +130,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\BaoCaoController.cs" />
     <Compile Include="Controllers\CheckAdminController.cs" />
     <Compile Include="Controllers\CheckLoginController.cs" />
     <Compile Include="Controllers\CheckUserController.cs" />
@@ -1222,6 +1223,7 @@
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Scripts\js\" />
+    <Folder Include="Views\BaoCao\" />
     <Folder Include="Views\CheckAdmin\" />
     <Folder Include="Views\CheckLogin\" />
     <Folder Include="Views\CheckUser\" />

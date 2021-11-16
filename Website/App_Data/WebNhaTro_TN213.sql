@@ -1142,3 +1142,26 @@ begin
 	and (@giaphong is null or @giaphong >= (select min(dbo.fn_tim_tien_phong(b.ma_nt, b.ma_lp)) from CoGia b where b.ma_nt = a.ma_nt))
 end
 go
+if exists (
+	select 1
+	from sys.objects
+	where name = N'sp_get_gia_phong_hien_tai'
+	and type = 'P'
+)
+drop proc sp_get_gia_phong_hien_tai
+go
+create proc sp_get_gia_phong_hien_tai @ma_nt int
+as
+begin
+	select a.*
+	from CoGia a, (
+		select a1.ma_nt, a1.ma_lp, max(a1.ngay) 'ngay'
+		from CoGia a1
+		where a1.ma_nt = @ma_nt
+		group by a1.ma_nt, a1.ma_lp
+	) as b
+	where a.ma_nt = b.ma_nt
+	and a.ma_lp = b.ma_lp
+	and a.ngay = b.ngay
+end
+

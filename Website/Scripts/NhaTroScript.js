@@ -246,8 +246,17 @@ $(document).ready(() => {
         })
     })
 
+    $('.modal-close').click(e => {
+        $('#baocaonguoidung').modal('hide');
+    })
 
 })
+
+
+function baocao(baocao, bibaocao) {
+    $('#baocaonguoidung').modal('show');
+}
+
 function deletecmt(ma_nd, ma_nt, ngayiso, danhgia, sosao) {
     console.log(1);
     var data = {

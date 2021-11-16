@@ -34,7 +34,7 @@ namespace Website.DAO
             var danhGia = db.DanhGias.Where(dg => dg.ma_nt == ma_nt && dg.ma_nd == ma_nd && dg.ngay == ngay).SingleOrDefault();
             if(danhGia == null)
             {
-                danhGia = db.DanhGias.Where(dg => dg.ma_nt == ma_nt && dg.ma_nd == ma_nd && dg.sosao == sosao && dg.danhgia1.Contains(danhgia)).SingleOrDefault();
+                danhGia = db.DanhGias.Where(dg => dg.ma_nt == ma_nt && dg.ma_nd == ma_nd && dg.sosao == sosao && dg.danhgia1.Contains(danhgia)).OrderByDescending(dg=>dg.ngay).Take(1).SingleOrDefault();
             }
             if (danhGia != null)
             {

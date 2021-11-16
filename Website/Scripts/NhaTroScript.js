@@ -253,11 +253,37 @@ $(document).ready(() => {
 })
 
 
-function baocao(baocao, bibaocao, ten) {
+function fbaocaonguoidung(baocao, bibaocao, ten) {
     $('#baocaonguoidung').modal('show');
     $('#ten_nguoi_dung').html(ten);
-    var data = {
+    $('#nguoi_bao_cao').val(baocao);
+    $('#nguoi_bi_bao_cao').val(bibaocao);
+}
 
+function guibaocaonguoidung() {
+    var data = {
+        'nguoi_bao_cao': $('#nguoi_bao_cao').val(),
+        'nguoi_bi_bao_cao': $('#nguoi_bi_bao_cao').val(),
+        'malbc': $('#ma_lbc').val(),
+        'lydo': $('#lydobaocaonguoidung').val(),
+    }
+    if (data.lydo) {
+        $.ajax({
+            url: '/BaoCao/NguoiDung',
+            type: 'post',
+            data: data,
+            success: res => {
+                console.log(res)
+            }
+        })
+    }
+    else {
+        Swal.fire({
+            icon: 'error',
+            title: 'Bạn chưa nhập lý do báo cáo',
+            showConfirmButton: false,
+            timer: 1000
+        })
     }
 }
 

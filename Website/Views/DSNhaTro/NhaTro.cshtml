@@ -225,7 +225,7 @@
                                             var nd = (Website.Models.UserLoginModel)HttpContext.Current.Session["USER_LOGIN"];
                                             if (cmt.ma_nd != nd.ma_nd)
                                             {
-                                                <button class="btn btn-sm btn-warning baocao" data-toggle="tooltip" title="Báo cáo người dùng này" data-ma_nd="@cmt.ma_nd" onclick="baocao(@nd.ma_nd, @cmt.ma_nd, '@cmt.NguoiDung.holot_nd @cmt.NguoiDung.ten_nd')" data-target="#baocaonguoidung"><i class="icofont-hand"></i></button>
+                                                <button class="btn btn-sm btn-warning baocao" data-toggle="tooltip" title="Báo cáo người dùng này" data-ma_nd="@cmt.ma_nd" onclick="fbaocaonguoidung(@nd.ma_nd, @cmt.ma_nd, '@cmt.NguoiDung.holot_nd @cmt.NguoiDung.ten_nd')" data-target="#baocaonguoidung"><i class="icofont-hand"></i></button>
                                             }
                                             if (nd.ma_vt == 1 || Model.ma_nd == nd.ma_nd || cmt.ma_nd == nd.ma_nd)
                                             {
@@ -310,19 +310,21 @@
             </div>
             <div class="modal-body">
                 <form name="baocaonguoidung" method="post">
+                    <input type="text" name="nguoi_bao_cao" id="nguoi_bao_cao" />
+                    <input type="text" name="nguoi_bi_bao_cao" id="nguoi_bi_bao_cao" />
                     <div class="form-group">
                         <label>Loại báo cáo</label>
-                        @Html.DropDownList("ma_lbc", (IEnumerable<SelectListItem>)ViewBag.loaiBaoCaoList, new { @class = "form-control"})
+                        @Html.DropDownList("ma_lbc", (IEnumerable<SelectListItem>)ViewBag.loaiBaoCaoList, new { @class = "form-control" })
                     </div>
                     <div class="form-group">
                         <label>Lý do báo cáo</label>
-                        <textarea class="form-control"></textarea>
+                        <textarea class="form-control" name="lydobaocaonguoidung" id="lydobaocaonguoidung"></textarea>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary modal-close" data-dismiss="modal">Hủy báo cáo</button>
-                <button type="button" class="btn btn-primary">Báo cáo</button>
+                <button type="button" class="btn btn-primary" onclick="guibaocaonguoidung()">Báo cáo</button>
             </div>
         </div>
     </div>

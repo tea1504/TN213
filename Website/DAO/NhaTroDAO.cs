@@ -40,5 +40,10 @@ namespace Website.DAO
             }
             return res;
         }
+        public NhaTro GetNhaTro(int ma_nt)
+        {
+            var res = db.NhaTroes.Where(nt=>nt.ma_nt == ma_nt).SingleOrDefault();
+            return res;
+        }
     }
 }

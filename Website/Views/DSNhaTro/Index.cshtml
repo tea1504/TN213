@@ -113,7 +113,7 @@
                                             </span>
                                         </div>
                                     </div>
-                                    <a href="course-single.html"><h5>@m.nhaTro.ten_nt</h5></a>
+                                    <a href="@Url.Action("NhaTro","DSNhaTro", new { Area = "", id = m.nhaTro.ma_nt })"><h5>@m.nhaTro.ten_nt</h5></a>
                                     <div class="course-details">
                                         <div class="couse-count"><i class="icofont-google-map"></i> @m.nhaTro.diachi_nt</div>
                                         <div class="couse-topic"><i class="icofont-phone"></i> @m.nhaTro.sdt_nt</div>
@@ -124,7 +124,7 @@
                                             <a href="team-single.html" class="ca-name">@m.nguoiDung.holot_nd @m.nguoiDung.ten_nd</a>
                                         </div>
                                         <div class="course-btn">
-                                            <a href="course-single.html" class="lab-btn-text">Xem thêm <i class="icofont-external-link"></i></a>
+                                            <a href="@Url.Action("NhaTro","DSNhaTro", new { Area = "", id = m.nhaTro.ma_nt })" class="lab-btn-text">Xem thêm <i class="icofont-external-link"></i></a>
                                         </div>
                                     </div>
                                 </div>

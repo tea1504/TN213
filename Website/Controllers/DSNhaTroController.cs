@@ -23,5 +23,24 @@ namespace Website.Controllers
             ViewBag.page = page;
             return View(res);
         }
+        public ActionResult NhaTro(int? id)
+        {
+            if(id == null)
+            {
+                return RedirectToAction("Index");
+            }
+            var res = new NhaTroDAO().GetNhaTro(id ?? 1);
+            if(res == null)
+            {
+                return RedirectToAction("Index");
+            }
+            ViewBag.tiendien = new CoTienDienNuocDAO().GetTienDien(res.ma_nt);
+            ViewBag.tiennuoc = new CoTienDienNuocDAO().GetTienNuoc(res.ma_nt);
+            ViewBag.khuvuc = new KhuVucDAO().GetAllKhuVuc();
+            var loaiBaoCao = new LoaiBaoCaoDAO().GetAllLoaiBaoCao();
+            SelectList loaiBaoCaoList = new SelectList(loaiBaoCao, "ma_lbc", "ten_lbc");
+            ViewBag.loaiBaoCaoList = loaiBaoCaoList;
+            return View(res);
+        }
     }
 }

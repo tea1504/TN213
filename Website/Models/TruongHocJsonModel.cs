@@ -1,15 +1,13 @@
-﻿namespace Website.EF
-{
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web;
 
-    [Table("TruongHoc")]
-    public partial class TruongHoc
+namespace Website.Models
+{
+    public class TruongHocJsonModel
     {
-        [Key]
         [Display(Name = "Mã trường")]
         public int ma_th { get; set; }
 
@@ -28,8 +26,6 @@
 
         [Required]
         [Display(Name = "Tọa độ")]
-        public DbGeometry toado_th { get; set; }
-
-        public virtual KhuVuc KhuVuc { get; set; }
+        public string toado_th { get; set; }
     }
 }

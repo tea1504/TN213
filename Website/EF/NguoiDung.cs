@@ -1,10 +1,8 @@
-namespace Website.EF
+﻿namespace Website.EF
 {
-    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
 
     [Table("NguoiDung")]
     public partial class NguoiDung
@@ -20,39 +18,50 @@ namespace Website.EF
         }
 
         [Key]
+        [Display(Name = "Mã người dùng")]
         public int ma_nd { get; set; }
 
+        [Display(Name = "Vai trò")]
         public int ma_vt { get; set; }
 
         [Required]
         [StringLength(15)]
+        [Display(Name = "Tên")]
         public string ten_nd { get; set; }
 
         [Required]
         [StringLength(35)]
+        [Display(Name = "Họ lót")]
         public string holot_nd { get; set; }
 
+        [Display(Name = "Giới tính")]
         public byte gioitinh_nd { get; set; }
 
         [StringLength(10)]
+        [Display(Name = "Điện thoại")]
         public string sdt_nd { get; set; }
 
         [StringLength(50)]
+        [Display(Name = "Email")]
         public string email { get; set; }
 
         [StringLength(200)]
+        [Display(Name = "Địa chỉ")]
         public string diachi { get; set; }
 
         [Required]
         [StringLength(50)]
+        [Display(Name = "Ảnh đại diện")]
         public string anh_nd { get; set; }
 
         [Required]
         [StringLength(50)]
+        [Display(Name = "Tài khoản")]
         public string taikhoan { get; set; }
 
         [Required]
         [StringLength(100)]
+        [Display(Name = "Mật khẩu")]
         public string matkhau { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

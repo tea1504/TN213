@@ -1,4 +1,4 @@
-namespace Website.EF
+﻿namespace Website.EF
 {
     using System;
     using System.Collections.Generic;
@@ -20,25 +20,32 @@ namespace Website.EF
         }
 
         [Key]
+        [Display(Name = "Mã nhà trọ")]
         public int ma_nt { get; set; }
 
+        [Display(Name = "Chủ trọ")]
         public int ma_nd { get; set; }
 
+        [Display(Name = "Khu vực")]
         public int ma_kv { get; set; }
 
         [Required]
         [StringLength(50)]
+        [Display(Name = "Tên nhà trọ")]
         public string ten_nt { get; set; }
 
         [Required]
         [StringLength(200)]
+        [Display(Name = "Địa chỉ")]
         public string diachi_nt { get; set; }
 
         [Required]
         [StringLength(10)]
+        [Display(Name = "Điện thoại")]
         public string sdt_nt { get; set; }
 
         [Required]
+        [Display(Name = "Tọa độ")]
         public DbGeometry toado_nt { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

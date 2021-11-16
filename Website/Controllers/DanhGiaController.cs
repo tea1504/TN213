@@ -17,12 +17,20 @@ namespace Website.Controllers
             var nd = new NguoiDungDAO().LayNguoiDung(res.ma_nd);
             var data = new {
                 ngay = res.ngay.ToString("dd/MM/yyyy h:mm:ss tt"),
+                ngayiso = res.ngay.ToString("yyyy-MM-ddTHH:mm:ss.fff"),
                 sosao = res.sosao,
                 danhgia = res.danhgia1,
                 anh = nd.anh_nd,
                 hoten = nd.holot_nd + " " + nd.ten_nd,
+                ma_nt = res.ma_nt,
+                ma_nd = res.ma_nd,
             };
             return Json(data, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult XoaDanhGia(int ma_nd, int ma_nt, string ngay)
+        {
+
+            return Json(1, JsonRequestBehavior.AllowGet);
         }
     }
 }

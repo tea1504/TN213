@@ -1,4 +1,5 @@
 ﻿$(document).ready(() => {
+    $('[data-toggle="tooltip"]').tooltip()
     $(".pageheader-section").hide();
     $(".pageheader-section.style-2").show();
     $('.money').each((i, e) => {
@@ -49,6 +50,14 @@
     };
     control.addTo(map);
 
+    var control1 = L.control({ position: "topleft" });
+    control1.onAdd = function (map) {
+        var div = L.DomUtil.create("div", "div1");
+        div.innerHTML = '<select id="combobox" style="background-color: white; border: solid 2px #ccc; border-radius: 5px;"></select>';
+        return div;
+    };
+    control1.addTo(map);
+
     $('#control').click(e => {
         $('#zoomcontrol').toggleClass('zoom');
         var check = $('#control i').hasClass('icofont-ui-zoom-in');
@@ -77,7 +86,7 @@
     })
 
     Fancybox.bind("[data-fancybox]", {
-        
+
     });
 
     $('#comment').click(e => {
@@ -133,6 +142,7 @@
                                     </span>
                                 </div>
                                 <p>${res.danhgia}</p>
+                                <button class="btn btn-sm btn-danger" data-toggle="tooltip" title="Xóa đánh giá này" data-ma_nd="${res.ma_nd}" data-ma_nt="${res.ma_nt}" data-ngay="${res.ngayiso}"><i class="icofont-ui-delete"></i></button>
                                 <hr />
                             </div>
                         </li>
@@ -166,6 +176,59 @@
             })
         }
 
+    });
+
+    $.getJSON('/School/GetSchool?ma_th=0').done(data => {
+        var menu = $('#combobox');
+        menu.append('<option></option>');
+        $.each(data, function (key, value) {
+            menu.append('<option value=' + value.ma_th + '>' + value.ten_th + '</option>');
+        });
+    })
+
+    var layer = L.layerGroup().addTo(map);
+
+    $('#combobox').change(e => {
+        layer.clearLayers();
+        var data = {
+            'ma_th': $('#combobox').val(),
+            'lat': lat,
+            'lng': lng,
+        };
+        $.ajax({
+            url: '/School/GetSchoolDistand',
+            type: 'post',
+            data: data,
+            success: res => {
+                console.log(res)
+                var coors = res.toado.match(/[0-9]+\.*[0-9]*/ig);
+                var truongHocMarker = L.marker([coors[1], coors[0]]).addTo(layer);
+                truongHocMarker.bindPopup("<h5>" + res.ten_th + "</h5><br/>" + res.diachi);
+                var line = L.polyline([[lat, lng], [coors[1], coors[0]]]).addTo(layer);
+                line.bindPopup(Number.parseFloat((eval(res.khoancach) * 111).toFixed(2)) + " km");
+                line.bindTooltip(Number.parseFloat((eval(res.khoancach) * 111).toFixed(2)) + " km");
+                var x = (eval(lng) + eval(coors[0])) / 2;
+                var y = (eval(lat) + eval(coors[1])) / 2;
+                map.setView([y, x], 13);
+            }
+        })
+    })
+
+    $('.del-cmt').click(e => {
+        var el = e.delegateTarget;
+        var data = {
+            'ma_nd': el.getAttribute('data-ma_nd'),
+            'ma_nt': el.getAttribute('data-ma_nt'),
+            'ngay': el.getAttribute('data-ngay'),
+        };
+        $.ajax({
+            url: '/DanhGia/XoaDanhGia',
+            type: 'post',
+            data: data,
+            success: res => {
+                console.log(res);
+            }
+        })
     })
 
 })

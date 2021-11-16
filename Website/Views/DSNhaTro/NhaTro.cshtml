@@ -68,6 +68,13 @@
                                 @total đánh giá
                             </span>
                         </div>
+                        <br />
+                        <div class="mt-3">
+                            @if (HttpContext.Current.Session["USER_LOGIN"] != null)
+                            {
+                                <button class="btn btn-warning">Báo cáo nhà trọ này</button>
+                            }
+                        </div>
                     </div>
                 </div>
             </div>
@@ -212,6 +219,18 @@
                                             </span>
                                         </div>
                                         <p>@cmt.danhgia1</p>
+                                        @if (HttpContext.Current.Session["USER_LOGIN"] != null)
+                                        {
+                                            var nd = (Website.Models.UserLoginModel)HttpContext.Current.Session["USER_LOGIN"];
+                                            if (cmt.ma_nd != nd.ma_nd)
+                                            {
+                                                <button class="btn btn-sm btn-warning baocao" data-toggle="tooltip" title="Báo cáo người dùng này" data-ma_nd="@cmt.ma_nd"><i class="icofont-hand"></i></button>
+                                            }
+                                            if (nd.ma_vt == 1 || Model.ma_nd == nd.ma_nd || cmt.ma_nd == nd.ma_nd)
+                                            {
+                                                <button class="btn btn-sm btn-danger del-cmt" data-toggle="tooltip" title="Xóa đánh giá này" data-ma_nd="@cmt.ma_nd" data-ma_nt="@cmt.ma_nt" data-ngay="@cmt.ngay.ToString("yyyy-MM-ddTHH:mm:ss.fff")"><i class="icofont-ui-delete"></i></button>
+                                            }
+                                        }
                                         <hr />
                                     </div>
                                 </li>

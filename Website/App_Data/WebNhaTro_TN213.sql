@@ -1164,4 +1164,3 @@ begin
 	and a.ma_lp = b.ma_lp
 	and a.ngay = b.ngay
 end
-

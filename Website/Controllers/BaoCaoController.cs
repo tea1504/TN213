@@ -31,7 +31,7 @@ namespace Website.Controllers
             bc.lydobaocao = lydo;
             bc.ngay = DateTime.Now;
             bc.trangthaibaocao = 1;
-            var res = new BaoCaoNguoiDungDAO().AddBaoCaoNguoiDung(bc);
+            var res = new BaoCaoNhaTroDAO().AddBaoCaoNhaTro(bc);
             return Json(res, JsonRequestBehavior.AllowGet);
         }
     }

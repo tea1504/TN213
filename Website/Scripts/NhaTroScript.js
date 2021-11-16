@@ -321,7 +321,7 @@ function guibaocaonhatro() {
                     showConfirmButton: false,
                     timer: 1000
                 });
-                $('#lydobaocaonguoidung').val("")
+                $('#lydobaocaonhatro').val("")
             }
         })
     }

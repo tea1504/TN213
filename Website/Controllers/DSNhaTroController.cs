@@ -42,5 +42,10 @@ namespace Website.Controllers
             ViewBag.loaiBaoCaoList = loaiBaoCaoList;
             return View(res);
         }
+        public ActionResult TimKiem()
+        {
+
+            return View();
+        }
     }
 }

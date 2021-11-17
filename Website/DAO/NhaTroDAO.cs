@@ -47,7 +47,23 @@ namespace Website.DAO
         }
         public List<NhaTro> GetKQTimNhaTro(int? ma_kv, int? ma_th, string ten_nt, string diachi_nt, string ten_nd, int? khoancach)
         {
-
+            List<NhaTro> res = null;
+            if(ma_th!= null)
+            {
+                TruongHoc th = new TruongHocDAO().GetTruongHoc(ma_th??1);
+                if (ma_kv != null)
+                    res = db.NhaTroes.Where(nt => nt.ma_kv == ma_kv && nt.ten_nt.Contains(ten_nt) && nt.diachi_nt.Contains(diachi_nt) && nt.NguoiDung.ten_nd.Contains(ten_nd) && nt.toado_nt.Distance(th.toado_th)*111 <= khoancach).ToList();
+                else
+                    res = db.NhaTroes.Where(nt => nt.ten_nt.Contains(ten_nt) && nt.diachi_nt.Contains(diachi_nt) && nt.NguoiDung.ten_nd.Contains(ten_nd) && nt.toado_nt.Distance(th.toado_th) * 111 <= khoancach).ToList();
+            }
+            else
+            {
+                if (ma_kv != null)
+                    res = db.NhaTroes.Where(nt => nt.ma_kv == ma_kv && nt.ten_nt.Contains(ten_nt) && nt.diachi_nt.Contains(diachi_nt) && nt.NguoiDung.ten_nd.Contains(ten_nd)).ToList();
+                else
+                    res = db.NhaTroes.Where(nt => nt.ten_nt.Contains(ten_nt) && nt.diachi_nt.Contains(diachi_nt) && nt.NguoiDung.ten_nd.Contains(ten_nd)).ToList();
+            }
+            return res;
         }
     }
 }

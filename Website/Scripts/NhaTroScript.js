@@ -10,6 +10,13 @@
     }
 });
 
+var schoolIcon = L.icon({
+    iconUrl: '/Content/img/icon/school.png',
+    iconSize: [72, 72],
+    iconAnchor: [36, 60],
+    popupAnchor: [0, -60],
+});
+
 $(document).ready(() => {
     $('[data-toggle="tooltip"]').tooltip()
     $(".pageheader-section").hide();
@@ -203,7 +210,7 @@ $(document).ready(() => {
             success: res => {
                 console.log(res)
                 var coors = res.toado.match(/[0-9]+\.*[0-9]*/ig);
-                var truongHocMarker = L.marker([coors[1], coors[0]]).addTo(layer);
+                var truongHocMarker = L.marker([coors[1], coors[0]], { icon: schoolIcon }).addTo(layer);
                 truongHocMarker.bindPopup("<h5>" + res.ten_th + "</h5><br/>" + res.diachi);
                 var line = L.polyline([[lat, lng], [coors[1], coors[0]]]).addTo(layer);
                 line.bindPopup(Number.parseFloat((eval(res.khoancach) * 111).toFixed(2)) + " km");

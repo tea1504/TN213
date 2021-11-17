@@ -45,5 +45,9 @@ namespace Website.DAO
             var res = db.NhaTroes.Where(nt=>nt.ma_nt == ma_nt).SingleOrDefault();
             return res;
         }
+        public List<NhaTro> GetKQTimNhaTro(int? ma_kv, int? ma_th, string ten_nt, string diachi_nt, string ten_nd, int? khoancach)
+        {
+
+        }
     }
 }

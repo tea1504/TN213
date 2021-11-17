@@ -53,5 +53,9 @@ namespace Website.Controllers
             ViewBag.listTruongHoc = listTruongHoc;
             return View();
         }
+        public JsonResult KetQua(int? ma_kv, int? ma_th, string ten_nt, string diachi_nt, string ten_nd, int? khoancach)
+        {
+            return Json(1, JsonRequestBehavior.AllowGet);
+        }
     }
 }

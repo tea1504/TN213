@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Website.DAO;
+using Website.EF;
 using Website.Models;
 
 namespace Website.Controllers
@@ -25,12 +26,12 @@ namespace Website.Controllers
         }
         public ActionResult NhaTro(int? id)
         {
-            if(id == null)
+            if (id == null)
             {
                 return RedirectToAction("Index");
             }
             var res = new NhaTroDAO().GetNhaTro(id ?? 1);
-            if(res == null)
+            if (res == null)
             {
                 return RedirectToAction("Index");
             }
@@ -41,6 +42,88 @@ namespace Website.Controllers
             SelectList loaiBaoCaoList = new SelectList(loaiBaoCao, "ma_lbc", "ten_lbc");
             ViewBag.loaiBaoCaoList = loaiBaoCaoList;
             return View(res);
+        }
+        public ActionResult TimKiem()
+        {
+            List<KhuVuc> khuVuc = new KhuVucDAO().GetAllKhuVuc();
+            SelectList listKhuVuc = new SelectList(khuVuc, "ma_kv", "ten_kv");
+            ViewBag.listKhuVuc = listKhuVuc;
+            List<TruongHoc> truongHoc = new TruongHocDAO().GetAllTruongHoc();
+            SelectList listTruongHoc = new SelectList(truongHoc, "ma_th", "ten_th");
+            ViewBag.listTruongHoc = listTruongHoc;
+            return View();
+        }
+        public JsonResult KetQua(int? ma_kv, int? ma_th, string ten_nt, string diachi_nt, string ten_nd, int? khoancach)
+        {
+            List<NhaTro> resNT = new NhaTroDAO().GetKQTimNhaTro(ma_kv, ma_th, ten_nt, diachi_nt, ten_nd, khoancach);
+            List<object[]> dataNT = new List<object[]>();
+            List<object[]> dataKV = new List<object[]>();
+            List<KhuVuc> resKV;
+            if (ma_kv == null)
+            {
+                resKV = new KhuVucDAO().GetAllKhuVuc();
+            }
+            else
+            {
+                resKV = new List<KhuVuc>();
+                resKV.Add(new KhuVucDAO().LayKhuVuc(ma_kv ?? 1));
+            }
+            foreach (var item in resNT)
+            {
+                object[] temp =
+                {
+                    item.ma_kv,
+                    item.ma_nd,
+                    item.ma_nt,
+                    item.toado_nt.XCoordinate,
+                    item.toado_nt.YCoordinate,
+                    item.ten_nt,
+                    item.diachi_nt,
+                };
+                dataNT.Add(temp);
+            }
+            foreach (var item in resKV)
+            {
+                object[] temp =
+                {
+                    item.ma_kv,
+                    item.ten_kv,
+                    item.toado_kv.XCoordinate,
+                    item.toado_kv.YCoordinate,
+                    item.polygon_kv.AsText(),
+                    item.ma_ms,
+                };
+                dataKV.Add(temp);
+            };
+            if (ma_th != null)
+            {
+                TruongHoc resTH = new TruongHocDAO().GetTruongHoc(ma_th ?? 1);
+                object[] dataTH =
+                {
+                    resTH.ma_th,
+                    resTH.ten_th,
+                    resTH.toado_th.XCoordinate,
+                    resTH.toado_th.YCoordinate,
+                    resTH.diachi_th,
+                };
+                var res = new
+                {
+                    dsnhatro = dataNT,
+                    dskhuvuc = dataKV,
+                    truonghoc = dataTH,
+                };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                var res = new
+                {
+                    dsnhatro = dataNT,
+                    dskhuvuc = dataKV,
+                    truonghoc = "",
+                };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
         }
     }
 }

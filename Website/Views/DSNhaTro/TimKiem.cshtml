@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "Tìm kiếm nhà trọ";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+@section style{
+    <link href="~/Content/css/TimKiemNhaTroStyle.css" rel="stylesheet" />
+}
+@section scripts{
+    <script src="~/Scripts/js/TimKiemNhaTroScript.js"></script>
+}
+<div class="container-fluid h-100">
+    <div class="row h-100">
+        <div class="col-md-3 h-100 overflow-auto">
+            <h3>@ViewBag.Title</h3>
+            <br />
+            <i>Cơ bản</i>
+            <hr />
+            <div class="form-group">
+                @Html.DropDownList("ma_kv", (IEnumerable<SelectListItem>)ViewBag.listKhuVuc, "Tất cả khu vực", new { @class = "form-control" })
+            </div>
+            <div class="form-group mt-2">
+                @Html.TextBox("ten_nt", null, new { @class = "form-control", @placeholder = "Nhập tên nhà trọ" })
+            </div>
+            <div class="form-group mt-2">
+                @Html.TextBox("diachi_nt", null, new { @class = "form-control", @placeholder = "Nhập địa chỉ nhà trọ" })
+            </div>
+            <div class="form-group mt-2">
+                @Html.TextBox("ten_nd", null, new { @class = "form-control", @placeholder = "Nhập tên chủ nhà trọ" })
+            </div>
+            <br />
+            <i>Nâng cao</i>
+            <hr />
+            <div class="form-group">
+                @Html.DropDownList("ma_th", (IEnumerable<SelectListItem>)ViewBag.listTruongHoc, "Chọn trường học", new { @class = "form-control" })
+            </div>
+            <div class="form-group mt-2">
+                @Html.TextBox("khoancach", null, new { @class = "form-control", @placeholder = "Nhập khoản cách (km)", @type = "number", @min = "0" })
+            </div>
+            <br />
+            <button class="btn w-100 btn-primary mt-2" id="sreach">Tìm kiếm</button>
+            <a href="@Url.Action("Index", "Home", new { Area = "" })" class="btn btn-outline-secondary mt-3 w-100">Trang chủ</a>
+        </div>
+        <div class="col-md-9 h-100 overflow-hidden">
+            <div id="map"></div>
+        </div>
+    </div>
+</div>
+

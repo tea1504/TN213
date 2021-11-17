@@ -92,25 +92,7 @@
                                         <li><a href="blog-single.html">Blog Single</a></li>
                                     </ul>
                                 </li>
-                                <li>
-                                    <a href="#0">Pages</a>
-                                    <ul class="lab-ul">
-                                        <li><a href="about.html">About</a></li>
-                                        <li><a href="team.html">Team</a></li>
-                                        <li><a href="instructor.html">Instructor</a></li>
-                                        <li>
-                                            <a href="#0">Shop Pages</a>
-                                            <ul class="lab-ul">
-                                                <li><a href="shop.html">Shop Page</a></li>
-                                                <li><a href="shop-single.html">Shop Details Page</a></li>
-                                                <li><a href="cart-page.html">Shop Cart Page</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="search-page.html">Search Page</a></li>
-                                        <li><a href="search-none.html">Search None</a></li>
-                                        <li><a href="404.html">404</a></li>
-                                    </ul>
-                                </li>
+                                <li><a href="@Url.Action("TimKiem", "DSNhaTro", new { Area = "" })">Tìm nhà trọ</a></li>
                                 <li><a href="@Url.Action("Index", "DSNhaTro", new { Area = "" })">Nhà trọ</a></li>
                                 @if (HttpContext.Current.Session["USER_LOGIN"] != null)
                                 {

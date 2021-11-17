@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Website.DAO;
+using Website.EF;
 using Website.Models;
 
 namespace Website.Controllers
@@ -44,7 +45,12 @@ namespace Website.Controllers
         }
         public ActionResult TimKiem()
         {
-
+            List<KhuVuc> khuVuc = new KhuVucDAO().GetAllKhuVuc();
+            SelectList listKhuVuc = new SelectList(khuVuc, "ma_kv", "ten_kv");
+            ViewBag.listKhuVuc = listKhuVuc;
+            List<TruongHoc> truongHoc = new TruongHocDAO().GetAllTruongHoc();
+            SelectList listTruongHoc = new SelectList(truongHoc, "ma_th", "ten_th");
+            ViewBag.listTruongHoc = listTruongHoc;
             return View();
         }
     }

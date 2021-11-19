@@ -65,5 +65,10 @@ namespace Website.DAO
             }
             return res;
         }
+        public int GetSoLuongNhaTro()
+        {
+            int res = db.NhaTroes.Count();
+            return res;
+        }
     }
 }

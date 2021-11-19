@@ -28,5 +28,10 @@ namespace Website.DAO
             var res = db.NguoiDungs.Find(ma_nd);
             return res;
         }
+        public int LaySoLuongNguoiDung()
+        {
+            int res = db.NguoiDungs.Count();
+            return res;
+        }
     }
 }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Website.DAO;
+using Website.EF;
 
 namespace Website.Controllers
 {
@@ -10,7 +12,9 @@ namespace Website.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            List<KhuVuc> dsKhuVuc = new KhuVucDAO().GetAllKhuVuc();
+            ViewBag.soNguoiDung = new NguoiDungDAO().LaySoLuongNguoiDung();
+            return View(dsKhuVuc);
         }
 
         public ActionResult About()

@@ -14,6 +14,7 @@ namespace Website.Controllers
         {
             List<KhuVuc> dsKhuVuc = new KhuVucDAO().GetAllKhuVuc();
             ViewBag.soNguoiDung = new NguoiDungDAO().LaySoLuongNguoiDung();
+            ViewBag.soNhaTro = new NhaTroDAO().GetSoLuongNhaTro();
             return View(dsKhuVuc);
         }
 

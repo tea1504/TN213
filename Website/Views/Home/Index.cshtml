@@ -126,22 +126,13 @@
         <div class="container">
             <div class="banner-content">
                 <h2>Tìm kiếm nhà trọ phù hợp với <span>120+</span> nhà trọ</h2>
-                <form>
-                    <select>
-                        <option>Categories</option>
-                        <option>Web Development</option>
-                        <option>Graphic Design</option>
-                        <option>Python Proramming</option>
-                        <option>JavaScript</option>
-                        <option>PHP</option>
-                    </select>
-                    <input type="text" name="search" placeholder="Search your theme">
-                    <button type="submit"><i class="icofont-search"></i></button>
+                <form style="background: #f16126;">
+                    <div class="w-100 text-center h1 py-2 mb-0"><a href="@Url.Action("Index", "DSNhaTro")" style="color:white;">Xem tất cả nhà trọ</a></div>
                 </form>
                 <p>Chúng tôi đã tập hợp với hơn 120 nhà trọ trên địa bàn quận Ninh Kiều</p>
                 <ul class="lab-ul">
-                    <li><i class="icofont-users-alt-4"></i>X người dùng</li>
-                    <li><i class="icofont-notification"></i>Y nhà trọ liên kết</li>
+                    <li><i class="icofont-users-alt-4"></i>@ViewBag.soNguoiDung người dùng</li>
+                    <li><i class="icofont-home"></i>@ViewBag.soNhaTro nhà trọ liên kết</li>
                     <li><i class="icofont-globe"></i> Tìm kiếm online</li>
                 </ul>
             </div>
@@ -176,7 +167,7 @@
                             <div class="course-item style-4">
                                 <div class="course-inner">
                                     <div class="course-thumb">
-                                        @{ 
+                                        @{
                                             string urlImage = "/Content/user/assets/images/course/16.jpg";
                                             if (nhatro.anhNT.Count() > 0)
                                             {

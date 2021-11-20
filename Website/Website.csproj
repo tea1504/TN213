@@ -1226,6 +1226,7 @@
     <Content Include="Views\DSNhaTro\NhaTro.cshtml" />
     <Content Include="Views\DSNhaTro\TimKiem.cshtml" />
     <Content Include="Views\QuanLy\Index.cshtml" />
+    <Content Include="Views\QuanLy\NhaTro.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />

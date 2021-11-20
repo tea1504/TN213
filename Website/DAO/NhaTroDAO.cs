@@ -75,5 +75,10 @@ namespace Website.DAO
             var res = db.NhaTroes.ToList();
             return res;
         }
+        public List<NhaTro> GetNhaTroTheoChuTro(int ma_nd)
+        {
+            var res = db.NhaTroes.Where(nt => nt.ma_nd == ma_nd).ToList();
+            return res;
+        }
     }
 }

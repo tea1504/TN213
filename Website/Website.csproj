@@ -137,6 +137,7 @@
     <Compile Include="Controllers\DanhGiaController.cs" />
     <Compile Include="Controllers\DSNhaTroController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\QuanLyController.cs" />
     <Compile Include="Controllers\SchoolController.cs" />
     <Compile Include="DAO\BaoCaoNguoiDungDAO.cs" />
     <Compile Include="DAO\BaoCaoNhaTroDAO.cs" />
@@ -1232,6 +1233,7 @@
     <Folder Include="Views\CheckLogin\" />
     <Folder Include="Views\CheckUser\" />
     <Folder Include="Views\DanhGia\" />
+    <Folder Include="Views\QuanLy\" />
     <Folder Include="Views\School\" />
   </ItemGroup>
   <ItemGroup>

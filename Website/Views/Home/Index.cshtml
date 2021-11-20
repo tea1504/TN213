@@ -67,23 +67,6 @@
                                 <li class="active">
                                     <a href="@Url.Action("Index", "Home", new { Area = "" })">Trang chủ</a>
                                 </li>
-
-                                <li>
-                                    <a href="#0">Courses</a>
-                                    <ul class="lab-ul">
-                                        <li><a href="course.html">Course</a></li>
-                                        <li><a href="course-single.html">Course Details</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#0">Blog</a>
-                                    <ul class="lab-ul">
-                                        <li><a href="blog.html">Blog Grid</a></li>
-                                        <li><a href="blog-2.html">Blog Style 2</a></li>
-                                        <li><a href="blog-3.html">Blog Style 3</a></li>
-                                        <li><a href="blog-single.html">Blog Single</a></li>
-                                    </ul>
-                                </li>
                                 <li><a href="@Url.Action("TimKiem", "DSNhaTro", new { Area = "" })">Tìm nhà trọ</a></li>
                                 <li><a href="@Url.Action("Index", "DSNhaTro", new { Area = "" })">Nhà trọ</a></li>
                                 @if (HttpContext.Current.Session["USER_LOGIN"] != null)
@@ -92,6 +75,10 @@
                                     if (user.ma_vt == 1)
                                     {
                                         <li><a href="@Url.Action("Index", "Dashboard", new { Area ="Admin" })">Dashboard</a></li>
+                                    }
+                                    if (user.ma_vt == 2)
+                                    {
+                                        <li><a href="@Url.Action("Index", "QuanLy", new { Area ="" })">Quản lý</a></li>
                                     }
                                 }
                             </ul>

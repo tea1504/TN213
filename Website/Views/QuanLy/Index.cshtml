@@ -1,58 +1,132 @@
 ﻿@model IEnumerable<Website.EF.NhaTro>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Quản lý nhà trọ";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
-
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ma_nd)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ma_kv)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ten_nt)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.diachi_nt)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.sdt_nt)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ma_nd)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ma_kv)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ten_nt)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.diachi_nt)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.sdt_nt)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ma_nt }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ma_nt }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ma_nt })
-        </td>
-    </tr>
+@section style{
 }
+@section scripts{
+}
+@section  breadcrumb{
+    <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home", new { Area = "" })">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">@ViewBag.Title</li>
+}
+<div class="course-section padding-tb section-bg">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <article>
+                    <div class="section-wrapper">
+                        <div class="row row-cols-1 justify-content-center g-4">
+                            @foreach (var item in Model)
+                            {
+                                <div class="col">
+                                    <div class="post-item style-2">
+                                        <div class="post-inner">
+                                            <div class="post-content">
+                                                <a href="blog-single.html"><h3>@item.ten_nt</h3></a>
+                                                <div class="meta-post">
+                                                    <ul class="lab-ul">
+                                                        <li><i class="icofont-phone"></i>@item.sdt_nt</li>
+                                                        <li><i class="icofont-google-map"></i>@item.diachi_nt</li>
+                                                        <li><i class="icofont-speech-comments"></i>@item.DanhGias.Count() Đánh giá</li>
+                                                    </ul>
+                                                </div>
+                                                <a href="blog-single.html" class="lab-btn mt-2"><span>Xem thêm <i class="icofont-external-link"></i></span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+    <ul class="default-pagination lab-ul">
+        <li>
+            <a href="@Url.Action("Index", "QuanLy", new { Area = "", page = 1 })"><i class="icofont-rounded-left"></i></a>
+        </li>
+        @if (ViewBag.max <= 5)
+        {
+            for (int i = 1; i <= ViewBag.max; i++)
+            {
+                if (i == ViewBag.page)
+                {
+                    <li>
+                        <a href="@Url.Action("Index", "QuanLy", new { Area = "", page = i })" class="active">@i</a>
+                    </li>
+                }
+                else
+                {
+                    <li>
+                        <a href="@Url.Action("Index", "QuanLy", new { Area = "", page = i })">@i</a>
+                    </li>
+                }
+            }
+        }
+        else
+        {
+            if (ViewBag.page <= 3)
+            {
+                for (int i = 1; i <= 5; i++)
+                {
+                    if (i == ViewBag.page)
+                    {
+                        <li>
+                            <a href="@Url.Action("Index", "QuanLy", new { Area = "", page = i })" class="active">@i</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li>
+                            <a href="@Url.Action("Index", "QuanLy", new { Area = "", page = i })">@i</a>
+                        </li>
+                    }
+                }
+            }
+            else if (ViewBag.page >= ViewBag.max - 2)
+            {
+                for (int i = ViewBag.max - 4; i <= ViewBag.max; i++)
+                {
+                    if (i == ViewBag.page)
+                    {
+                        <li>
+                            <a href="@Url.Action("Index", "QuanLy", new { Area = "", page = i })" class="active">@i</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li>
+                            <a href="@Url.Action("Index", "QuanLy", new { Area = "", page = i })">@i</a>
+                        </li>
+                    }
+                }
+            }
+            else
+            {
+                for (int i = ViewBag.page - 2; i <= ViewBag.page + 2; i++)
+                {
+                    if (i == ViewBag.page)
+                    {
+                        <li>
+                            <a href="@Url.Action("Index", "QuanLy", new { Area = "", page = i })" class="active">@i</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li>
+                            <a href="@Url.Action("Index", "QuanLy", new { Area = "", page = i })">@i</a>
+                        </li>
+                    }
+                }
+            }
+        }
 
-</table>
+        <li>
+            <a href="@Url.Action("Index", "QuanLy", new { Area = "", page = ViewBag.max })"><i class="icofont-rounded-right"></i></a>
+        </li>
+    </ul>
+</div>

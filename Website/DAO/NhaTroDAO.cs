@@ -70,5 +70,10 @@ namespace Website.DAO
             int res = db.NhaTroes.Count();
             return res;
         }
+        public List<NhaTro> GetAllNhaTro()
+        {
+            var res = db.NhaTroes.ToList();
+            return res;
+        }
     }
 }

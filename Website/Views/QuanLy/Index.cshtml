@@ -25,7 +25,7 @@
                                     <div class="post-item style-2">
                                         <div class="post-inner">
                                             <div class="post-content">
-                                                <a href="blog-single.html"><h3>@item.ten_nt</h3></a>
+                                                <a href="@Url.Action("NhaTro", "QuanLy", new { Area = "", id = item.ma_nt })"><h3>@item.ten_nt</h3></a>
                                                 <div class="meta-post">
                                                     <ul class="lab-ul">
                                                         <li><i class="icofont-phone"></i>@item.sdt_nt</li>
@@ -33,7 +33,7 @@
                                                         <li><i class="icofont-speech-comments"></i>@item.DanhGias.Count() Đánh giá</li>
                                                     </ul>
                                                 </div>
-                                                <a href="blog-single.html" class="lab-btn mt-2"><span>Xem thêm <i class="icofont-external-link"></i></span></a>
+                                                <a href="@Url.Action("NhaTro", "QuanLy", new { Area = "", id = item.ma_nt })" class="lab-btn mt-2"><span>Xem thêm <i class="icofont-external-link"></i></span></a>
                                             </div>
                                         </div>
                                     </div>

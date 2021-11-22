@@ -1,59 +1,130 @@
 ﻿@model Website.EF.NhaTro
 
 @{
-    ViewBag.Title = "NhaTro";
+    ViewBag.Title = Model.ten_nt;
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
-
-<h2>NhaTro</h2>
-
-<div>
-    <h4>NhaTro</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ma_nd)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ma_nd)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ma_kv)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ma_kv)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ten_nt)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ten_nt)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.diachi_nt)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.diachi_nt)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.sdt_nt)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.sdt_nt)
-        </dd>
-
-    </dl>
+@section style{
+    <link href="~/Content/css/QuanLyNhaTroStyle.css" rel="stylesheet" />
+}
+@section scripts{
+    <script src="~/Scripts/js/QuanLyNhaTroScript.js"></script>
+}
+@section  breadcrumb{
+    <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home", new { Area = "" })">Home</a></li>
+    <li class="breadcrumb-item" aria-current="page"><a href="@Url.Action("Index", "QuanLy", new { Area = "" })">Quản lý</a></li>
+    <li class="breadcrumb-item active" aria-current="page">@ViewBag.Title</li>
+}
+<div class="blog-section blog-single padding-tb section-bg">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-12">
+                <article>
+                    <div class="section-wrapper">
+                        <div class="row row-cols-1 justify-content-center g-4">
+                            <div class="col">
+                                @if (Model.DanhGias.Count > 0)
+                                {
+                                    <div class="course-section style-2 padding-tb section-bg-ash yellow-color-section">
+                                        <div class="container">
+                                            <div class="section-wrapper">
+                                                <div class="course-slider p-2">
+                                                    <div class="swiper-wrapper">
+                                                        @foreach (var item in Model.DanhGias)
+                                                        {
+                                                            <div class="swiper-slide">
+                                                                <blockquote class="mb-3 p-2">
+                                                                    <p class="text-white">@item.danhgia1</p>
+                                                                    <cite><a href="#" style="display: block; text-align: right; color: white;">...@item.NguoiDung.holot_nd @item.NguoiDung.ten_nd</a></cite>
+                                                                </blockquote>
+                                                            </div>
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <div class="col-lg-4 col-12">
+                <aside>
+                    <div class="widget widget-post">
+                        <div class="widget-header">
+                            <h5 class="title">Nhà trọ khác</h5>
+                        </div>
+                        <ul class="widget-wrapper">
+                            @foreach (var item in Model.NguoiDung.NhaTroes)
+                            {
+                                if (item.ma_nt != Model.ma_nt)
+                                {
+                                    var imgUrl = "/Content/user/assets/images/blog/01.jpg";
+                                    if (item.AnhNhaTroes.Count > 0)
+                                    {
+                                        imgUrl = "/Content/" + item.AnhNhaTroes.ElementAt(0).ten_anh;
+                                    }
+                                    <li class="d-flex flex-wrap justify-content-between">
+                                        <div class="post-thumb">
+                                            <a href="@Url.Action("NhaTro", "QuanLy", new { Area = "", id = item.ma_nt })"><img src="@imgUrl" alt="@item.ten_nt"></a>
+                                        </div>
+                                        <div class="post-content">
+                                            <a href="@Url.Action("NhaTro", "QuanLy", new { Area = "", id = item.ma_nt })"><h6>@item.ten_nt</h6></a>
+                                            <p>
+                                                <span class="ratting">
+                                                    @{
+                                                        var sosao = (int)item.DanhGias.Select(dg => dg.sosao).DefaultIfEmpty().Average();
+                                                    }
+                                                    @for (int i = 1; i <= sosao; i++)
+                                                    {
+                                                        <i class="icofont-ui-rating" style="color: #f16126"></i>
+                                                    }
+                                                    @for (int i = 1; i <= 5 - sosao; i++)
+                                                    {
+                                                        <i class="icofont-ui-rate-blank" style="color: #f16126"></i>
+                                                    }
+                                                </span>
+                                            </p>
+                                        </div>
+                                    </li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                    <div class="widget widget-instagram">
+                        <div class="widget-header">
+                            <h5 class="title">Hình ảnh <button class="btn btn-sm" id="btnaddimg" data-toggle="modal" data-target="#modaladdimg"><i class="icofont-plus-circle"></i></button></h5>
+                        </div>
+                        <ul class="widget-wrapper d-flex flex-wrap justify-content-center">
+                            @foreach (var item in Model.AnhNhaTroes)
+                            {
+                                <li><a data-rel="lightcase" href="/Content/@item.ten_anh"><img src="/Content/@item.ten_anh" alt="@item.mota_anh"></a></li>
+                            }
+                        </ul>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ma_nt }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<div class="modal" tabindex="-1" role="dialog" id="modaladdimg">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Modal body text goes here.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

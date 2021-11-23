@@ -46,5 +46,18 @@ namespace Website.Controllers
             };
             return Json(data, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult ChartData(int ma_nt)
+        {
+            object[] data =
+            {
+                new DanhGiaDAO().CountStar(ma_nt, 1),
+                new DanhGiaDAO().CountStar(ma_nt, 2),
+                new DanhGiaDAO().CountStar(ma_nt, 3),
+                new DanhGiaDAO().CountStar(ma_nt, 4),
+                new DanhGiaDAO().CountStar(ma_nt, 5),
+                0
+            };
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
     }
 }

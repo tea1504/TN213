@@ -87,7 +87,7 @@
                                         string UrlImage = "/Content/user/assets/images/course/01.jpg";
                                         if (m.anhNhaTro.Count > 0)
                                         {
-                                            UrlImage = "/Content/" + m.anhNhaTro[0].ten_anh;
+                                            UrlImage = m.anhNhaTro[0].ten_anh;
                                         }
                                     }
                                     <img src="@UrlImage" alt="course" style="height: 250px" />

@@ -192,7 +192,7 @@ go
 create table AnhNhaTro (
 	ma_nt int not null,
 	STT int not null,
-	ten_anh nvarchar(50) not null,
+	ten_anh nvarchar(200) not null,
 	mota_anh  nvarchar(1000)
 
 	constraint pk_anhnhatro_ma_nt primary key (ma_nt, STT),
@@ -620,9 +620,9 @@ values
 go
 insert into AnhNhaTro(ma_nt, STT, ten_anh, mota_anh)
 values
-	(1, 1, 'anh1.jpg', N'Nhà trọ An Gia'),
-	(1, 2, 'anh2.jpg', N'Nhà trọ Hoàng Nam'),
-	(2, 3, 'anh3.jpg', N'Nhà trọ Thới Hưng');
+	(1, 1, '/Content/ckfinder/userfiles/images/ductin/anh1.jpg', N'Nhà trọ An Gia'),
+	(1, 2, '/Content/ckfinder/userfiles/images/ductin/anh2.jpg', N'Nhà trọ An Gia'),
+	(2, 1, '/Content/ckfinder/userfiles/images/angia/anh3.jpg', N'Nhà trọ Thới Hưng');
 go
 insert into Ngay(ngay)
 values

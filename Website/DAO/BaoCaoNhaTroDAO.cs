@@ -19,5 +19,22 @@ namespace Website.DAO
             db.SaveChanges();
             return res;
         }
+        public List<BaoCaoNhaTro> GetTheoNhaTro(int ma_nt)
+        {
+            var res = db.BaoCaoNhaTroes.Where(bc => bc.ma_nt == ma_nt).ToList();
+            return res;
+        }
+        public void DeleteTheoNhaTro(int ma_nt)
+        {
+            var list = GetTheoNhaTro(ma_nt);
+            if (list != null)
+            {
+                foreach(var item in list)
+                {
+                    db.BaoCaoNhaTroes.Remove(item);
+                    db.SaveChanges();
+                }
+            }
+        }
     }
 }

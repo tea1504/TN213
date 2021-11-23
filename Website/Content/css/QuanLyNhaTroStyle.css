@@ -21,6 +21,16 @@
 button {
     outline: none;
 }
-button i{
-    color: #f16126 !important;
+
+    button i {
+        color: #f16126 !important;
+    }
+
+.modal {
+    background: #00000055 !important;
+}
+
+#map {
+    width: 100%;
+    height: 300px;
 }

@@ -18,5 +18,10 @@ namespace Website.DAO
             var res = db.LoaiPhongs.Find(ma_lp);
             return res;
         }
+        public List<LoaiPhong> GetAllLoaiPhong()
+        {
+            var res = db.LoaiPhongs.ToList();
+            return res;
+        }
     }
 }

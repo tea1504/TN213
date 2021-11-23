@@ -158,7 +158,7 @@
                                             string urlImage = "/Content/user/assets/images/course/16.jpg";
                                             if (nhatro.anhNT.Count() > 0)
                                             {
-                                                urlImage = "/Content/" + nhatro.anhNT.ElementAt(0).ten_anh;
+                                                urlImage = nhatro.anhNT.ElementAt(0).ten_anh;
                                             }
                                         }
                                         <img src="@urlImage" alt="course" style="height:181px;">

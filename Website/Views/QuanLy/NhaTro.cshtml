@@ -5,9 +5,12 @@
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
 @section style{
+    <link href="~/Content/admin/assets/plugins/datatable/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
     <link href="~/Content/css/QuanLyNhaTroStyle.css" rel="stylesheet" />
 }
 @section scripts{
+    <script src="~/Content/admin/assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
+    <script src="~/Content/admin/assets/plugins/chartjs/js/Chart.min.js"></script>
     <script src="~/Scripts/js/QuanLyNhaTroScript.js"></script>
 }
 @section  breadcrumb{
@@ -15,6 +18,10 @@
     <li class="breadcrumb-item" aria-current="page"><a href="@Url.Action("Index", "QuanLy", new { Area = "" })">Quản lý</a></li>
     <li class="breadcrumb-item active" aria-current="page">@ViewBag.Title</li>
 }
+
+@Html.TextBox("ma_nt", Model.ma_nt, new { @type = "hidden" })
+<input type="hidden" name="_lat" id="_lat" value="@Model.toado_nt.YCoordinate" />
+<input type="hidden" name="_lng" id="_lng" value="@Model.toado_nt.XCoordinate" />
 <div class="blog-section blog-single padding-tb section-bg">
     <div class="container">
         <div class="row justify-content-center">
@@ -23,8 +30,102 @@
                     <div class="section-wrapper">
                         <div class="row row-cols-1 justify-content-center g-4">
                             <div class="col">
+                                <h2 class="pb-2">Thông tin chung <a class="btn btn-sm" href="@Url.Action("Edit", "QuanLy", new { Area = "", id = Model.ma_nt })" data-toggle="tooltip" data-placement="top" title="Chỉnh sửa"><i class="icofont-edit text-secondary icofont-2x"></i></a></h2>
+                                <hr />
+                                <div class="contact-wrapper">
+                                    <div class="contact-item">
+                                        <div class="contact-thumb">
+                                            <i class="icofont-ui-office icofont-3x text-danger"></i>
+                                        </div>
+                                        <div class="contact-content">
+                                            <h6 class="title">Tên nhà trọ</h6>
+                                            <p>@Model.ten_nt</p>
+                                        </div>
+                                    </div>
+                                    <div class="contact-item">
+                                        <div class="contact-thumb">
+                                            <i class="icofont-ui-map icofont-3x text-success"></i>
+                                        </div>
+                                        <div class="contact-content">
+                                            <h6 class="title">Địa chỉ nhà trọ</h6>
+                                            <p>@Model.diachi_nt</p>
+                                        </div>
+                                    </div>
+                                    <div class="contact-item">
+                                        <div class="contact-thumb">
+                                            <i class="icofont-ui-dial-phone icofont-3x text-primary"></i>
+                                        </div>
+                                        <div class="contact-content">
+                                            <h6 class="title">Số điện thoại</h6>
+                                            <p>@Model.sdt_nt</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <h2>Bản đồ</h2>
+                                <hr />
+                                <div id="map"></div>
+                                <h2>Lịch sử chi phí</h2>
+                                <hr />
+                                <h3 class="text-center">Chi phí điện nước</h3>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <table class="table" id="tableDienNuoc">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Ngày</th>
+                                                    <th>Giá điện</th>
+                                                    <th>Giá nước</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @{ int stt = 1;}
+                                                @foreach (var item in Model.CoTienDienNuocs)
+                                                {
+                                                    <tr>
+                                                        <td>@stt</td>
+                                                        <td>@item.ngay.ToString("dd/MM/yyyy")</td>
+                                                        <td>@item.tiendien</td>
+                                                        <td>@item.tiennuoc</td>
+                                                    </tr>
+                                                    stt += 1;
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <h3 class="text-center">Chi phí phòng ở</h3>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <table class="table" id="tableGiaPhong">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Ngày</th>
+                                                    <th>Loại phòng</th>
+                                                    <th>Giá phòng</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @{ stt = 1;}
+                                                @foreach (var item in Model.CoGias)
+                                                {
+                                                    <tr>
+                                                        <td>@stt</td>
+                                                        <td>@item.ngay.ToString("dd/MM/yyyy")</td>
+                                                        <td>@item.LoaiPhong.ten_lp</td>
+                                                        <td>@item.giaphong</td>
+                                                    </tr>
+                                                    stt += 1;
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                                 @if (Model.DanhGias.Count > 0)
                                 {
+                                    <h2 class="pb-2">Các đánh giá</h2>
+                                    <hr />
                                     <div class="course-section style-2 padding-tb section-bg-ash yellow-color-section">
                                         <div class="container">
                                             <div class="section-wrapper">
@@ -45,6 +146,13 @@
                                         </div>
                                     </div>
                                 }
+                                <h2>Thống kê đánh giá</h2>
+                                <hr />
+                                <div class="card">
+                                    <div class="card-body">
+                                        <canvas id="myChart" width="400" height="200"></canvas>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -64,7 +172,7 @@
                                     var imgUrl = "/Content/user/assets/images/blog/01.jpg";
                                     if (item.AnhNhaTroes.Count > 0)
                                     {
-                                        imgUrl = "/Content/" + item.AnhNhaTroes.ElementAt(0).ten_anh;
+                                        imgUrl = item.AnhNhaTroes.ElementAt(0).ten_anh;
                                     }
                                     <li class="d-flex flex-wrap justify-content-between">
                                         <div class="post-thumb">
@@ -95,35 +203,50 @@
                     </div>
                     <div class="widget widget-instagram">
                         <div class="widget-header">
-                            <h5 class="title">Hình ảnh <button class="btn btn-sm" id="btnaddimg" data-toggle="modal" data-target="#modaladdimg"><i class="icofont-plus-circle"></i></button></h5>
+                            <h5 class="title">
+                                Hình ảnh
+                                <button class="btn btn-sm" id="btnaddimg" data-toggle="tooltip" data-placement="top" title="Thêm ảnh"><i class="icofont-plus-circle"></i></button>
+                                <a class="btn btn-sm" href="#" data-toggle="tooltip" data-placement="top" title="Chỉnh sửa"><i class="icofont-edit text-secondary"></i></a>
+                            </h5>
                         </div>
-                        <ul class="widget-wrapper d-flex flex-wrap justify-content-center">
+                        <ul class="widget-wrapper d-flex flex-wrap justify-content-center" id="containerImg">
                             @foreach (var item in Model.AnhNhaTroes)
                             {
-                                <li><a data-rel="lightcase" href="/Content/@item.ten_anh"><img src="/Content/@item.ten_anh" alt="@item.mota_anh"></a></li>
+                                <li data-src="@item.ten_anh" data-fancybox="gallery" data-caption="@item.mota_anh">
+                                    <img src="@item.ten_anh" class="img-thumbnail" style="height: 64px; width: 95px;" />
+                                </li>
                             }
                         </ul>
                     </div>
                 </aside>
+                <a class="btn btn-danger btn-delete mt-4 w-100" data-id="@Model.ma_nt">Xóa dữ liệu nhà trọ</a>
             </div>
         </div>
     </div>
 </div>
-<div class="modal" tabindex="-1" role="dialog" id="modaladdimg">
-    <div class="modal-dialog" role="document">
+<div class="modal" id="modaladdimg" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                <h5 class="modal-title" id="exampleModalLabel">Thêm ảnh mới</h5>
+                <button type="button" class="close btn-dong btn-close" data-dismiss="modal" aria-label="Close">
                 </button>
             </div>
             <div class="modal-body">
-                <p>Modal body text goes here.</p>
+                @Html.TextBox("ten_anh", "", new { @type = "hidden" })
+                <div class="form-group">
+                    <button class="btn btn-primary mb-1" id="btn-chonanh">Chọn ảnh</button>
+                    <br />
+                    <img id="img-temp" style="max-height: 250px" />
+                </div>
+                <div class="form-group">
+                    <label class="label">Mô tả ảnh</label>
+                    @Html.TextArea("mota_anh", new { @class = "form-control" })
+                </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Save changes</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary btn-dong" data-dismiss="modal">Hủy</button>
+                <button type="button" class="btn btn-primary" id="btn-themanh">thêm ảnh</button>
             </div>
         </div>
     </div>

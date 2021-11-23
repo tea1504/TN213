@@ -1,0 +1,217 @@
+﻿@model Website.EF.NhaTro
+
+@{
+    ViewBag.Title = "Chỉnh sửa nhà trọ";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+    var user = (Website.Models.UserLoginModel)HttpContext.Current.Session["USER_LOGIN"];
+}
+
+@section style{
+    <link href="~/Content/css/QuanLyThemNhaTroStyle.css" rel="stylesheet" />
+}
+@section scripts{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Scripts/js/QuanLyThemNhaTroScript.js"></script>
+}
+@section  breadcrumb{
+    <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home", new { Area = "" })">Home</a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("Index", "QuanLy", new { Area = "" })">Quản lý</a></li>
+    <li class="breadcrumb-item active" aria-current="page">@ViewBag.Title</li>
+}
+<div class="course-section padding-tb section-bg">
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="text-center">Chỉnh sửa thông tin nhà trọ</h3>
+            </div>
+            <div class="card-body">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.TextBoxFor(m => m.ma_nt, new { type = "hidden" })
+                    <h3>Thông tin cơ bản</h3>
+                    <hr />
+                    <input type="hidden" name="ma_nd" value="@user.ma_nd" />
+                    <div class="form-group row my-2">
+                        <label class="col-sm-2 col-form-label">@Html.DisplayNameFor(m => m.ten_nt) <span class="text-danger">*</span></label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(m => m.ten_nt, new { @class = "form-control" })
+                            <small class="text-danger">
+                                <i>@Html.ValidationMessageFor(m => m.ten_nt)</i>
+                            </small>
+                        </div>
+                    </div>
+                    <div class="form-group row my-2">
+                        <label class="col-sm-2 col-form-label">@Html.DisplayNameFor(m => m.diachi_nt) <span class="text-danger">*</span></label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(m => m.diachi_nt, new { @class = "form-control" })
+                            <small class="text-danger">
+                                <i>@Html.ValidationMessageFor(m => m.diachi_nt)</i>
+                            </small>
+                        </div>
+                    </div>
+                    <div class="form-group row my-2">
+                        <label class="col-sm-2 col-form-label">@Html.DisplayNameFor(m => m.sdt_nt) <span class="text-danger">*</span></label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(m => m.sdt_nt, new { @class = "form-control" })
+                            <small class="text-danger">
+                                <i>@Html.ValidationMessageFor(m => m.sdt_nt)</i>
+                            </small>
+                        </div>
+                    </div>
+                    <div class="form-group row my-2">
+                        <label class="col-sm-2 col-form-label">@Html.DisplayNameFor(m => m.ma_kv) <span class="text-danger">*</span></label>
+                        <div class="col-sm-10">
+                            @Html.DropDownList("ma_kv", (IEnumerable<SelectListItem>)ViewBag.listKhuVuc, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row my-2">
+                        <label class="col-sm-2 col-form-label">@Html.DisplayNameFor(m => m.toado_nt) <span class="text-danger">*</span></label>
+                        <div class="col-sm-4">
+                            @Html.TextBox("lng", Model.toado_nt.XCoordinate, new { @class = "form-control", @placeholder = "Kinh độ" })
+                        </div>
+                        <div class="col-sm-4">
+                            @Html.TextBox("lat", Model.toado_nt.YCoordinate, new { @class = "form-control", @placeholder = "Vĩ độ" })
+                        </div>
+                        <div class="col-sm-2">
+                            <button class="w-100 btn btn-primary" id="getLatLng">Chọn từ bản đồ</button>
+                        </div>
+                    </div>
+                    <h3>Ảnh nhà trọ</h3>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-2">
+                            <button class="btn btn-primary w-100" id="btnAddImg">Thêm ảnh</button>
+                        </div>
+                        <div class="col-md-10" id="containerImg">
+                            <table width="100%" class="table table-hover table-striped">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">Ảnh</th>
+                                        <th class="text-center">Đường dẫn</th>
+                                        <th class="text-center">Mô tả</th>
+                                        <th class="text-center">Xóa</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{ int i = 0; }
+                                    @foreach (var item in Model.AnhNhaTroes)
+                                    {
+                                        string id = "r" + i;
+                                        <tr id="@id">
+                                            <td width="200px"><img src="@item.ten_anh" class="img-fluid" /></td>
+                                            <td class="text-center">@item.ten_anh <input type="hidden" name="a[@i].ten_anh" value="@item.ten_anh"></td>
+                                            <td class="text-center">@item.mota_anh <input type="hidden" name="a[@i].mota_anh" value="@item.mota_anh"></td>
+                                            <td class="text-center"><a class="btn btn-danger" onclick=" deleterow('@id')">Xóa</a></td>
+                                        </tr>
+                                        i++;
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <h3>Chi phí</h3>
+                    <hr />
+                    <div class="form-group row my-2">
+                        <label class="col-sm-2 col-form-label">Tiền điện <span class="text-danger">*</span></label>
+                        <div class="col-sm-8">
+                            @Html.TextBox("dn.tiendien", Model.CoTienDienNuocs.OrderByDescending(dn => dn.ngay).ToList()[0].tiendien, new { @class = "form-control", @type = "number", @min = 0 })
+                        </div>
+                        <label class="col-sm-2 col-form-label">VNĐ / tháng</label>
+                    </div>
+                    <div class="form-group row my-2">
+                        <label class="col-sm-2 col-form-label">Tiền nước <span class="text-danger">*</span></label>
+                        <div class="col-sm-8">
+                            @Html.TextBox("dn.tiennuoc", Model.CoTienDienNuocs.OrderByDescending(dn => dn.ngay).ToList()[0].tiennuoc, new { @class = "form-control", @type = "number", @min = 0 })
+                        </div>
+                        <label class="col-sm-2 col-form-label">VNĐ / tháng</label>
+                    </div>
+                    <div class="row">
+                        <div class="col-5">
+                            @Html.DropDownList("ma_lp", (IEnumerable<SelectListItem>)ViewBag.listLoaiPhong, new { @class = "form-control" })
+                        </div>
+                        <div class="col-5">
+                            @Html.TextBox("giaphong", "", new { @class = "form-control mb-2", @placeholder = "Nhập giá phòng", @type = "number", @min = 0 })
+                        </div>
+                        <div class="col-2">
+                            <button type="submit" class="btn btn-primary mb-2 w-100" id="addLP">Thêm</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-hover table-striped" id="containerLoaiPhong">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">Loại phòng</th>
+                                        <th class="text-center">Số tiền<br />(VNĐ / tháng)</th>
+                                        <th class="text-center">Xóa</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <br />
+                    <hr />
+                    <button type="submit" class="btn btn-success w-100">Lưu</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal" id="modalLatLng" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered h-75" role="document">
+        <div class="modal-content h-100">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Chọn tọa độ</h5>
+                <button type="button" class="close btn-dong btn-close" data-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body h-75 p-0">
+                <div id="map" class="h-100 w-100 p-0 m-0"></div>
+            </div>
+            <div class="modal-footer">
+                <div>
+                    <span id="tempLat"></span>
+                    <span id="tempLng"></span>
+                </div>
+                <button type="button" class="btn btn-secondary btn-dong" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" id="getCoor">Lưu lại</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="modalAddImg" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Thêm ảnh</h5>
+                <button type="button" class="close btn-dong btn-close" data-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                @Html.TextBox("ten_anh", "", new { @type = "hidden" })
+                <div class="form-group">
+                    <button class="btn btn-primary mb-1" id="btn-chonanh">Chọn ảnh</button>
+                    <br />
+                    <img id="img-temp" style="max-height: 250px" />
+                </div>
+                <div class="form-group">
+                    <label class="label">Mô tả ảnh</label>
+                    @Html.TextArea("mota_anh", new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-dong" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" id="addImg">Thêm ảnh</button>
+            </div>
+        </div>
+    </div>
+</div>

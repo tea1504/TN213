@@ -28,5 +28,29 @@ namespace Website.DAO
             }
             return res;
         }
+        public CoGia Add(CoGia cg)
+        {
+            cg.ngay = DateTime.Now;
+            var res = db.CoGias.Add(cg);
+            db.SaveChanges();
+            return res;
+        }
+        public List<CoGia> GetTheoNhaTro(int ma_nt)
+        {
+            var res = db.CoGias.Where(cg => cg.ma_nt == ma_nt).ToList();
+            return res;
+        }
+        public void DeleteTheoMaNT(int ma_nt)
+        {
+            var list = GetTheoNhaTro(ma_nt);
+            if (list != null)
+            {
+                foreach (var item in list)
+                {
+                    db.CoGias.Remove(item);
+                    db.SaveChanges();
+                }
+            }
+        }
     }
 }

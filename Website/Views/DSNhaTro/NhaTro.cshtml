@@ -15,7 +15,7 @@
     string UrlImage = "/Content/user/assets/images/course/01.jpg";
     if (Model.AnhNhaTroes.Count > 0)
     {
-        UrlImage = "/Content/" + Model.AnhNhaTroes.ElementAt(0).ten_anh;
+        UrlImage = Model.AnhNhaTroes.ElementAt(0).ten_anh;
     }
 }
 @section style{
@@ -99,8 +99,8 @@
                             <div class="swiper-slide">
                                 <div class="sponsor-iten">
                                     <div class="sponsor-thumb">
-                                        <div data-src="/Content/@item.ten_anh" data-fancybox="gallery" data-caption="@item.mota_anh">
-                                            <img src="/Content/@item.ten_anh" />
+                                        <div data-src="@item.ten_anh" data-fancybox="gallery" data-caption="@item.mota_anh">
+                                            <img src="@item.ten_anh" />
                                         </div>
                                     </div>
                                 </div>

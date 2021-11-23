@@ -80,5 +80,39 @@ namespace Website.DAO
             var res = db.NhaTroes.Where(nt => nt.ma_nd == ma_nd).ToList();
             return res;
         }
+        public NhaTro Add(NhaTro nt)
+        {
+            var res = db.NhaTroes.Add(nt);
+            db.SaveChanges();
+            return res;
+        }
+        public NhaTro Edit(NhaTro nt)
+        {
+            var res = db.NhaTroes.Find(nt.ma_nt);
+            res.ma_kv = nt.ma_kv;
+            res.ma_nd = nt.ma_nd;
+            res.ten_nt = nt.ten_nt;
+            res.diachi_nt = nt.diachi_nt;
+            res.sdt_nt = nt.sdt_nt;
+            res.toado_nt = nt.toado_nt;
+            db.SaveChanges();
+            return res;
+        }
+        public void Delete(int ma_nt)
+        {
+            var cg = new CoGiaDAO();
+            var dn = new CoTienDienNuocDAO();
+            var anh = new AnhNhaTroDAO();
+            var bc = new BaoCaoNhaTroDAO();
+            var dg = new DanhGiaDAO();
+            cg.DeleteTheoMaNT(ma_nt);
+            dn.DeteleTheoNhaTro(ma_nt);
+            anh.DeleteTheoNhaTro(ma_nt);
+            bc.DeleteTheoNhaTro(ma_nt);
+            dg.DeleteTheoNhaTro(ma_nt);
+            var nt = GetNhaTro(ma_nt);
+            db.NhaTroes.Remove(nt);
+            db.SaveChanges();
+        }
     }
 }

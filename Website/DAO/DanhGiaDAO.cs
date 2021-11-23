@@ -44,5 +44,24 @@ namespace Website.DAO
             }
             return new DanhGia();
         }
+        public List<DanhGia> GetTheoNhaTro(int ma_nt)
+        {
+            var res = db.DanhGias.Where(dg => dg.ma_nt == ma_nt).ToList();
+            return res;
+        }
+        public void DeleteTheoNhaTro(int ma_nt)
+        {
+            var list = GetTheoNhaTro(ma_nt);
+            foreach(var item in list)
+            {
+                db.DanhGias.Remove(item);
+                db.SaveChanges();
+            }
+        }
+        public int CountStar(int ma_nt, int num)
+        {
+            var res = db.DanhGias.Where(dg => dg.ma_nt == ma_nt && dg.sosao == num).Count();
+            return res;
+        }
     }
 }

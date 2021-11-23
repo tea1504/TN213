@@ -20,7 +20,7 @@ namespace Website.EF
         public int STT { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [StringLength(200)]
         public string ten_anh { get; set; }
 
         [Column(TypeName = "text")]

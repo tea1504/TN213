@@ -1,0 +1,26 @@
+﻿blockquote {
+    color: white;
+    position: relative;
+    background: #f16126;
+}
+
+    blockquote::before {
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        content: "";
+        font-size: 1.875rem;
+        font-family: IcoFont !important;
+    }
+
+    blockquote p {
+        padding-left: 40px;
+        padding-top: 15px;
+    }
+
+button {
+    outline: none;
+}
+button i{
+    color: #f16126 !important;
+}

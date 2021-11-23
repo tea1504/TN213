@@ -8,7 +8,7 @@ using Website.Models;
 
 namespace Website.Controllers
 {
-    public class CheckUserController : Controller
+    public class CheckUserController : CheckLoginController
     {
         protected override void OnActionExecuted(ActionExecutedContext filterContext)
         {

@@ -125,5 +125,57 @@ namespace Website.Controllers
                 return Json(res, JsonRequestBehavior.AllowGet);
             }
         }
+        public JsonResult ThongTinNhaTro(int ma_nt)
+        {
+            var res = new NhaTroDAO().GetNhaTro(ma_nt);
+            var sosao = new DanhGiaDAO().TBSoSaoTheoNhaTro(ma_nt);
+            List<object> anh = new List<object>();
+            List<object> danhgia = new List<object>();
+            foreach (var item in res.AnhNhaTroes)
+            {
+                var temp = new
+                {
+                    ten_anh = item.ten_anh,
+                    mota = item.mota_anh
+                };
+                anh.Add(temp);
+            }
+            foreach (var item in res.DanhGias)
+            {
+                var temp = new
+                {
+                    ngay = item.ngay.ToShortDateString(),
+                    sosao = item.sosao,
+                    danhgia = item.danhgia1,
+                    user = new
+                    {
+                        ten = item.NguoiDung.ten_nd,
+                        holot = item.NguoiDung.holot_nd,
+                        anh = item.NguoiDung.anh_nd
+                    }
+                };
+                danhgia.Add(temp);
+            }
+            var data = new
+            {
+                nhatro = new
+                {
+                    ma_nt = res.ma_nt,
+                    ten_nt = res.ten_nt,
+                    diachi_nt = res.diachi_nt,
+                    sdt_nt = res.sdt_nt,
+                    sosao = sosao
+                },
+                chutro = new
+                {
+                    ten = res.NguoiDung.ten_nd,
+                    holot = res.NguoiDung.holot_nd,
+                    anh = res.NguoiDung.anh_nd
+                },
+                anh = anh,
+                danhgia = danhgia
+            };
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
     }
 }

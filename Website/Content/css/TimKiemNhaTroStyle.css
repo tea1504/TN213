@@ -8,3 +8,28 @@
     left: 80px;
     z-index: 1000;
 }
+
+#container-info i {
+    color: #f16126;
+}
+
+#chutro div {
+    display: inline;
+}
+
+    #chutro div img, #cmt img {
+        height: 60px;
+        width: 60px;
+        border-radius: 50%;
+    }
+
+#image {
+    overflow-y: auto;
+    white-space: nowrap;
+}
+#image div {
+    display: inline;
+}
+#image div img {
+    height: 100px;
+}

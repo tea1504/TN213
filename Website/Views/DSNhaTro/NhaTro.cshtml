@@ -129,7 +129,7 @@
 
                     <div class="authors">
                         <div class="author-thumb">
-                            <img src="~/Content/@Model.NguoiDung.anh_nd" alt="@Model.NguoiDung.ten_nd">
+                            <img src="@Model.NguoiDung.anh_nd" alt="@Model.NguoiDung.ten_nd">
                         </div>
                         <div class="author-content">
                             <h5>@Model.NguoiDung.holot_nd @Model.NguoiDung.ten_nd</h5>
@@ -204,7 +204,7 @@
                                 string id = cmt.ma_nd + "_" + cmt.ma_nt + "_" + cmt.ngay.ToString("yyyy-MM-ddTHH:mm:ss.fff");
                                 <li class="comment" id="@id">
                                     <div class="com-thumb">
-                                        <img alt="@cmt.NguoiDung.ten_nd" src="~/Content/@cmt.NguoiDung.anh_nd">
+                                        <img alt="@cmt.NguoiDung.ten_nd" src="@cmt.NguoiDung.anh_nd">
                                     </div>
                                     <div class="com-content">
                                         <div class="com-title">

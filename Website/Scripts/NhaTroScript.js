@@ -148,7 +148,7 @@ $(document).ready(() => {
                         `
                         <li class="comment" id="${id}">
                             <div class="com-thumb">
-                                <img alt="${res.hoten}" src="/Content/${res.anh}">
+                                <img alt="${res.hoten}" src="${res.anh}">
                             </div>
                             <div class="com-content">
                                 <div class="com-title">

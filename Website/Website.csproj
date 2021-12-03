@@ -143,7 +143,9 @@
     <Compile Include="Controllers\DSNhaTroController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\QuanLyController.cs" />
+    <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Controllers\SchoolController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DAO\BaoCaoNguoiDungDAO.cs" />
     <Compile Include="DAO\BaoCaoNhaTroDAO.cs" />
     <Compile Include="DAO\LoaiBaoCaoDAO.cs" />
@@ -180,6 +182,7 @@
     <Compile Include="Models\DSNhaTroModel.cs" />
     <Compile Include="Models\FilterNhaTroModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Models\TruongHocJsonModel.cs" />
     <Compile Include="Models\UserLoginModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1862,7 +1865,9 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\js\EditUserScript.js" />
     <Content Include="Scripts\js\HomeScript.js" />
+    <Content Include="Scripts\js\QuanLyEditnhaTroScript.js" />
     <Content Include="Scripts\js\QuanLyNhaTroScript.js" />
     <Content Include="Scripts\js\QuanLyThemNhaTroScript.js" />
     <Content Include="Scripts\js\TimKiemNhaTroScript.js" />
@@ -1894,6 +1899,9 @@
     <Content Include="Views\QuanLy\NhaTro.cshtml" />
     <Content Include="Views\QuanLy\Create.cshtml" />
     <Content Include="Views\QuanLy\Edit.cshtml" />
+    <Content Include="Views\Register\Index.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />

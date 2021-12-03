@@ -46,12 +46,12 @@
                     @if (HttpContext.Current.Session["USER_LOGIN"] == null)
                     {
                         <a href="@Url.Action("Index", "Login", new { Area = "" })" class="login"><i class="icofont-login"></i> <span>LOG IN</span> </a>
-                        <a href="signup.html" class="signup"><i class="icofont-edit"></i> <span>SIGN UP</span> </a>
+                        <a href="@Url.Action("Index", "Register", new { Area = "" })" class="signup"><i class="icofont-edit"></i> <span>SIGN UP</span> </a>
                     }
                     else
                     {
                         var user = (UserLoginModel)HttpContext.Current.Session["USER_LOGIN"];
-                        <a href="#" class="login"><i class="icofont-user"></i> <span>@user.holot_nd @user.ten_nd</span> </a>
+                        <a href="@Url.Action("Index", "User", new { Area = "" })" class="login"><i class="icofont-user"></i> <span>@user.holot_nd @user.ten_nd</span> </a>
                         <a href="@Url.Action("Dangxuat", "Login", new { Area = "", HttpContext.Current.Request.Url.AbsolutePath })" class="signup"><i class="icofont-logout"></i> <span>Đăng xuất</span> </a>
                     }
                     <!-- toggle icons -->

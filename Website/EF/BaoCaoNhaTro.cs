@@ -28,7 +28,7 @@ namespace Website.EF
         [Column(Order = 3)]
         public DateTime ngay { get; set; }
 
-        [Column(TypeName = "text")]
+        [Column(TypeName = "nvarchar")]
         public string lydobaocao { get; set; }
 
         public byte? trangthaibaocao { get; set; }

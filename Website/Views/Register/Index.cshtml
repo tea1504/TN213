@@ -1,5 +1,4 @@
-﻿@model Website.Models.LoginModel
-
+﻿@model Website.Models.RegisterModel
 @{
     Layout = null;
 }
@@ -20,7 +19,7 @@
     <link rel="stylesheet" href="~/Content/user/assets/css/lightcase.css">
     <link rel="stylesheet" href="~/Content/user/assets/css/style.css">
     <style>
-        html, body{
+        html, body {
             height: 100%;
         }
     </style>
@@ -41,13 +40,31 @@
     <div class="login-section padding-tb section-bg h-100">
         <div class="container">
             <div class="account-wrapper">
-                <h3 class="title">Đăng nhập</h3>
-                @using (Html.BeginForm("DangNhap", "Login", FormMethod.Post, new { @class = "account-form" }))
+                <h3 class="title">Đăng ký tài khoản</h3>
+                @using (Html.BeginForm("DangKy", "Register", FormMethod.Post, new { @class = "account-form" }))
                 {
                     @Html.AntiForgeryToken()
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    <input type="hidden" value="@Request.Params["path"]" name="path"/>
                     <div class="form-group">
+                        @Html.TextBoxFor(m => m.holot_nd, new { @placeholder = "Họ lót" })
+                        <div>
+                            <small>@Html.ValidationMessageFor(m => m.holot_nd, "", new { @class = "text-danger" })</small>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(m => m.ten_nd, new { @placeholder = "Tên" })<div>
+                            <small>@Html.ValidationMessageFor(m => m.ten_nd, "", new { @class = "text-danger" })</small>
+                        </div>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        @Html.RadioButtonFor(m => m.gioitinh_nd, 1, new { @class = "form-check-input", id = "gioitinh_nd1", @checked = "checked" })
+                        <label class="form-check-label" for="gioitinh_nd1">Nam</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        @Html.RadioButtonFor(m=>m.gioitinh_nd, 0, new { @class = "form-check-input", id= "gioitinh_nd2" })
+                        <label class="form-check-label" for="gioitinh_nd2">Nữ</label>
+                    </div>
+                    <div class="form-group mt-2">
                         @Html.TextBoxFor(m => m.taikhoan, new { @placeholder = "Tài khoản" })
                         <div>
                             <small>@Html.ValidationMessageFor(m => m.taikhoan, "", new { @class = "text-danger" })</small>
@@ -59,12 +76,21 @@
                             <small>@Html.ValidationMessageFor(m => m.matkhau, "", new { @class = "text-danger" })</small>
                         </div>
                     </div>
+                    <div class="form-group">
+                        @Html.PasswordFor(m => m.Confirmpwd, new { @placeholder = "Nhập lại khẩu" })
+                        <div>
+                            <small>@Html.ValidationMessageFor(m => m.Confirmpwd, "", new { @class = "text-danger" })</small>
+                        </div>
+                    </div>
+                    <div class="">
+                        <input class="form-check-input" type="checkbox" id="ma_vt" name="ma_vt" value="2">
+                        <label class="form-check-label" for="ma_vt">Tôi là chủ nhà trọ</label>
+                    </div>
                     <div class="form-group text-center">
-                        <button class="d-block lab-btn"><span>Đăng nhập</span></button>
+                        <button class="d-block lab-btn"><span>Đăng ký</span></button>
                     </div>
                 }
                 <div class="account-bottom">
-                    <span class="d-block cate pt-10">Chưa có tài khoản?  <a href="@Url.Action("Index", "Register", new { Area = "" })">Sign Up</a></span>
                     <span class="or"><span>or</span></span>
                     <h5 class="subtitle">Login With Social Media</h5>
                     <ul class="lab-ul social-icons justify-content-center">

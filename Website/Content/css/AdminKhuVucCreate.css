@@ -1,2 +1,4 @@
-﻿body {
+﻿#preview-color {
+    background: gray;
+    border-radius: 10px;
 }

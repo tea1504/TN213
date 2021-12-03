@@ -108,11 +108,11 @@ create table NguoiDung (
 	holot_nd nvarchar(35)not null,
 	gioitinh_nd tinyint not null,
 	sdt_nd char(10),
-	email nchar(50),
+	email varchar(50),
 	diachi nvarchar(200),
-	anh_nd nchar(50) not null,
-	taikhoan nchar(50) not null,
-	matkhau nchar(100) not null
+	anh_nd varchar(200) not null,
+	taikhoan varchar(50) not null,
+	matkhau varchar(100) not null
 
 	constraint pk_nguoidung_ma_nd primary key (ma_nd),
 	constraint fp_nguoidung_ma_vt_vaitro_ma_vt foreign key (ma_vt) references VaiTro(ma_vt),
@@ -296,7 +296,7 @@ create table DanhGia (
 	ma_nt int not null,
 	ngay datetime not null,
 	ma_nd int not null,
-	danhgia  nvarchar(1000) ,
+	danhgia nvarchar(1000) ,
 	sosao int not null
 
 	constraint pk_danhgia primary key (ma_nt, ngay),

@@ -20,7 +20,7 @@ namespace Website.EF
 
         public int ma_nd { get; set; }
 
-        [Column("danhgia", TypeName = "text")]
+        [Column("danhgia", TypeName = "nvarchar")]
         public string danhgia1 { get; set; }
 
         public int sosao { get; set; }

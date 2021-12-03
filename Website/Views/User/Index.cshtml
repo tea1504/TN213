@@ -1,0 +1,123 @@
+﻿@model Website.EF.NguoiDung
+
+@{
+    ViewBag.Title = Model.holot_nd + " " + Model.ten_nd;
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+@section style{
+
+}
+@section scripts{
+    
+}
+@section  breadcrumb{
+    <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home", new { Area = "" })">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">@ViewBag.Title</li>
+}
+
+<!-- instructor Single Section Starts Here -->
+<section class="instructor-single-section padding-tb section-bg">
+    <div class="container">
+        <div class="instructor-wrapper">
+            <div class="instructor-single-top">
+                <div class="instructor-single-item d-flex flex-wrap justify-content-between">
+                    <div class="instructor-single-thumb">
+                        <img src="@Model.anh_nd" alt="instructor">
+                    </div>
+                    <div class="instructor-single-content">
+                        <h4 class="title">@Model.holot_nd @Model.ten_nd</h4>
+                        <p class="ins-dege">@Model.VaiTro.ten_vt</p>
+                        <br />
+                        <br />
+                        <hr />
+                        <h6 class="subtitle">Thông tin cá nhân <a class="btn btn-sm" href="@Url.Action("Edit", "User", new { Area = "" })" data-toggle="tooltip" data-placement="top" title="Chỉnh sửa"><i class="icofont-edit text-secondary icofont-2x"></i></a></h6>
+                        <ul class="lab-ul">
+                            <li class="d-flex flex-wrap justify-content-start">
+                                <span class="list-name">Giới tính</span>
+                                @if (Model.gioitinh_nd == 0)
+                                {
+                                    <span class="list-attr">Nữ</span>
+                                }
+                                else
+                                {
+                                    <span class="list-attr">Nam</span>
+                                }
+                            </li>
+                            <li class="d-flex flex-wrap justify-content-start">
+                                <span class="list-name">Số điện thoại</span>
+                                <span class="list-attr">@Model.sdt_nd</span>
+                            </li>
+                            <li class="d-flex flex-wrap justify-content-start">
+                                <span class="list-name">Email</span>
+                                <span class="list-attr">@Model.email</span>
+                            </li>
+                            <li class="d-flex flex-wrap justify-content-start">
+                                <span class="list-name">Địa chỉ</span>
+                                <span class="list-attr">@Model.diachi</span>
+                            </li>
+                            <li class="d-flex flex-wrap justify-content-start">
+                                <span class="list-name">Follow Us</span>
+                                <ul class="lab-ul list-attr d-flex flex-wrap justify-content-start">
+                                    <li>
+                                        <a class="twitter" href="#"><i class="icofont-twitter"></i></a>
+                                    </li>
+                                    <li>
+                                        <a class="instagram" href="#"><i class="icofont-instagram"></i></a>
+                                    </li>
+                                    <li>
+                                        <a class="basketball" href="#"><i class="icofont-basketball"></i></a>
+                                    </li>
+                                    <li>
+                                        <a class="vimeo" href="#"><i class="icofont-vimeo"></i></a>
+                                    </li>
+                                    <li>
+                                        <a class="beahnce" href="#"><i class="icofont-behance"></i></a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="instructor-single-bottom d-flex flex-wrap mt-4">
+                <div class="col-xl-12 pb-5 pb-xl-0 justify-content-lg-start justify-content-between">
+                    <h4 class="subtitle">Personal Language Skill</h4>
+                    <div class="row justify-content-center">
+                        <div class="col">
+                            <div class="count-item">
+                                <div class="count-inner">
+                                    <div class="count-content">
+                                        <h2><span class="count" data-to="@Model.DanhGias.Count" data-speed="500">@Model.DanhGias.Count</span></h2>
+                                        <p>Lần đánh giá</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="count-item">
+                                <div class="count-inner">
+                                    <div class="count-content">
+                                        <h2><span class="count" data-to="@Model.BaoCaoNguoiDungs.Count" data-speed="500">@Model.BaoCaoNguoiDungs.Count</span></h2>
+                                        <p>Lần báo cáo</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="count-item">
+                                <div class="count-inner">
+                                    <div class="count-content">
+                                        <h2><span class="count" data-to="@Model.BaoCaoNguoiDungs1.Count" data-speed="500">@Model.BaoCaoNguoiDungs1.Count</span></h2>
+                                        <p>Lần bị báo cáo</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- instructor Single Section Ends Here -->

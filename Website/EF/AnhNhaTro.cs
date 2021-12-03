@@ -23,7 +23,7 @@ namespace Website.EF
         [StringLength(200)]
         public string ten_anh { get; set; }
 
-        [Column(TypeName = "text")]
+        [Column(TypeName = "nvarchar")]
         public string mota_anh { get; set; }
 
         public virtual NhaTro NhaTro { get; set; }

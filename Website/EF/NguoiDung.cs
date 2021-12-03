@@ -50,7 +50,7 @@
         public string diachi { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [StringLength(200)]
         [Display(Name = "Ảnh đại diện")]
         public string anh_nd { get; set; }
 

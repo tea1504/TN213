@@ -1,44 +1,59 @@
 ﻿@model Website.EF.KhuVuc
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Thêm mới khu vực";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
+@section Style {
 
-<h2>Create</h2>
+}
+@section Scripts {
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>KhuVuc</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.ma_ms, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ma_ms, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ma_ms, "", new { @class = "text-danger" })
-            </div>
+}
+@section breadcrumb{
+    <div class="page-breadcrumb d-none d-md-flex align-items-center mb-3">
+        <div class="breadcrumb-title pr-3">@ViewBag.Title</div>
+        <div class="pl-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0 p-0">
+                    <li class="breadcrumb-item">
+                        <a href="@Url.Action("Index", "Dashboard", new { Area = "Admin" })"><i class="bx bx-home-alt"></i></a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="@Url.Action("Index", "KhuVuc", new { Area = "Admin" })">Quản lý khu vực</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">@ViewBag.Title</li>
+                </ol>
+            </nav>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ten_kv, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ten_kv, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ten_kv, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
     </div>
 }
+<div class="card">
+    <div class="card-header">
+        <h2 class="text-center">@ViewBag.Title</h2>
+    </div>
+    <div class="card-body">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group row">
+                @Html.LabelFor(m => m.ten_kv, new { @class = "col-sm-2 col-form-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.ten_kv, new { @class = "form-control" })
+                    <small class="form-text text-danger">@Html.ValidationMessageFor(m => m.ten_kv)</small>
+                </div>
+            </div>
+            <div class="form-group row">
+                @Html.LabelFor(m => m.ten_kv, new { @class = "col-sm-2 col-form-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.ten_kv, new { @class = "form-control" })
+                    <small class="form-text text-danger">@Html.ValidationMessageFor(m => m.ten_kv)</small>
+                </div>
+            </div>
+            <button class="btn btn-primary btn-block">Lưu</button>
+        }
+    </div>
 </div>

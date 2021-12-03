@@ -158,6 +158,7 @@
     <Compile Include="DAO\DanhGiaDAO.cs" />
     <Compile Include="DAO\KhuVucDAO.cs" />
     <Compile Include="DAO\LoginDAO.cs" />
+    <Compile Include="DAO\MauSacDAO.cs" />
     <Compile Include="DAO\NguoiDungDAO.cs" />
     <Compile Include="DAO\NhaTroDAO.cs" />
     <Compile Include="DAO\TruongHocDAO.cs" />

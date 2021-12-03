@@ -30,6 +30,9 @@ namespace Website.Areas.Admin.Controllers
         }
         public ActionResult Create()
         {
+            List<MauSac> mauSac = new MauSacDAO().GetAll();
+            SelectList listMauSac = new SelectList(mauSac, "ma_ms", "ten_ms");
+            ViewBag.listMauSac = listMauSac;
             return View();
         }
     }

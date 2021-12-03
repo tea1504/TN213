@@ -1511,6 +1511,7 @@
     <Content Include="Content\ckfinder\skins\v1\skin.js" />
     <Content Include="Content\ckfinder\skins\v1\uipanel.css" />
     <Content Include="Content\ckfinder\translations.txt" />
+    <Content Include="Content\css\AdminKhuVucCreate.css" />
     <Content Include="Content\css\AdminKhuVucStyle.css" />
     <Content Include="Content\css\NhaTroStyle.css" />
     <Content Include="Content\css\QuanLyNhaTroStyle.css" />

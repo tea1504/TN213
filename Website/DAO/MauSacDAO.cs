@@ -9,7 +9,7 @@ namespace Website.DAO
     public class MauSacDAO
     {
         NhaTroDBContext db = null;
-        MauSacDAO()
+        public MauSacDAO()
         {
             db = new NhaTroDBContext();
         }

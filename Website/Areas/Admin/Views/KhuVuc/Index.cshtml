@@ -4,15 +4,15 @@
     ViewBag.Title = "Quản lý khu vực";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-@section Scripts {
-
-}
 @section Style {
 
 }
+@section Scripts {
+    <script src="~/Scripts/js/AdminKhuVucScript.js"></script>
+}
 @section breadcrumb{
     <div class="page-breadcrumb d-none d-md-flex align-items-center mb-3">
-        <div class="breadcrumb-title pr-3">User Profile</div>
+        <div class="breadcrumb-title pr-3">@ViewBag.Title</div>
         <div class="pl-3">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0 p-0">
@@ -31,24 +31,47 @@
         <h2 class="text-center">@ViewBag.title</h2>
     </div>
     <div class="card-body">
-        <table class="table" id="myTable">
+        <table class="table table-striped table-hover" id="myTable">
             <thead>
                 <tr>
-                    <th>Mã khu vực</th>
-                    <th>Tên khu vực</th>
-                    <th>Màu tượng trưng</th>
+                    <th class="text-center">Mã khu vực</th>
+                    <th class="text-center">Tên khu vực</th>
+                    <th class="text-center">Màu tượng trưng</th>
+                    <th class="text-center">Thao tác</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr>
+                    <tr id="kv_@item.ma_kv">
                         <td>@item.ma_kv</td>
                         <td>@item.ten_kv</td>
-                        <td>@item.ma_ms</td>
+                        <td class="text-center"><span class="badge badge-pill text-white" style="background-color: #@item.ma_ms">@item.MauSac.ten_ms</span></td>
+                        <td class="text-center">
+                            <span data-toggle="tooltip" data-placement="top" title="Xem"><button class="btn btn-sm btn-white" data-toggle="modal" data-target="#modalMap" data-id="@item.ma_kv"><i class="bx bx-map"></i></button></span>
+                            <a href="#" class="btn btn-sm btn-light-success" data-toggle="tooltip" data-placement="top" title="Chỉnh sửa"><i class="bx bx-pencil"></i></a>
+                            <button class="btn btn-sm btn-light-danger" data-toggle="tooltip" data-placement="top" title="Xóa"><i class="bx bx-trash"></i></button>
+                        </td>
                     </tr>
                 }
             </tbody>
         </table>
+    </div>
+</div>
+
+<!-- Modal Edit-->
+<div class="modal fade" id="modalMap" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="labelMap"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="map"></div>
+            </div>
+        </div>
     </div>
 </div>

@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Website.EF.KhuVuc>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ma_ms)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ten_kv)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ma_ms)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ten_kv)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ma_kv }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ma_kv }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ma_kv })
+        </td>
+    </tr>
+}
+
+</table>

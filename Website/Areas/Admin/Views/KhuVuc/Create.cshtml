@@ -47,7 +47,7 @@
                 </div>
             </div>
             <div class="form-group row">
-                @Html.LabelFor(m => m.ten_kv, new { @class = "col-sm-2 col-form-label" })
+                @Html.LabelFor(m => m.ma_ms, new { @class = "col-sm-2 col-form-label" })
                 <div class="col-sm-9">
                     @Html.DropDownListFor(m=>m.ma_ms, (IEnumerable<SelectListItem>)ViewBag.listMauSac, "Chọn màu sắc", new { @class = "form-control" })
                     <small class="form-text text-danger">@Html.ValidationMessageFor(m => m.ten_kv)</small>

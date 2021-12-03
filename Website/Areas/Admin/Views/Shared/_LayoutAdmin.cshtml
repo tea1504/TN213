@@ -31,6 +31,8 @@
     <link rel="stylesheet" href="~/Content/admin/assets/css/app.css" />
     <link rel="stylesheet" href="~/Content/admin/assets/css/dark-sidebar.css" />
     <link rel="stylesheet" href="~/Content/admin/assets/css/dark-theme.css" />
+    <link href="~/Content/leaflet/css/leaflet.css" rel="stylesheet" />
+    <link href="~/Content/leaflet/css/leaflet.draw.css" rel="stylesheet" />
 
     @RenderSection("Style", false)
 </head>
@@ -85,6 +87,8 @@
         new PerfectScrollbar('.dashboard-social-list');
         new PerfectScrollbar('.dashboard-top-countries');
     </script>
+    <script src="~/Content/leaflet/js/leaflet.js"></script>
+    <script src="~/Content/leaflet/js/leaflet.draw.js"></script>
     @RenderSection("Scripts", false)
 </body>
 

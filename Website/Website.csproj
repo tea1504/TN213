@@ -1858,6 +1858,7 @@
     <Content Include="Content\ckfinder\skins\bootstrap\assets\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Content\ckfinder\userfiles\.htaccess" />
     <Content Include="Areas\Admin\Views\KhuVuc\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\KhuVuc\Create.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

@@ -29,18 +29,19 @@
         [Display(Name = "Khu vực")]
         public int ma_kv { get; set; }
 
-        [Required]
-        [StringLength(50)]
+        [Required(ErrorMessage = "Bạn phải nhập tên nhà trọ")]
+        [StringLength(50, ErrorMessage = "Tên nhà trọ chỉ chứa 50 ký tự")]
         [Display(Name = "Tên nhà trọ")]
         public string ten_nt { get; set; }
 
-        [Required]
-        [StringLength(200)]
+        [Required(ErrorMessage = "Bạn phải nhập địa chỉ trọ")]
+        [StringLength(200, ErrorMessage = "Địa chỉ chứa tối đa 200 ký tự")]
         [Display(Name = "Địa chỉ")]
         public string diachi_nt { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Bạn phải nhập số điện thoại")]
         [StringLength(10)]
+        [RegularExpression("[0-9]{10}", ErrorMessage = "Bạn phải nhập số điện thoại")]
         [Display(Name = "Điện thoại")]
         public string sdt_nt { get; set; }
 

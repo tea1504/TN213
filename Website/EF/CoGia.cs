@@ -1,4 +1,4 @@
-namespace Website.EF
+﻿namespace Website.EF
 {
     using System;
     using System.Collections.Generic;
@@ -12,14 +12,18 @@ namespace Website.EF
         [Key]
         [Column(Order = 0)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Display(Name = "Nhà trọ")]
         public int ma_nt { get; set; }
 
         [Key]
         [Column(Order = 1)]
+        [Display(Name = "Ngày")]
         public DateTime ngay { get; set; }
 
+        [Display(Name = "Loại phòng")]
         public int ma_lp { get; set; }
 
+        [Display(Name = "Giá phòng")]
         public double? giaphong { get; set; }
 
         public virtual NhaTro NhaTro { get; set; }

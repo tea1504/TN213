@@ -41,9 +41,9 @@ namespace Website.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(NhaTro nt, float? lat, float? lng, List<AnhNhaTro> a, CoTienDienNuoc dn, List<CoGia> l)
+        public ActionResult Create(NhaTro nt, string lat, string lng, List<AnhNhaTro> a, CoTienDienNuoc dn, List<CoGia> l)
         {
-            if (lat != null && lng != null && dn.tiendien != null && dn.tiennuoc != null)
+            if (!String.IsNullOrEmpty(lat) && !String.IsNullOrEmpty(lng) && dn.tiendien != null && dn.tiennuoc != null)
             {
                 nt.toado_nt = DbGeometry.FromText("POINT(" + lng + " " + lat + ")");
                 var nt_new = new NhaTroDAO().Add(nt);
@@ -110,9 +110,9 @@ namespace Website.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(NhaTro nt, float? lat, float? lng, List<AnhNhaTro> a, CoTienDienNuoc dn, List<CoGia> l)
+        public ActionResult Edit(NhaTro nt, string lat, string lng, List<AnhNhaTro> a, CoTienDienNuoc dn, List<CoGia> l)
         {
-            if (lat != null && lng != null && dn.tiendien != null && dn.tiennuoc != null)
+            if (!String.IsNullOrEmpty(lat) && !String.IsNullOrEmpty(lng) && dn.tiendien != null && dn.tiennuoc != null)
             {
                 nt.toado_nt = DbGeometry.FromText("POINT(" + lng + " " + lat + ")");
                 var nt_new = new NhaTroDAO().Edit(nt);

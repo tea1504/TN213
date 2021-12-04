@@ -16,13 +16,13 @@
         [Display(Name = "Mã khu vực")]
         public int ma_kv { get; set; }
 
-        [Required]
-        [StringLength(100)]
+        [Required(ErrorMessage = "Bạn phải nhập tên trường")]
+        [StringLength(100, ErrorMessage = "Tên trường chỉ chứa 100 kỳ tự. Bạn có thể viết tắt nếu tên trường quá dài.")]
         [Display(Name = "Tên trường")]
         public string ten_th { get; set; }
 
-        [Required]
-        [StringLength(200)]
+        [Required(ErrorMessage = "Bạn phải nhập địa chỉ")]
+        [StringLength(200, ErrorMessage = "Địa chỉ chỉ chứa tối đa 200 ký tự")]
         [Display(Name = "Địa chỉ trường")]
         public string diachi_th { get; set; }
 

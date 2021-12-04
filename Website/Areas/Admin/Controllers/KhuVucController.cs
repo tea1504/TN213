@@ -10,7 +10,7 @@ using Website.EF;
 
 namespace Website.Areas.Admin.Controllers
 {
-    public class KhuVucController : Controller
+    public class KhuVucController : CheckAdminController
     {
         // GET: Admin/KhuVuc
         public ActionResult Index()

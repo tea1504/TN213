@@ -135,6 +135,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Admin\Controllers\KhuVucController.cs" />
+    <Compile Include="Areas\Admin\Controllers\NhaTroController.cs" />
     <Compile Include="Controllers\AnhController.cs" />
     <Compile Include="Controllers\BaoCaoController.cs" />
     <Compile Include="Controllers\CheckAdminController.cs" />
@@ -1863,6 +1864,7 @@
     <Content Include="Areas\Admin\Views\KhuVuc\Index.cshtml" />
     <Content Include="Areas\Admin\Views\KhuVuc\Create.cshtml" />
     <Content Include="Areas\Admin\Views\KhuVuc\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\NhaTro\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

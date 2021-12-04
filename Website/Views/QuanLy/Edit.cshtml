@@ -123,8 +123,18 @@
                     <hr />
                     <div class="form-group row my-2">
                         <label class="col-sm-2 col-form-label">Tiền điện <span class="text-danger">*</span></label>
+                        @{
+                            var td = Model.CoTienDienNuocs.OrderByDescending(dn => dn.ngay).ToList();
+                            double? tiendien = null, tiennuoc = null;
+
+                            if (td.Count > 0)
+                            {
+                                tiendien = td.ElementAt(0).tiendien;
+                                tiennuoc = td.ElementAt(0).tiennuoc;
+                            }
+                        }
                         <div class="col-sm-8">
-                            @Html.TextBox("dn.tiendien", Model.CoTienDienNuocs.OrderByDescending(dn => dn.ngay).ToList()[0].tiendien, new { @class = "form-control", @type = "number", @min = 0, data_val_required = "Bạn phải nhập tiền điện", data_val = "true" })
+                            @Html.TextBox("dn.tiendien", tiendien, new { @class = "form-control", @type = "number", @min = 0, data_val_required = "Bạn phải nhập tiền điện", data_val = "true" })
                             <small class="text-danger">
                                 <i>@Html.ValidationMessage("dn.tiendien")</i>
                             </small>
@@ -134,7 +144,7 @@
                     <div class="form-group row my-2">
                         <label class="col-sm-2 col-form-label">Tiền nước <span class="text-danger">*</span></label>
                         <div class="col-sm-8">
-                            @Html.TextBox("dn.tiennuoc", Model.CoTienDienNuocs.OrderByDescending(dn => dn.ngay).ToList()[0].tiennuoc, new { @class = "form-control", @type = "number", @min = 0, data_val_required = "Bạn phải nhập tiền nước", data_val = "true" })
+                            @Html.TextBox("dn.tiennuoc", tiennuoc, new { @class = "form-control", @type = "number", @min = 0, data_val_required = "Bạn phải nhập tiền nước", data_val = "true" })
                             <small class="text-danger">
                                 <i>@Html.ValidationMessage("dn.tiennuoc")</i>
                             </small>

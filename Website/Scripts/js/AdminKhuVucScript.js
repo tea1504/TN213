@@ -27,6 +27,8 @@ $(document).ready(function () {
         }, 50);
         var element = e.delegateTarget;
         var id = element.getAttribute('data-id');
+        var name = element.getAttribute('data-name');
+        $('#labelMap').html(name);
         khuVucLayer.clearLayers();
         $.ajax({
             url: '/Admin/KhuVuc/GetKhuVuc/' + id,
@@ -45,6 +47,25 @@ $(document).ready(function () {
 
             }
         })
+    })
+
+    $('.delete').click(e => {
+        var el = e.delegateTarget;
+        var id = el.getAttribute('data-id');
+        var name = el.getAttribute('data-name');
+        Swal.fire({
+            title: 'Bạn có chắc chắn muốn xóa khu vực ' + name + '?',
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: 'Xóa',
+            denyButtonText: `Không xóa`,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = '/Admin/KhuVuc/Delete/' + id;
+            } else if (result.isDenied) {
+                Swal.fire('Đã hủy thao tác', '', 'info');
+            }
+        });
     })
 
     $('#myTable').DataTable();

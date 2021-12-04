@@ -34,5 +34,24 @@ namespace Website.DAO
             var res = db.TruongHocs.Where(th=>th.ma_th == ma_th).Select(th => new TruongHocJsonModel { ma_th = th.ma_th, ma_kv = th.ma_kv, diachi_th = th.diachi_th, ten_th = th.ten_th, toado_th = th.toado_th.AsText() }).SingleOrDefault();
             return res;
         }
+        public void Delete(int ma_th)
+        {
+            TruongHoc th = GetTruongHoc(ma_th);
+            db.TruongHocs.Remove(th);
+            db.SaveChanges();
+        }
+        public List<TruongHoc> GetTheoKhuVuc(int ma_kv)
+        {
+            var res = db.TruongHocs.Where(th => th.ma_kv == ma_kv).ToList();
+            return res;
+        }
+        public void DeleteTheoKhuVuc(int ma_kv)
+        {
+            var th = GetTheoKhuVuc(ma_kv);
+            foreach(var item in th)
+            {
+                Delete(item.ma_th);
+            }
+        }
     }
 }

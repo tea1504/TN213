@@ -53,9 +53,9 @@
                         <td>@item.ten_kv</td>
                         <td class="text-center"><span class="badge badge-pill text-white" style="background-color: #@item.ma_ms">@item.MauSac.ten_ms</span></td>
                         <td class="text-center">
-                            <span data-toggle="tooltip" data-placement="top" title="Xem"><button class="btn btn-sm btn-white show-map" data-toggle="modal" data-target="#modalMap" data-id="@item.ma_kv"><i class="bx bx-map"></i></button></span>
-                            <a href="#" class="btn btn-sm btn-light-success" data-toggle="tooltip" data-placement="top" title="Chỉnh sửa"><i class="bx bx-pencil"></i></a>
-                            <button class="btn btn-sm btn-light-danger" data-toggle="tooltip" data-placement="top" title="Xóa"><i class="bx bx-trash"></i></button>
+                            <span data-toggle="tooltip" data-placement="top" title="Xem"><button class="btn btn-sm btn-white show-map" data-toggle="modal" data-target="#modalMap" data-id="@item.ma_kv" data-name="@item.ten_kv"><i class="bx bx-map"></i></button></span>
+                            <a href="@Url.Action("Edit", "KhuVuc", new { Area = "Admin", id = item.ma_kv })" class="btn btn-sm btn-light-success" data-toggle="tooltip" data-placement="top" title="Chỉnh sửa"><i class="bx bx-pencil"></i></a>
+                            <button class="btn btn-sm btn-light-danger delete" data-toggle="tooltip" data-placement="top" title="Xóa" data-id="@item.ma_kv" data-name="@item.ten_kv"><i class="bx bx-trash"></i></button>
                         </td>
                     </tr>
                 }

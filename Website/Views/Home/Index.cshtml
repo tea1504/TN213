@@ -149,7 +149,10 @@
                     @foreach (var item in Model)
                     {
                         var fillter = "ma" + item.ma_kv;
-                        var nhatro = item.NhaTroes.Select(nt => new { name = nt.ten_nt, sosao = nt.DanhGias.Select(dg => dg.sosao).DefaultIfEmpty().Average(), ma = nt.ma_nt, tenchutro = nt.NguoiDung.holot_nd + " " + nt.NguoiDung.ten_nd, anh = nt.NguoiDung.anh_nd, anhNT = nt.AnhNhaTroes.ToList() }).OrderByDescending(nt => nt.sosao).Take(1).ToList().ElementAt(0);
+                        var tempnhatro = item.NhaTroes.Select(nt => new { name = nt.ten_nt, sosao = nt.DanhGias.Select(dg => dg.sosao).DefaultIfEmpty().Average(), ma = nt.ma_nt, tenchutro = nt.NguoiDung.holot_nd + " " + nt.NguoiDung.ten_nd, anh = nt.NguoiDung.anh_nd, anhNT = nt.AnhNhaTroes.ToList() }).OrderByDescending(nt => nt.sosao).Take(1).ToList();
+                        if (tempnhatro.Count > 0)
+                        {
+                            var nhatro = tempnhatro.ElementAt(0);
                         <div class="col @fillter container-filter">
                             <div class="course-item style-4">
                                 <div class="course-inner">
@@ -192,7 +195,8 @@
                                 </div>
                             </div>
                         </div>
-                    }
+                                                }
+                                            }
                 </div>
             </div>
         </div>

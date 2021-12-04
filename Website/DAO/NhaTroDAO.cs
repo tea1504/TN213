@@ -114,5 +114,18 @@ namespace Website.DAO
             db.NhaTroes.Remove(nt);
             db.SaveChanges();
         }
+        public List<NhaTro> GetTheoKhuVuc(int ma_kv)
+        {
+            var res = db.NhaTroes.Where(nt => nt.ma_kv == ma_kv).ToList();
+            return res;
+        }
+        public void DeleteTheoKhuVuc(int ma_kv)
+        {
+            var nt = GetTheoKhuVuc(ma_kv);
+            foreach(var item in nt)
+            {
+                Delete(item.ma_nt);
+            }
+        }
     }
 }

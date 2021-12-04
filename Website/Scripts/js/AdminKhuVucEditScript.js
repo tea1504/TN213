@@ -32,6 +32,15 @@ function setPoint(t, a) {
     return res;
 }
 
+function getLatLng(arr) {
+    let res = [];
+    arr.map((item, ind) => {
+        ind % 2 == 0 && res.push([item]);
+        ind % 2 == 1 && res[res.length - 1].unshift(item);
+    });
+    return res;
+}
+
 var map = L.map("map", { center: [10.032778, 105.759444], zoom: 14 });
 
 L.tileLayer(
@@ -98,6 +107,21 @@ $(document).ready(function () {
     control.addTo(map);
 
     var layer = new L.Layer();
+
+    $.ajax({
+        url: '/Admin/KhuVuc/GetKhuVuc/' + $('#ma_kv').val(),
+        type: 'post',
+        success: res => {
+            $('#polygon').val(res.polygon);
+            $('#latlng').val(res.latlng);
+            drawn.clearLayers();
+            var coors = res.polygon.match(/[0-9]+\.*[0-9]*/ig);
+            layer = L.polygon(getLatLng(coors));
+            layer.addTo(drawn);
+            var coors = res.latlng.match(/[0-9]+\.*[0-9]*/ig);
+            map.setView([coors[1], coors[0]], 14)
+        }
+    })
 
     map.on("draw:created", function (e) {
         drawn.clearLayers();

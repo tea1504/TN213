@@ -1,4 +1,4 @@
-namespace Website.EF
+﻿namespace Website.EF
 {
     using System;
     using System.Collections.Generic;
@@ -17,14 +17,17 @@ namespace Website.EF
         }
 
         [Key]
+        [Display(Name = "Mã khu vực")]
         public int ma_kv { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Bạn phải chọn màu sắc")]
         [StringLength(6)]
+        [Display(Name = "Màu sắc")]
         public string ma_ms { get; set; }
 
-        [Required]
-        [StringLength(50)]
+        [Required(ErrorMessage ="Bạn phải nhập tên khu vực")]
+        [StringLength(50, ErrorMessage = "Tên khu vực chỉ chứa tối đa 50 ký tự")]
+        [Display(Name = "Tên khu vực")]
         public string ten_kv { get; set; }
 
         [Required]

@@ -21,6 +21,7 @@ namespace Website.EF
 
         [Key]
         [Column("ngay")]
+        [Display(Name = "Ngày")]
         public DateTime ngay1 { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

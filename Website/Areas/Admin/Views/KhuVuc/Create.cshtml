@@ -52,7 +52,7 @@
                 @Html.LabelFor(m => m.ma_ms, new { @class = "col-sm-2 col-form-label" })
                 <div class="col-sm-9">
                     @Html.DropDownListFor(m => m.ma_ms, (IEnumerable<SelectListItem>)ViewBag.listMauSac, "Chọn màu sắc", new { @class = "form-control" })
-                    <small class="form-text text-danger">@Html.ValidationMessageFor(m => m.ten_kv)</small>
+                    <small class="form-text text-danger">@Html.ValidationMessageFor(m => m.ma_ms)</small>
                 </div>
                 <div class="col-sm-1">
                     <div class="w-100 h-100" id="preview-color"></div>

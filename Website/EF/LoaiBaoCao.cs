@@ -1,4 +1,4 @@
-namespace Website.EF
+﻿namespace Website.EF
 {
     using System;
     using System.Collections.Generic;
@@ -17,10 +17,12 @@ namespace Website.EF
         }
 
         [Key]
+        [Display(Name = "Mã loại báo cáo")]
         public int ma_lbc { get; set; }
 
-        [Required]
-        [StringLength(50)]
+        [Required(ErrorMessage = "Bạn phải nhập tên loại báo cáo")]
+        [StringLength(50, ErrorMessage = "Tên loại báo cáo chỉ chứa 50 ký tự")]
+        [Display(Name = "Tên loại báo cáo")]
         public string ten_lbc { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -71,10 +71,16 @@
                     <div class="form-group row my-2">
                         <label class="col-sm-2 col-form-label">@Html.DisplayNameFor(m => m.toado_nt) <span class="text-danger">*</span></label>
                         <div class="col-sm-4">
-                            @Html.TextBox("lng", Model.toado_nt.XCoordinate, new { @class = "form-control", @placeholder = "Kinh độ" })
+                            @Html.TextBox("lng", Model.toado_nt.XCoordinate, new { @class = "form-control", @placeholder = "Kinh độ", data_val_required = "Bạn phải nhập/chọn kinh độ", data_val = "true" })
+                            <small class="text-danger">
+                                <i>@Html.ValidationMessage("lng")</i>
+                            </small>
                         </div>
                         <div class="col-sm-4">
-                            @Html.TextBox("lat", Model.toado_nt.YCoordinate, new { @class = "form-control", @placeholder = "Vĩ độ" })
+                            @Html.TextBox("lat", Model.toado_nt.YCoordinate, new { @class = "form-control", @placeholder = "Vĩ độ", data_val_required = "Bạn phải nhập/chọn vĩ độ", data_val = "true" })
+                            <small class="text-danger">
+                                <i>@Html.ValidationMessage("lat")</i>
+                            </small>
                         </div>
                         <div class="col-sm-2">
                             <button class="w-100 btn btn-primary" id="getLatLng">Chọn từ bản đồ</button>
@@ -118,14 +124,20 @@
                     <div class="form-group row my-2">
                         <label class="col-sm-2 col-form-label">Tiền điện <span class="text-danger">*</span></label>
                         <div class="col-sm-8">
-                            @Html.TextBox("dn.tiendien", Model.CoTienDienNuocs.OrderByDescending(dn => dn.ngay).ToList()[0].tiendien, new { @class = "form-control", @type = "number", @min = 0 })
+                            @Html.TextBox("dn.tiendien", Model.CoTienDienNuocs.OrderByDescending(dn => dn.ngay).ToList()[0].tiendien, new { @class = "form-control", @type = "number", @min = 0, data_val_required = "Bạn phải nhập tiền điện", data_val = "true" })
+                            <small class="text-danger">
+                                <i>@Html.ValidationMessage("dn.tiendien")</i>
+                            </small>
                         </div>
                         <label class="col-sm-2 col-form-label">VNĐ / tháng</label>
                     </div>
                     <div class="form-group row my-2">
                         <label class="col-sm-2 col-form-label">Tiền nước <span class="text-danger">*</span></label>
                         <div class="col-sm-8">
-                            @Html.TextBox("dn.tiennuoc", Model.CoTienDienNuocs.OrderByDescending(dn => dn.ngay).ToList()[0].tiennuoc, new { @class = "form-control", @type = "number", @min = 0 })
+                            @Html.TextBox("dn.tiennuoc", Model.CoTienDienNuocs.OrderByDescending(dn => dn.ngay).ToList()[0].tiennuoc, new { @class = "form-control", @type = "number", @min = 0, data_val_required = "Bạn phải nhập tiền nước", data_val = "true" })
+                            <small class="text-danger">
+                                <i>@Html.ValidationMessage("dn.tiennuoc")</i>
+                            </small>
                         </div>
                         <label class="col-sm-2 col-form-label">VNĐ / tháng</label>
                     </div>

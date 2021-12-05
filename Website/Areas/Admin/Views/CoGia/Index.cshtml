@@ -51,7 +51,7 @@
             {
                 <tr>
                     <td>@item.ma_nt</td>
-                    <td><a href="@Url.Action("NhaTro", "DSNhaTro", new { Area = "", id = item.ma_nt })">@item.NhaTro.ten_nt</a></td>
+                    <td><a href="@Url.Action("Detail", "NhaTro", new { Area = "Admin", id = item.ma_nt })">@item.NhaTro.ten_nt</a></td>
                     <td>@item.LoaiPhong.ten_lp</td>
                     <td class="text-right">@Convert.ToDecimal(item.giaphong).ToString("#,##0")</td>
                     <td class="text-center">@item.ngay</td>

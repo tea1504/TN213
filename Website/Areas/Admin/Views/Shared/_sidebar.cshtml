@@ -5,7 +5,7 @@
             <img src="~/Content/admin/assets/images/logo-icon.png" class="logo-icon-2" alt="" />
         </div>
         <div>
-            <h4 class="logo-text">Syndash</h4>
+            <h4 class="logo-text">NK Hostel</h4>
         </div>
         <a href="javascript:;" class="toggle-btn ml-auto">
             <i class="bx bx-menu"></i>
@@ -19,6 +19,14 @@
                     <i class="bx bx-home-alt"></i>
                 </div>
                 <div class="menu-title">Dashboard</div>
+            </a>
+        </li>
+        <li>
+            <a href="@Url.Action("Index", "Home", new { Area = "" })">
+                <div class="parent-icon icon-color-11">
+                    <i class="bx bx-arrow-back"></i>
+                </div>
+                <div class="menu-title">Website</div>
             </a>
         </li>
         <li class="menu-label">Web Apps</li>
@@ -48,9 +56,17 @@
                     <a href="@Url.Action("Index", "CoGia", new { Area = "Admin" })"><i class="bx bx-right-arrow-alt"></i>Thông tin giá phòng</a>
                 </li>
                 <li>
-                    <a href="#"><i class="bx bx-right-arrow-alt"></i>Hình ảnh</a>
+                    <a href="@Url.Action("Index", "AnhNhaTro", new { Area = "Admin" })"><i class="bx bx-right-arrow-alt"></i>Hình ảnh</a>
                 </li>
             </ul>
+        </li>
+        <li>
+            <a href="@Url.Action("Index", "DanhGiaNhaTro", new { Area = "Admin" })" >
+                <div class="parent-icon icon-color-10">
+                    <i class="bx bx-star"></i>
+                </div>
+                <div class="menu-title">Đánh giá</div>
+            </a>
         </li>
         <li>
             <a href="contact-list.html">

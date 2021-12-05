@@ -42,7 +42,7 @@ namespace Website.DAO
         }
         public NhaTro GetNhaTro(int ma_nt)
         {
-            var res = db.NhaTroes.Where(nt=>nt.ma_nt == ma_nt).SingleOrDefault();
+            var res = db.NhaTroes.Find(ma_nt);
             return res;
         }
         public List<NhaTro> GetKQTimNhaTro(int? ma_kv, int? ma_th, string ten_nt, string diachi_nt, string ten_nd, int? khoancach)

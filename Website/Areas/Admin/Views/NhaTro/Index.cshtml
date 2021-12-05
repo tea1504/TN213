@@ -69,7 +69,7 @@
                     <td>@item.NguoiDung.holot_nd @item.NguoiDung.holot_nd</td>
                     <td class="text-center"><span class="badge" style="background: #@item.KhuVuc.ma_ms; color:white;">@item.KhuVuc.ten_kv</span></td>
                     <td class="text-center">
-                        <a href="@Url.Action("NhaTro", "DSNhaTro", new { Area = "", id = item.ma_nt })" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Xem thông tin"><i class="bx bx-info-circle"></i></a>
+                        <a href="@Url.Action("Detail", "NhaTro", new { Area = "Admin", id = item.ma_nt })" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Xem thông tin"><i class="bx bx-info-circle"></i></a>
                         <button class="btn btn-sm btn-light-danger btndelete" data-id="@item.ma_nt" data-name="@item.ten_nt" data-toggle="tooltip" data-placement="top" title="Xóa"><i class="bx bx-trash"></i></button>
                     </td>
                 </tr>

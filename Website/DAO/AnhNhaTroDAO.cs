@@ -42,5 +42,10 @@ namespace Website.DAO
                 }
             }
         }
+        public List<AnhNhaTro> GetAll()
+        {
+            var res = db.AnhNhaTroes.ToList();
+            return res;
+        }
     }
 }

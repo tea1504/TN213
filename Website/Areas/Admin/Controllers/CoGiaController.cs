@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Website.DAO;
 
 namespace Website.Areas.Admin.Controllers
 {
@@ -11,7 +12,8 @@ namespace Website.Areas.Admin.Controllers
         // GET: Admin/CoGia
         public ActionResult Index()
         {
-            return View();
+            var model = new CoGiaDAO().GetAll();
+            return View(model);
         }
     }
 }

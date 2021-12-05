@@ -1869,6 +1869,7 @@
     <Content Include="Areas\Admin\Views\KhuVuc\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\NhaTro\Index.cshtml" />
     <Content Include="Areas\Admin\Views\CoTienDienNuoc\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\CoGia\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -1923,7 +1924,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Admin\Views\CoGia\" />
     <Folder Include="Views\Anh\" />
     <Folder Include="Views\BaoCao\" />
     <Folder Include="Views\CheckAdmin\" />

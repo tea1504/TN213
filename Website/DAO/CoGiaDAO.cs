@@ -52,5 +52,10 @@ namespace Website.DAO
                 }
             }
         }
+        public List<CoGia> GetAll()
+        {
+            var res = db.CoGias.ToList();
+            return res;
+        }
     }
 }

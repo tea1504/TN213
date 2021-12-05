@@ -139,8 +139,10 @@
     <Compile Include="Areas\Admin\Controllers\DanhGiaNhaTroController.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Admin\Controllers\KhuVucController.cs" />
+    <Compile Include="Areas\Admin\Controllers\MauSacController.cs" />
     <Compile Include="Areas\Admin\Controllers\NhaTroController.cs" />
     <Compile Include="Areas\Admin\Controllers\TruongHocController.cs" />
+    <Compile Include="Areas\Admin\Controllers\VaiTroController.cs" />
     <Compile Include="Controllers\AnhController.cs" />
     <Compile Include="Controllers\BaoCaoController.cs" />
     <Compile Include="Controllers\CheckAdminController.cs" />
@@ -168,6 +170,7 @@
     <Compile Include="DAO\NguoiDungDAO.cs" />
     <Compile Include="DAO\NhaTroDAO.cs" />
     <Compile Include="DAO\TruongHocDAO.cs" />
+    <Compile Include="DAO\VaiTroDAO.cs" />
     <Compile Include="EF\AnhNhaTro.cs" />
     <Compile Include="EF\BaoCaoNguoiDung.cs" />
     <Compile Include="EF\BaoCaoNhaTro.cs" />
@@ -1884,6 +1887,8 @@
     <Content Include="Areas\Admin\Views\TruongHoc\Detail.cshtml" />
     <Content Include="Areas\Admin\Views\TruongHoc\Create.cshtml" />
     <Content Include="Areas\Admin\Views\TruongHoc\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\VaiTro\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\MauSac\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -1899,6 +1904,7 @@
     <Content Include="Scripts\js\AdminKhuVucCreateScript.js" />
     <Content Include="Scripts\js\AdminKhuVucEditScript.js" />
     <Content Include="Scripts\js\AdminKhuVucScript.js" />
+    <Content Include="Scripts\js\AdminMauSacScript.js" />
     <Content Include="Scripts\js\AdminNhaTroDetailScript.js" />
     <Content Include="Scripts\js\AdminNhaTroScript.js" />
     <Content Include="Scripts\js\AdminScript.js" />

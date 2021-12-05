@@ -53,5 +53,21 @@ namespace Website.DAO
                 Delete(item.ma_th);
             }
         }
+        public TruongHoc Add(TruongHoc th)
+        {
+            var res = db.TruongHocs.Add(th);
+            db.SaveChanges();
+            return res;
+        }
+        public TruongHoc Edit(TruongHoc th)
+        {
+            var res = db.TruongHocs.Find(th.ma_th);
+            res.ten_th = th.ten_th;
+            res.diachi_th = th.diachi_th;
+            res.toado_th = th.toado_th;
+            res.ma_kv = th.ma_kv;
+            db.SaveChanges();
+            return res;
+        }
     }
 }

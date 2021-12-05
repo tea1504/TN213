@@ -140,6 +140,7 @@
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Admin\Controllers\KhuVucController.cs" />
     <Compile Include="Areas\Admin\Controllers\NhaTroController.cs" />
+    <Compile Include="Areas\Admin\Controllers\TruongHocController.cs" />
     <Compile Include="Controllers\AnhController.cs" />
     <Compile Include="Controllers\BaoCaoController.cs" />
     <Compile Include="Controllers\CheckAdminController.cs" />
@@ -1522,6 +1523,8 @@
     <Content Include="Content\css\AdminKhuVucStyle.css" />
     <Content Include="Content\css\AdminNhaTroDetailStyle.css" />
     <Content Include="Content\css\AdminNhaTroStyle.css" />
+    <Content Include="Content\css\AdminTruongHocCreateStyle.css" />
+    <Content Include="Content\css\AdminTruongHocDetailStyle.css" />
     <Content Include="Content\css\NhaTroStyle.css" />
     <Content Include="Content\css\QuanLyNhaTroStyle.css" />
     <Content Include="Content\css\QuanLyThemNhaTroStyle.css" />
@@ -1877,6 +1880,10 @@
     <Content Include="Areas\Admin\Views\AnhNhaTro\Index.cshtml" />
     <Content Include="Areas\Admin\Views\NhaTro\Detail.cshtml" />
     <Content Include="Areas\Admin\Views\DanhGiaNhaTro\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\TruongHoc\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\TruongHoc\Detail.cshtml" />
+    <Content Include="Areas\Admin\Views\TruongHoc\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\TruongHoc\Edit.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -1895,6 +1902,10 @@
     <Content Include="Scripts\js\AdminNhaTroDetailScript.js" />
     <Content Include="Scripts\js\AdminNhaTroScript.js" />
     <Content Include="Scripts\js\AdminScript.js" />
+    <Content Include="Scripts\js\AdminTruongHocCreateSrcipt.js" />
+    <Content Include="Scripts\js\AdminTruongHocDetailScript.js" />
+    <Content Include="Scripts\js\AdminTruongHocEditSrcipt.js" />
+    <Content Include="Scripts\js\AdminTruongHocScript.js" />
     <Content Include="Scripts\js\EditUserScript.js" />
     <Content Include="Scripts\js\HomeScript.js" />
     <Content Include="Scripts\js\QuanLyEditnhaTroScript.js" />

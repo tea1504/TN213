@@ -52,5 +52,15 @@ namespace Website.DAO
                 }
             }
         }
+        public List<CoGia> GetAll()
+        {
+            var res = db.CoGias.ToList();
+            return res;
+        }
+        public List<CoGia> GetTheoNhaTroVaLoaiPhong(int ma_nt, int ma_lp)
+        {
+            var res = db.CoGias.Where(cg => cg.ma_nt == ma_nt && cg.ma_lp == ma_lp).ToList();
+            return res;
+        }
     }
 }

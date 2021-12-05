@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Website.EF.DanhGia>
+
+@{
+    ViewBag.Title = "Quản lý đánh giá";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@section Style {
+
+}
+@section Scripts {
+    <script src="~/Scripts/js/AdminDanhGiaScript.js"></script>
+}
+@section breadcrumb{
+    <div class="page-breadcrumb d-none d-md-flex align-items-center mb-3">
+        <div class="breadcrumb-title pr-3">@ViewBag.Title</div>
+        <div class="pl-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0 p-0">
+                    <li class="breadcrumb-item">
+                        <a href="@Url.Action("Index", "Dashboard", new { Area = "Admin" })"><i class="bx bx-home-alt"></i></a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">@ViewBag.Title</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+}
+
+<div class="card">
+    <div class="card-header">
+        <h2 class="text-center">@ViewBag.Title</h2>
+    </div>
+    <div class="card-body">
+        <table id="myTable" class="table table-hover table-striped">
+            <thead>
+                <tr>
+                    <th class="text-center">@Html.DisplayNameFor(m => m.ngay)</th>
+                    <th class="text-center">@Html.DisplayNameFor(m => m.ma_nt)</th>
+                    <th class="text-center">@Html.DisplayNameFor(m => m.ma_nd)</th>
+                    <th class="text-center">@Html.DisplayNameFor(m => m.sosao)</th>
+                    <th class="text-center">@Html.DisplayNameFor(m => m.danhgia1)</th>
+                    <th class="text-center">Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="text-center">@item.ngay</td>
+                        <td><a href="@Url.Action("Detail", "NhaTro", new { Area = "Admin", id = item.ma_nt })">@item.NhaTro.ten_nt</a></td>
+                        <td>@item.NguoiDung.holot_nd @item.NguoiDung.ten_nd</td>
+                        <td class="text-center">
+                            @for (int i = 1; i <= item.sosao; i++)
+                            {
+                                <i class="bx bxs-star icon-color-1"></i>
+                            }
+                            @for (int i = 1; i <= 5 - item.sosao; i++)
+                            {
+                                <i class="bx bx-star icon-color-1"></i>
+                            }
+                        </td>
+                        <td>@item.danhgia1</td>
+                        <td class="text-center">
+                            <button class="btn btn-sm btn-light-danger delete" data-toggle="tooltip" data-placement="top" title="Xóa" data-nt="@item.ma_nt" data-nd="@item.ma_nd" data-ngay="@item.ngay.ToString("yyyy-MM-ddTHH:mm:ss.fff")"><i class="bx bx-trash"></i></button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

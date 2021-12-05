@@ -1,0 +1,74 @@
+﻿@model Website.EF.TruongHoc
+
+@{
+    ViewBag.Title = "Thêm mới trường học";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@section Style {
+    <link href="~/Content/css/AdminTruongHocCreateStyle.css" rel="stylesheet" />
+}
+@section Scripts {
+    <script src="~/Scripts/js/AdminTruongHocCreateSrcipt.js"></script>
+}
+@section breadcrumb{
+    <div class="page-breadcrumb d-none d-md-flex align-items-center mb-3">
+        <div class="breadcrumb-title pr-3">@ViewBag.Title</div>
+        <div class="pl-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0 p-0">
+                    <li class="breadcrumb-item">
+                        <a href="@Url.Action("Index", "Dashboard", new { Area = "Admin" })"><i class="bx bx-home-alt"></i></a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="@Url.Action("Index", "TruongHoc", new { Area = "Admin" })">Quản lý trường học</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">@ViewBag.Title</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="ml-auto">
+            <div class="btn-group">
+                <a href="@Url.Action("Create", "TruongHoc", new { Area = "Admin" })" class="btn btn-primary">Thêm mới</a>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="card">
+    <div class="card-header">
+        <h2 class="text-center">@ViewBag.Title</h2>
+    </div>
+    <div class="card-body">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.Hidden("latlng")
+            <div class="form-group row">
+                @Html.LabelFor(m=>m.ten_th, new { @class = "col-sm-2 col-form-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.ten_th, new { @class = "form-control" })
+                    <small class="form-text text-danger">@Html.ValidationMessageFor(m => m.ten_th)</small>
+                </div>
+            </div>
+            <div class="form-group row">
+                @Html.LabelFor(m=>m.diachi_th, new { @class = "col-sm-2 col-form-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.diachi_th, new { @class = "form-control" })
+                    <small class="form-text text-danger">@Html.ValidationMessageFor(m => m.diachi_th)</small>
+                </div>
+            </div>
+            <div class="form-group row">
+                @Html.LabelFor(m=>m.ma_kv, new { @class = "col-sm-2 col-form-label" })
+                <div class="col-sm-10">
+                    @Html.DropDownListFor(m => m.ma_kv, (IEnumerable<SelectListItem>)ViewBag.list, new { @class = "form-control" })
+                    <small class="form-text text-danger">@Html.ValidationMessageFor(m => m.ma_kv)</small>
+                </div>
+            </div>
+            <div id="map"></div>
+            <div class="form-group mt-1">
+                <button class="btn btn-primary btn-block">Lưu</button>
+            </div>
+        }
+    </div>
+</div>

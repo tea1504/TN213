@@ -13,7 +13,7 @@
         [Display(Name = "Mã trường")]
         public int ma_th { get; set; }
 
-        [Display(Name = "Mã khu vực")]
+        [Display(Name = "Khu vực")]
         public int ma_kv { get; set; }
 
         [Required(ErrorMessage = "Bạn phải nhập tên trường")]

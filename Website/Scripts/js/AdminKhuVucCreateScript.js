@@ -4,11 +4,11 @@
     var btn = document.getElementById('zoom');
     if (check) {
         el.classList.remove('zoom');
-        btn.innerHTML = '<i class="bx bxs-zoom-in"></i>'
+        btn.innerHTML = '<i class="bx bxs-zoom-in bx-tada"></i>'
     }
     else {
         el.classList.add('zoom');
-        btn.innerHTML = '<i class="bx bxs-zoom-out"></i>'
+        btn.innerHTML = '<i class="bx bxs-zoom-out bx-tada"></i>'
     }
     setTimeout(function () {
         map.invalidateSize();
@@ -92,7 +92,7 @@ $(document).ready(function () {
     var control = L.control({ position: "topright" });
     control.onAdd = function (map) {
         var div = L.DomUtil.create("div", "divsave");
-        div.innerHTML = '<a href="#" id="zoom" onclick="zoom()" class="btn btn-outline-primary"><i class="bx bxs-zoom-in"></i></a>';
+        div.innerHTML = '<a href="#" id="zoom" onclick="zoom()" class="btn btn-white btn-outline-primary"><i class="bx bxs-zoom-in bx-tada"></i></a>';
         return div;
     };
     control.addTo(map);

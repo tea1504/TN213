@@ -16,5 +16,11 @@ namespace Website.Areas.Admin.Controllers
             List<NhaTro> model = new NhaTroDAO().GetAllNhaTro();
             return View(model);
         }
+
+        public ActionResult Delete(int id)
+        {
+            new NhaTroDAO().Delete(id);
+            return RedirectToAction("Index");
+        }
     }
 }

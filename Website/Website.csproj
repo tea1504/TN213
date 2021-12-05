@@ -133,6 +133,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\CoGiaController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CoTienDienNuocController.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Admin\Controllers\KhuVucController.cs" />
     <Compile Include="Areas\Admin\Controllers\NhaTroController.cs" />
@@ -1515,6 +1517,7 @@
     <Content Include="Content\css\AdminKhuVucCreate.css" />
     <Content Include="Content\css\AdminKhuVucEditStyle.css" />
     <Content Include="Content\css\AdminKhuVucStyle.css" />
+    <Content Include="Content\css\AdminNhaTroStyle.css" />
     <Content Include="Content\css\NhaTroStyle.css" />
     <Content Include="Content\css\QuanLyNhaTroStyle.css" />
     <Content Include="Content\css\QuanLyThemNhaTroStyle.css" />
@@ -1865,6 +1868,7 @@
     <Content Include="Areas\Admin\Views\KhuVuc\Create.cshtml" />
     <Content Include="Areas\Admin\Views\KhuVuc\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\NhaTro\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\CoTienDienNuoc\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -1878,6 +1882,7 @@
     <Content Include="Scripts\js\AdminKhuVucCreateScript.js" />
     <Content Include="Scripts\js\AdminKhuVucEditScript.js" />
     <Content Include="Scripts\js\AdminKhuVucScript.js" />
+    <Content Include="Scripts\js\AdminNhaTroScript.js" />
     <Content Include="Scripts\js\EditUserScript.js" />
     <Content Include="Scripts\js\HomeScript.js" />
     <Content Include="Scripts\js\QuanLyEditnhaTroScript.js" />
@@ -1918,6 +1923,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Views\CoGia\" />
     <Folder Include="Views\Anh\" />
     <Folder Include="Views\BaoCao\" />
     <Folder Include="Views\CheckAdmin\" />

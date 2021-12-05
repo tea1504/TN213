@@ -56,5 +56,10 @@ namespace Website.DAO
                 }
             }
         }
+        public List<CoTienDienNuoc> GetAll()
+        {
+            var res = db.CoTienDienNuocs.ToList();
+            return res;
+        }
     }
 }

@@ -25,6 +25,7 @@
 
     var marker = L.marker([10.032778, 105.759444]).addTo(map);
     map.on("click", e => {
+        console.log(e)
         var polygon = L.polygon(getLatLng(coorPoly));
         var tempMarker = L.marker([e.latlng.lat, e.latlng.lng]);
         if (isMarkerInsidePolygon(tempMarker, polygon)) {

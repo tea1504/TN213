@@ -1,7 +1,7 @@
-﻿@model IEnumerable<Website.EF.CoTienDienNuoc>
+﻿@model IEnumerable<Website.EF.VaiTro>
 
 @{
-    ViewBag.Title = "Xem thông tin điện nước";
+    ViewBag.Title = "Quản lý vai trò";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 @section Style {
@@ -31,29 +31,23 @@
 }
 
 <div class="card">
-    <div class="card-head">
+    <div class="card-header">
         <h2 class="text-center">@ViewBag.Title</h2>
     </div>
     <div class="card-body">
         <table id="myTable" class="table table-sm table-hover table-striped">
             <thead>
                 <tr>
-                    <th class="text-center">@Html.DisplayNameFor(m => m.NhaTro.ma_nt)</th>
-                    <th class="text-center">@Html.DisplayNameFor(m => m.ma_nt)</th>
-                    <th class="text-center">@Html.DisplayNameFor(m => m.tiendien)</th>
-                    <th class="text-center">@Html.DisplayNameFor(m => m.tiennuoc)</th>
-                    <th class="text-center">@Html.DisplayNameFor(m => m.ngay)</th>
+                    <th class="text-center">@Html.DisplayNameFor(m=>m.ma_vt)</th>
+                    <th class="text-center">@Html.DisplayNameFor(m=>m.ten_vt)</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach(var item in Model)
             {
                 <tr>
-                    <td>@item.ma_nt</td>
-                    <td><a href="@Url.Action("Detail", "NhaTro", new { Area = "Admin", id = item.ma_nt })">@item.NhaTro.ten_nt</a></td>
-                    <td class="text-right">@Convert.ToDecimal(item.tiendien).ToString("#,##0")</td>
-                    <td class="text-right">@Convert.ToDecimal(item.tiennuoc).ToString("#,##0")</td>
-                    <td class="text-center">@item.ngay</td>
+                    <td>@item.ma_vt</td>
+                    <td>@item.ten_vt</td>
                 </tr>
             }
             </tbody>

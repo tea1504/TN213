@@ -74,5 +74,10 @@ namespace Website.DAO
             var res = db.DanhGias.ToList();
             return res;
         }
+        public List<DanhGia> GetTheoNguoiDung(int ma_nd)
+        {
+            var res = db.DanhGias.Where(dg => dg.ma_nd == ma_nd).ToList();
+            return res;
+        }
     }
 }

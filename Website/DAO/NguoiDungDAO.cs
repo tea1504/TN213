@@ -62,5 +62,10 @@ namespace Website.DAO
             db.SaveChanges();
             return t;
         }
+        public List<NguoiDung> GetAll()
+        {
+            var res = db.NguoiDungs.ToList();
+            return res;
+        }
     }
 }

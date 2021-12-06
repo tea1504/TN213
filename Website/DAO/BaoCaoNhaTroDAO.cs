@@ -24,6 +24,21 @@ namespace Website.DAO
             var res = db.BaoCaoNhaTroes.Where(bc => bc.ma_nt == ma_nt).ToList();
             return res;
         }
+        public List<BaoCaoNhaTro> GetTheoNguoiBaoCao(int ma_nd)
+        {
+            var res = db.BaoCaoNhaTroes.Where(bc => bc.ma_nd == ma_nd).ToList();
+            return res;
+        }
+        public List<BaoCaoNhaTro> GetTheoChuNhaTro(int ma_nd)
+        {
+            List<BaoCaoNhaTro> res = new List<BaoCaoNhaTro>();
+            var dsnt = new NhaTroDAO().GetNhaTroTheoChuTro(ma_nd);
+            foreach(var nt in dsnt)
+            {
+                res.Concat(GetTheoNhaTro(nt.ma_nt));
+            }
+            return res;
+        }
         public void DeleteTheoNhaTro(int ma_nt)
         {
             var list = GetTheoNhaTro(ma_nt);

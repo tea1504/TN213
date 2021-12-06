@@ -66,7 +66,7 @@
                         <span data-toggle="tooltip" data-placement="top" title="@item.diachi_nt">@diachi</span>
                     </td>
                     <td class="text-center">@item.sdt_nt</td>
-                    <td>@item.NguoiDung.holot_nd @item.NguoiDung.holot_nd</td>
+                    <td><a href="@Url.Action("Detail", "NguoiDung", new { Area = "Admin", id = item.ma_nd })">@item.NguoiDung.holot_nd @item.NguoiDung.ten_nd</a></td>
                     <td class="text-center"><span class="badge" style="background: #@item.KhuVuc.ma_ms; color:white;">@item.KhuVuc.ten_kv</span></td>
                     <td class="text-center">
                         <a href="@Url.Action("Detail", "NhaTro", new { Area = "Admin", id = item.ma_nt })" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Xem thông tin"><i class="bx bx-info-circle"></i></a>

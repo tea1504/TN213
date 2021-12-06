@@ -19,5 +19,15 @@ namespace Website.DAO
             db.SaveChanges();
             return res;
         }
+        public List<BaoCaoNguoiDung> GetTheoNguoiBaoCao(int ma_nd)
+        {
+            var res = db.BaoCaoNguoiDungs.Where(bc => bc.nguoi_bao_cao == ma_nd).ToList();
+            return res;
+        }
+        public List<BaoCaoNguoiDung> GetTheoNguoiBiBaoCao(int ma_nd)
+        {
+            var res = db.BaoCaoNguoiDungs.Where(bc => bc.nguoi_bi_bao_cao == ma_nd).ToList();
+            return res;
+        }
     }
 }

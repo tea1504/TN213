@@ -1893,6 +1893,7 @@
     <Content Include="Areas\Admin\Views\MauSac\Index.cshtml" />
     <Content Include="Areas\Admin\Views\NguoiDung\Index.cshtml" />
     <Content Include="Areas\Admin\Views\NguoiDung\Detail.cshtml" />
+    <Content Include="Areas\Admin\Views\NguoiDung\Create.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -1909,6 +1910,8 @@
     <Content Include="Scripts\js\AdminKhuVucEditScript.js" />
     <Content Include="Scripts\js\AdminKhuVucScript.js" />
     <Content Include="Scripts\js\AdminMauSacScript.js" />
+    <Content Include="Scripts\js\AdminNguoiDungCreateScript.js" />
+    <Content Include="Scripts\js\AdminNguoiDungDetailScript.js" />
     <Content Include="Scripts\js\AdminNguoiDungScript.js" />
     <Content Include="Scripts\js\AdminNhaTroDetailScript.js" />
     <Content Include="Scripts\js\AdminNhaTroScript.js" />

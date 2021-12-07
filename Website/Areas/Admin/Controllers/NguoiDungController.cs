@@ -78,5 +78,39 @@ namespace Website.Areas.Admin.Controllers
             ViewBag.hoatdong = hoatdong;
             return View(model);
         }
+        public ActionResult Create()
+        {
+            var vaitro = new VaiTroDAO().GetAll();
+            SelectList listvaitro = new SelectList(vaitro, "ma_vt", "ten_vt");
+            ViewBag.listvaitro = listvaitro;
+            ViewBag.code = new NguoiDungDAO().GetAll().Last().ma_nd + 1;
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(NguoiDung nd, HttpPostedFileBase anh)
+        {
+            if (anh != null)
+            {
+                string pic = System.IO.Path.GetFileName(anh.FileName);
+                string path = System.IO.Path.Combine(
+                                       Server.MapPath("~/Content/ckfinder/userfiles/images"), pic);
+
+                anh.SaveAs(path);
+
+                nd.anh_nd = "/Content/ckfinder/userfiles/images/" + anh.FileName;
+            }
+            else
+            {
+                nd.anh_nd = "/Content/avatar.jpg";
+            }
+            var res = new NguoiDungDAO().Add(nd);
+            return RedirectToAction("Index");
+        }
+        public ActionResult Delete(int id)
+        {
+            new NguoiDungDAO().Delete(id);
+            return RedirectToAction("Index");
+        }
     }
 }

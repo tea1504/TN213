@@ -29,5 +29,18 @@ namespace Website.DAO
             var res = db.BaoCaoNguoiDungs.Where(bc => bc.nguoi_bi_bao_cao == ma_nd).ToList();
             return res;
         }
+        public void Delete(BaoCaoNguoiDung bc)
+        {
+            db.BaoCaoNguoiDungs.Remove(bc);
+            db.SaveChanges();
+        }
+        public void DeleteTheoNguoiDung(int ma_nd)
+        {
+            var res = db.BaoCaoNguoiDungs.Where(bc => bc.nguoi_bao_cao == ma_nd || bc.nguoi_bi_bao_cao == ma_nd).ToList();
+            foreach(var item in res)
+            {
+                Delete(item);
+            }
+        }
     }
 }

@@ -9,7 +9,7 @@
 }
 @section Scripts {
     <script src="~/Content/FancyBox/fancybox.umd.js"></script>
-    <script src="~/Scripts/js/AdminNguoiDungScript.js"></script>
+    <script src="~/Scripts/js/AdminNguoiDungDetailScript.js"></script>
 }
 @section breadcrumb{
     <div class="page-breadcrumb d-none d-md-flex align-items-center mb-3">
@@ -46,7 +46,7 @@
                             <p class="mb-0 text-muted">#@Model.taikhoan</p>
                             <p class="text-primary"><i class='bx bx-buildings'></i> @Model.VaiTro.ten_vt</p>
                             <a href="@Url.Action("Edit", "NguoiDung", new { Area = "Admin", id = Model.ma_nd })" class="btn btn-primary">Cập nhật</a>
-                            <button type="button" class="btn btn-outline-danger ml-2">Xóa</button>
+                            <button type="button" class="btn btn-outline-danger ml-2 btndelete" data-id="@Model.ma_nd" data-name="@Model.holot_nd @Model.ten_nd">Xóa</button>
                         </div>
                     </div>
                 </div>

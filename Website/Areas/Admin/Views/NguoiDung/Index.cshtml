@@ -26,7 +26,7 @@
         </div>
         <div class="ml-auto">
             <div class="btn-group">
-                <a href="@Url.Action("Create", "NguoiDung", new { Area = "Admin" })" class="btn btn-primary btncreate" data-toggle="modal" data-target="#createmodel">Thêm mới</a>
+                <a href="@Url.Action("Create", "NguoiDung", new { Area = "Admin" })" class="btn btn-primary btncreate">Thêm mới</a>
             </div>
         </div>
     </div>
@@ -95,7 +95,7 @@
                         <td class="text-center">
                             <a href="@Url.Action("Detail", "NguoiDung", new { Area = "Admin", id = item.ma_nd })" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Xem thông tin"><i class="bx bx-info-circle"></i></a>
                             <a href="@Url.Action("Edit", "NguoiDung", new { Area = "Admin", id = item.ma_nd })" class="btn btn-sm btn-light-success" data-toggle="tooltip" data-placement="top" title="Sửa"><i class="bx bx-pencil"></i></a>
-                            <btn class="btn btn-sm btn-light-danger" data-toggle="tooltip" data-placement="top" title="Xóa"><i class="bx bx-trash"></i></btn>
+                            <btn class="btn btn-sm btn-light-danger btndelete" data-id="@item.ma_nd" data-name="@item.holot_nd @item.ten_nd" data-toggle="tooltip" data-placement="top" title="Xóa"><i class="bx bx-trash"></i></btn>
                         </td>
                     </tr>
                 }

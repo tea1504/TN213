@@ -51,5 +51,14 @@ namespace Website.DAO
                 }
             }
         }
+        public void DeleteTheoNguoiBaoCao(int ma_nd)
+        {
+            var res = GetTheoNguoiBaoCao(ma_nd);
+            foreach (var item in res)
+            {
+                db.BaoCaoNhaTroes.Remove(item);
+                db.SaveChanges();
+            }
+        }
     }
 }

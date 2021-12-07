@@ -21,6 +21,7 @@
         [Display(Name = "Mã người dùng")]
         public int ma_nd { get; set; }
 
+        [Required(ErrorMessage = "Bạn phải chọn vai trò")]
         [Display(Name = "Vai trò")]
         public int ma_vt { get; set; }
 
@@ -30,10 +31,11 @@
         public string ten_nd { get; set; }
 
         [Required(ErrorMessage = "Bạn phải nhập họ và tên lót")]
-        [StringLength(35, ErrorMessage = "Họ và tên lót chỉ chứa 35 ký tự. Bạn có thể viết tắt nếu tên bạn quá dài")]
+        [StringLength(35, ErrorMessage = "Họ và tên lót chỉ chứa 35 ký tự. Bạn có thể viết tắt nếu tên quá dài")]
         [Display(Name = "Họ lót")]
         public string holot_nd { get; set; }
 
+        [Required(ErrorMessage = "Bạn phải chọn giới tính")]
         [Display(Name = "Giới tính")]
         public byte gioitinh_nd { get; set; }
 
@@ -54,16 +56,19 @@
         [Required]
         [StringLength(200)]
         [Display(Name = "Ảnh đại diện")]
+        [Column(TypeName = "nvarchar")]
         public string anh_nd { get; set; }
 
         [Required(ErrorMessage = "Bạn phải nhập tài khoản")]
         [StringLength(50, ErrorMessage = "Tài khoản chỉ chứa tối đa 50 ký tự")]
         [Display(Name = "Tài khoản")]
+        [Column(TypeName = "nvarchar")]
         public string taikhoan { get; set; }
 
         [Required(ErrorMessage = "Bạn phải nhập mật khẩu")]
         [StringLength(100)]
         [Display(Name = "Mật khẩu")]
+        [Column(TypeName = "nvarchar")]
         public string matkhau { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

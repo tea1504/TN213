@@ -79,5 +79,14 @@ namespace Website.DAO
             var res = db.DanhGias.Where(dg => dg.ma_nd == ma_nd).ToList();
             return res;
         }
+        public void DeleteTheoNguoiDung(int ma_nd)
+        {
+            var list = GetTheoNguoiDung(ma_nd);
+            foreach (var item in list)
+            {
+                db.DanhGias.Remove(item);
+                db.SaveChanges();
+            }
+        }
     }
 }

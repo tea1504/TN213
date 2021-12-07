@@ -67,5 +67,36 @@ namespace Website.DAO
             var res = db.NguoiDungs.ToList();
             return res;
         }
+        public NguoiDung Add(NguoiDung nd)
+        {
+            var res = db.NguoiDungs.Add(nd);
+            db.SaveChanges();
+            return res;
+        }
+        public NguoiDung Edit(NguoiDung nd)
+        {
+            var res = db.NguoiDungs.Find(nd.ma_nd);
+            res.holot_nd = nd.holot_nd;
+            res.ten_nd = nd.ten_nd;
+            res.gioitinh_nd = nd.gioitinh_nd;
+            res.sdt_nd = nd.sdt_nd;
+            res.email = nd.email;
+            res.diachi = nd.diachi;
+            res.ma_vt = nd.ma_vt;
+            if (nd.anh_nd != null)
+                res.anh_nd = nd.anh_nd;
+            db.SaveChanges();
+            return res;
+        }
+        public void Delete(int ma_nd)
+        {
+            new NhaTroDAO().DeleteTheoNguoiDung(ma_nd);
+            new BaoCaoNguoiDungDAO().DeleteTheoNguoiDung(ma_nd);
+            new BaoCaoNhaTroDAO().DeleteTheoNguoiBaoCao(ma_nd);
+            new DanhGiaDAO().DeleteTheoNguoiDung(ma_nd);
+            var nd = LayNguoiDung(ma_nd);
+            db.NguoiDungs.Remove(nd);
+            db.SaveChanges();
+        }
     }
 }

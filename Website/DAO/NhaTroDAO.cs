@@ -119,10 +119,23 @@ namespace Website.DAO
             var res = db.NhaTroes.Where(nt => nt.ma_kv == ma_kv).ToList();
             return res;
         }
+        public List<NhaTro> GetTheoNguoiDung(int ma_nd)
+        {
+            var res = db.NhaTroes.Where(nt => nt.ma_nd == ma_nd).ToList();
+            return res;
+        }
         public void DeleteTheoKhuVuc(int ma_kv)
         {
             var nt = GetTheoKhuVuc(ma_kv);
             foreach(var item in nt)
+            {
+                Delete(item.ma_nt);
+            }
+        }
+        public void DeleteTheoNguoiDung(int ma_nd)
+        {
+            var nt = GetTheoNguoiDung(ma_nd);
+            foreach (var item in nt)
             {
                 Delete(item.ma_nt);
             }

@@ -134,11 +134,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AnhNhaTroController.cs" />
+    <Compile Include="Areas\Admin\Controllers\BaoCaoNguoiDungController.cs" />
+    <Compile Include="Areas\Admin\Controllers\BaoCaoNhaTroController.cs" />
     <Compile Include="Areas\Admin\Controllers\CoGiaController.cs" />
     <Compile Include="Areas\Admin\Controllers\CoTienDienNuocController.cs" />
     <Compile Include="Areas\Admin\Controllers\DanhGiaNhaTroController.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Admin\Controllers\KhuVucController.cs" />
+    <Compile Include="Areas\Admin\Controllers\LoaiBaoCaoController.cs" />
     <Compile Include="Areas\Admin\Controllers\MauSacController.cs" />
     <Compile Include="Areas\Admin\Controllers\NguoiDungController.cs" />
     <Compile Include="Areas\Admin\Controllers\NhaTroController.cs" />
@@ -1894,6 +1897,8 @@
     <Content Include="Areas\Admin\Views\NguoiDung\Index.cshtml" />
     <Content Include="Areas\Admin\Views\NguoiDung\Detail.cshtml" />
     <Content Include="Areas\Admin\Views\NguoiDung\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\NguoiDung\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\LoaiBaoCao\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -1909,9 +1914,11 @@
     <Content Include="Scripts\js\AdminKhuVucCreateScript.js" />
     <Content Include="Scripts\js\AdminKhuVucEditScript.js" />
     <Content Include="Scripts\js\AdminKhuVucScript.js" />
+    <Content Include="Scripts\js\AdminLoaiBaoCaoScript.js" />
     <Content Include="Scripts\js\AdminMauSacScript.js" />
     <Content Include="Scripts\js\AdminNguoiDungCreateScript.js" />
     <Content Include="Scripts\js\AdminNguoiDungDetailScript.js" />
+    <Content Include="Scripts\js\AdminNguoiDungEditScript.js" />
     <Content Include="Scripts\js\AdminNguoiDungScript.js" />
     <Content Include="Scripts\js\AdminNhaTroDetailScript.js" />
     <Content Include="Scripts\js\AdminNhaTroScript.js" />
@@ -1960,6 +1967,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Views\BaoCaoNguoiDung\" />
+    <Folder Include="Areas\Admin\Views\BaoCaoNhaTro\" />
     <Folder Include="Areas\Admin\Views\DanhGiaNHa\" />
     <Folder Include="Views\Anh\" />
     <Folder Include="Views\BaoCao\" />

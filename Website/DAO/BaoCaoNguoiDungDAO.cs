@@ -29,6 +29,11 @@ namespace Website.DAO
             var res = db.BaoCaoNguoiDungs.Where(bc => bc.nguoi_bi_bao_cao == ma_nd).ToList();
             return res;
         }
+        public List<BaoCaoNguoiDung> GetTheoLoai(int ma_lbc)
+        {
+            var res = db.BaoCaoNguoiDungs.Where(bc => bc.ma_lbc == ma_lbc).ToList();
+            return res;
+        }
         public void Delete(BaoCaoNguoiDung bc)
         {
             db.BaoCaoNguoiDungs.Remove(bc);
@@ -38,6 +43,14 @@ namespace Website.DAO
         {
             var res = db.BaoCaoNguoiDungs.Where(bc => bc.nguoi_bao_cao == ma_nd || bc.nguoi_bi_bao_cao == ma_nd).ToList();
             foreach(var item in res)
+            {
+                Delete(item);
+            }
+        }
+        public void DeleteTheoLoai(int ma_lbc)
+        {
+            var res = GetTheoLoai(ma_lbc);
+            foreach (var item in res)
             {
                 Delete(item);
             }

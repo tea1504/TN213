@@ -39,6 +39,11 @@ namespace Website.DAO
             }
             return res;
         }
+        public List<BaoCaoNhaTro> GetTheoLoai(int ma_lbc)
+        {
+            var res = db.BaoCaoNhaTroes.Where(bc => bc.ma_lbc == ma_lbc).ToList();
+            return res;
+        }
         public void DeleteTheoNhaTro(int ma_nt)
         {
             var list = GetTheoNhaTro(ma_nt);
@@ -54,6 +59,15 @@ namespace Website.DAO
         public void DeleteTheoNguoiBaoCao(int ma_nd)
         {
             var res = GetTheoNguoiBaoCao(ma_nd);
+            foreach (var item in res)
+            {
+                db.BaoCaoNhaTroes.Remove(item);
+                db.SaveChanges();
+            }
+        }
+        public void DeleteTheoLoai(int ma_lbc)
+        {
+            var res = GetTheoLoai(ma_lbc);
             foreach (var item in res)
             {
                 db.BaoCaoNhaTroes.Remove(item);

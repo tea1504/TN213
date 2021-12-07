@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Website.Controllers;
 using Website.DAO;
 using Website.EF;
 using Website.Models;
 
 namespace Website.Areas.Admin.Controllers
 {
-    public class NguoiDungController : Controller
+    public class NguoiDungController : CheckAdminController
     {
         // GET: Admin/NguoiDung
         public ActionResult Index()
@@ -93,8 +94,7 @@ namespace Website.Areas.Admin.Controllers
             if (anh != null)
             {
                 string pic = System.IO.Path.GetFileName(anh.FileName);
-                string path = System.IO.Path.Combine(
-                                       Server.MapPath("~/Content/ckfinder/userfiles/images"), pic);
+                string path = System.IO.Path.Combine(Server.MapPath("~/Content/ckfinder/userfiles/images"), pic);
 
                 anh.SaveAs(path);
 
@@ -107,9 +107,45 @@ namespace Website.Areas.Admin.Controllers
             var res = new NguoiDungDAO().Add(nd);
             return RedirectToAction("Index");
         }
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction("Index");
+            }
+            var nd = new NguoiDungDAO().LayNguoiDung(id ?? 1);
+            if (nd == null)
+            {
+                return RedirectToAction("Index");
+            }
+            var vaitro = new VaiTroDAO().GetAll();
+            SelectList listvaitro = new SelectList(vaitro, "ma_vt", "ten_vt", nd.ma_vt);
+            ViewBag.listvaitro = listvaitro;
+            return View(nd);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(NguoiDung nd, HttpPostedFileBase anh)
+        {
+            if (anh != null)
+            {
+                string pic = System.IO.Path.GetFileName(anh.FileName);
+                string path = System.IO.Path.Combine(Server.MapPath("~/Content/ckfinder/userfiles/images"), pic);
+
+                anh.SaveAs(path);
+
+                nd.anh_nd = "/Content/ckfinder/userfiles/images/" + anh.FileName;
+            }
+            var res = new NguoiDungDAO().Edit(nd);
+            return RedirectToAction("Index");
+        }
         public ActionResult Delete(int id)
         {
-            new NguoiDungDAO().Delete(id);
+            var auth = (UserLoginModel)Session["USER_LOGIN"];
+            if (auth.ma_nd != id)
+            {
+                new NguoiDungDAO().Delete(id);
+            }
             return RedirectToAction("Index");
         }
     }

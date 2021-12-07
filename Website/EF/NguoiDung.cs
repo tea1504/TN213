@@ -47,6 +47,7 @@
         [StringLength(50, ErrorMessage = "Email chỉ chứa tối đa 50 ký tự")]
         [RegularExpression(@"([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})", ErrorMessage = "Chuỗi bạn nhập không khớp với email")]
         [Display(Name = "Email")]
+        [Column(TypeName = "nvarchar")]
         public string email { get; set; }
 
         [StringLength(200, ErrorMessage = "Địa chỉ chỉ chứa tối đa 200 ký tự")]

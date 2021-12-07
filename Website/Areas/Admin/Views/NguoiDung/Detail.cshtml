@@ -30,6 +30,8 @@
     </div>
 }
 
+@Html.Hidden("auth", ((Website.Models.UserLoginModel)HttpContext.Current.Session["USER_LOGIN"]).ma_nd)
+
 <div class="user-profile-page">
     <div class="card radius-15">
         <div class="card-body">

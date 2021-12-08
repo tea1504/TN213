@@ -33,7 +33,7 @@ namespace Website.DAO
         {
             List<BaoCaoNhaTro> res = new List<BaoCaoNhaTro>();
             var dsnt = new NhaTroDAO().GetNhaTroTheoChuTro(ma_nd);
-            foreach(var nt in dsnt)
+            foreach (var nt in dsnt)
             {
                 res.Concat(GetTheoNhaTro(nt.ma_nt));
             }
@@ -49,7 +49,7 @@ namespace Website.DAO
             var list = GetTheoNhaTro(ma_nt);
             if (list != null)
             {
-                foreach(var item in list)
+                foreach (var item in list)
                 {
                     db.BaoCaoNhaTroes.Remove(item);
                     db.SaveChanges();
@@ -73,6 +73,29 @@ namespace Website.DAO
                 db.BaoCaoNhaTroes.Remove(item);
                 db.SaveChanges();
             }
+        }
+        public List<BaoCaoNhaTro> GetAll()
+        {
+            var res = db.BaoCaoNhaTroes.ToList();
+            return res;
+        }
+        public BaoCaoNhaTro Get(int ma_lbc, int ma_nd, int ma_nt, DateTime ngay)
+        {
+            var res = db.BaoCaoNhaTroes.Where(bc => bc.ma_lbc == ma_lbc && bc.ma_nd == ma_nd && bc.ngay == ngay && bc.ma_nt == ma_nt).SingleOrDefault();
+            return res;
+        }
+        public BaoCaoNhaTro Edit(int ma_lbc, int ma_nd, int ma_nt, DateTime ngay)
+        {
+            var res = Get(ma_lbc, ma_nd, ma_nt, ngay);
+            res.trangthaibaocao = 2;
+            db.SaveChanges();
+            return res;
+        }
+        public void Delete(int ma_lbc, int ma_nd, int ma_nt, DateTime ngay)
+        {
+            var res = Get(ma_lbc, ma_nd, ma_nt, ngay);
+            db.BaoCaoNhaTroes.Remove(res);
+            db.SaveChanges();
         }
     }
 }

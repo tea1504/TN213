@@ -1899,6 +1899,7 @@
     <Content Include="Areas\Admin\Views\NguoiDung\Create.cshtml" />
     <Content Include="Areas\Admin\Views\NguoiDung\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\LoaiBaoCao\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\BaoCaoNhaTro\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -1910,6 +1911,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\js\AdminAnhNhaTroScript.js" />
+    <Content Include="Scripts\js\AdminBaoCaoNhaTroScript.js" />
     <Content Include="Scripts\js\AdminDanhGiaScript.js" />
     <Content Include="Scripts\js\AdminKhuVucCreateScript.js" />
     <Content Include="Scripts\js\AdminKhuVucEditScript.js" />
@@ -1968,7 +1970,6 @@
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Views\BaoCaoNguoiDung\" />
-    <Folder Include="Areas\Admin\Views\BaoCaoNhaTro\" />
     <Folder Include="Areas\Admin\Views\DanhGiaNHa\" />
     <Folder Include="Views\Anh\" />
     <Folder Include="Views\BaoCao\" />

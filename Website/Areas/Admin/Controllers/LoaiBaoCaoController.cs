@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Website.Controllers;
 using Website.DAO;
 using Website.EF;
 
 namespace Website.Areas.Admin.Controllers
 {
-    public class LoaiBaoCaoController : Controller
+    public class LoaiBaoCaoController : CheckAdminController
     {
         // GET: Admin/LoaiBaoCao
         public ActionResult Index()

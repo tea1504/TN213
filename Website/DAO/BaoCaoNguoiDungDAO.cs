@@ -55,5 +55,28 @@ namespace Website.DAO
                 Delete(item);
             }
         }
+        public List<BaoCaoNguoiDung> GetAll()
+        {
+            var res = db.BaoCaoNguoiDungs.ToList();
+            return res;
+        }
+        public BaoCaoNguoiDung Get(int ma_lbc, int nguoibaocao, int nguoibibaocao, DateTime ngay)
+        {
+            var res = db.BaoCaoNguoiDungs.Where(bc => bc.ma_lbc == ma_lbc && bc.nguoi_bao_cao == nguoibaocao && bc.nguoi_bi_bao_cao == nguoibibaocao && bc.ngay == ngay).SingleOrDefault();
+            return res;
+        }
+        public BaoCaoNguoiDung Edit(int ma_lbc, int nguoibaocao, int nguoibibaocao, DateTime ngay)
+        {
+            var res = db.BaoCaoNguoiDungs.Where(bc => bc.ma_lbc == ma_lbc && bc.nguoi_bao_cao == nguoibaocao && bc.nguoi_bi_bao_cao == nguoibibaocao && bc.ngay == ngay).SingleOrDefault();
+            res.trangthai = 2;
+            db.SaveChanges();
+            return res;
+        }
+        public void Delete(int ma_lbc, int nguoibaocao, int nguoibibaocao, DateTime ngay)
+        {
+            var res = db.BaoCaoNguoiDungs.Where(bc => bc.ma_lbc == ma_lbc && bc.nguoi_bao_cao == nguoibaocao && bc.nguoi_bi_bao_cao == nguoibibaocao && bc.ngay == ngay).SingleOrDefault();
+            db.BaoCaoNguoiDungs.Remove(res);
+            db.SaveChanges();
+        }
     }
 }

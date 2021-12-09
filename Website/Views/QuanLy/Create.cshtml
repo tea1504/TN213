@@ -69,13 +69,13 @@
                     </div>
                     <div class="form-group row my-2">
                         <label class="col-sm-2 col-form-label">@Html.DisplayNameFor(m => m.toado_nt) <span class="text-danger">*</span></label>
-                        <div class="col-sm-4">
+                        <div class="col-sm-3">
                             @Html.TextBox("lng", "", new { @class = "form-control", @placeholder = "Kinh độ", data_val_required = "Bạn phải nhập/chọn kinh độ", data_val = "true" })
                             <small class="text-danger">
                                 <i>@Html.ValidationMessage("lng")</i>
                             </small>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-3">
                             @Html.TextBox("lat", "", new { @class = "form-control", @placeholder = "Vĩ độ", data_val_required = "Bạn phải nhập/chọn vĩ độ", data_val = "true" })
                             <small class="text-danger">
                                 <i>@Html.ValidationMessage("lat")</i>
@@ -83,6 +83,9 @@
                         </div>
                         <div class="col-sm-2">
                             <button class="w-100 btn btn-primary" id="getLatLng">Chọn từ bản đồ</button>
+                        </div>
+                        <div class="col-sm-2">
+                            <button class="w-100 btn btn-outline-primary" id="getLatLngcur">Lấy tọa độ hiện tại</button>
                         </div>
                     </div>
                     <h3>Ảnh nhà trọ</h3>

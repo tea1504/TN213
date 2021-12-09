@@ -98,5 +98,13 @@ namespace Website.DAO
             db.NguoiDungs.Remove(nd);
             db.SaveChanges();
         }
+        public NguoiDung DoiTaiKhoan(int ma_nd, string taikhoan, string matkhaumoi)
+        {
+            var res = LayNguoiDung(ma_nd);
+            res.taikhoan = taikhoan;
+            res.matkhau = matkhaumoi;
+            db.SaveChanges();
+            return res;
+        }
     }
 }

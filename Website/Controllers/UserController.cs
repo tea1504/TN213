@@ -41,5 +41,18 @@ namespace Website.Controllers
             var res = new NguoiDungDAO().EditInfo(nguoi);
             return RedirectToAction("Index");
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Update(int ma_nd, string taikhoan, string matkhau, string matkhaumoi)
+        {
+            NguoiDung nguoiDung = new NguoiDungDAO().LayNguoiDung(ma_nd);
+            if (matkhau != nguoiDung.matkhau)
+            {
+                ModelState.AddModelError("", "Mật khẩu sai");
+                return View("Index", nguoiDung);
+            }
+            var res = new NguoiDungDAO().DoiTaiKhoan(ma_nd, taikhoan, matkhaumoi);
+            return RedirectToAction("Index");
+        }
     }
 }

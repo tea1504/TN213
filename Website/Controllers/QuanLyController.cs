@@ -72,6 +72,23 @@ namespace Website.Controllers
             ModelState.AddModelError("", "Chưa chọn tọa độ");
             return View("Create", nt);
         }
+        public JsonResult GetAllKhuVuc()
+        {
+            var res = new KhuVucDAO().GetAllKhuVuc();
+            List<object> data = new List<object>();
+            foreach (var item in res)
+            {
+                var temp = new
+                {
+                    toado = item.toado_kv.AsText(),
+                    polygon = item.polygon_kv.AsText(),
+                    ten = item.ten_kv,
+                    ma = item.ma_kv,
+                };
+                data.Add(temp);
+            };
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
         public JsonResult GetKhuVuc(int ma_kv)
         {
             var res = new KhuVucDAO().LayKhuVuc(ma_kv);
@@ -100,6 +117,9 @@ namespace Website.Controllers
             {
                 return RedirectToAction("Index");
             }
+            var user = (UserLoginModel)Session["USER_LOGIN"];
+            if (res == null || user.ma_nd != res.ma_nd)
+                return RedirectToAction("Index");
             List<KhuVuc> khuVuc = new KhuVucDAO().GetAllKhuVuc();
             SelectList listKhuVuc = new SelectList(khuVuc, "ma_kv", "ten_kv", res.ma_kv);
             ViewBag.listKhuVuc = listKhuVuc;
@@ -141,6 +161,15 @@ namespace Website.Controllers
             ViewBag.listLoaiPhong = listLoaiPhong;
             ModelState.AddModelError("", "Chưa chọn tọa độ");
             return View("Edit", nt);
+        }
+        public ActionResult Anh(int id)
+        {
+            NhaTro res = new NhaTroDAO().GetNhaTro(id);
+            var user = (UserLoginModel)Session["USER_LOGIN"];
+            if (res == null || user.ma_nd != res.ma_nd)
+                return RedirectToAction("Index");
+            var model = new AnhNhaTroDAO().GetAnhNhaTroTheoMaNhaTro(id);
+            return View(model);
         }
     }
 }

@@ -43,6 +43,64 @@
         }
     });
 
+    $('#getLatLngcur').click(e => {
+        e.preventDefault();
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(getLocationCallback, errorCallback);
+        }
+        else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Lỗi',
+                html: 'Trình duyệt không hỗ trợ truy cập vị trí'
+            });
+        }
+        function getLocationCallback(location) {
+            var latcur = location.coords.latitude;
+            var lngcur = location.coords.longitude;
+            var check = false;
+            console.log(latcur, lngcur);
+            $.ajax({
+                url: '/QuanLy/GetAllKhuVuc',
+                type: 'post',
+                success: res => {
+                    res.map(el => {
+                        var coors = el.polygon.match(/[0-9]+\.*[0-9]*/ig);
+                        var polygon = L.polygon(getLatLng(coors));
+                        var tempMarker = L.marker([latcur, lngcur]);
+                        if (isMarkerInsidePolygon(tempMarker, polygon)) {
+                            check = true;
+                            $('#ma_kv').val(el.ma_kv);
+                        }
+                    });
+                    if (check) {
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Cảnh báo',
+                            html: 'Vị trí của bạn không thuộc quận Ninh Kiều'
+                        });
+                    }
+                    else {
+                        $('#lat').val(latcur);
+                        $('#lng').val(lngcur);
+                        marker.setLatLng([latcur, lngcur]);
+                        map.panTo([latcur, lngcur]);
+                    }
+                },
+                error: res => {
+
+                }
+            })
+        }
+        function errorCallback(error) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Cảnh báo',
+                html: 'Bạn phải cho phép website truy cập vị trí.'
+            })
+        }
+    })
+
     $('#getCoor').on('click', e => {
         var lng = $("span#tempLng").html();
         var lat = $("span#tempLat").html();

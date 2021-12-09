@@ -1934,9 +1934,11 @@
     <Content Include="Scripts\js\EditUserScript.js" />
     <Content Include="Scripts\js\HomeScript.js" />
     <Content Include="Scripts\js\QuanLyEditnhaTroScript.js" />
+    <Content Include="Scripts\js\QuanLyNhaTroHinhAnh.js" />
     <Content Include="Scripts\js\QuanLyNhaTroScript.js" />
     <Content Include="Scripts\js\QuanLyThemNhaTroScript.js" />
     <Content Include="Scripts\js\TimKiemNhaTroScript.js" />
+    <Content Include="Scripts\js\UserScript.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\NhaTroScript.js" />
     <Content Include="Web.config" />
@@ -1968,6 +1970,7 @@
     <Content Include="Views\Register\Index.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\User\Edit.cshtml" />
+    <Content Include="Views\QuanLy\Anh.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />

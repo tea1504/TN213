@@ -26,5 +26,24 @@ namespace Website.Controllers
             };
             return Json(data, JsonRequestBehavior.AllowGet);
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(AnhNhaTro create)
+        {
+            var res = new AnhNhaTroDAO().AddAnhNhaTro(create);
+            return RedirectToAction("Anh", "QuanLy", new { Area = "", id = create.ma_nt });
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(AnhNhaTro edit)
+        {
+            var res = new AnhNhaTroDAO().Edit(edit);
+            return RedirectToAction("Anh", "QuanLy", new { Area = "", id = edit.ma_nt });
+        }
+        public JsonResult Delete(int ma_nt, int STT)
+        {
+            new AnhNhaTroDAO().Delete(ma_nt, STT);
+            return Json("OK", JsonRequestBehavior.AllowGet);
+        }
     }
 }

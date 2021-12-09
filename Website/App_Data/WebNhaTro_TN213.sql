@@ -1164,3 +1164,32 @@ begin
 	and a.ma_lp = b.ma_lp
 	and a.ngay = b.ngay
 end
+go
+if exists (
+	select 1
+	from sys.objects
+	where name = N'tr_del_anh'
+	and type = N'TR'
+)
+drop trigger tr_del_anh
+go
+create trigger tr_del_anh
+on AnhNhaTro
+for delete
+as
+	declare @ma_nt int = (select ma_nt from deleted);
+	declare @i int = 1;
+	declare cur cursor scroll for
+	select STT from AnhNhaTro where ma_nt = @ma_nt
+	open cur
+	declare @stt int
+	while @@FETCH_STATUS = 0
+	begin
+		fetch next from cur into @stt
+		update AnhNhaTro
+		set STT = @i
+		where ma_nt = @ma_nt
+		and STT = @stt
+		set @i = @i + 1
+	end
+go

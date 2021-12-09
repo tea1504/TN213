@@ -35,7 +35,7 @@ namespace Website.DAO
             var list = GetAnhNhaTroTheoMaNhaTro(ma_nt);
             if (list != null)
             {
-                foreach(var item in list)
+                foreach (var item in list)
                 {
                     db.AnhNhaTroes.Remove(item);
                     db.SaveChanges();
@@ -46,6 +46,19 @@ namespace Website.DAO
         {
             var res = db.AnhNhaTroes.ToList();
             return res;
+        }
+        public AnhNhaTro Edit(AnhNhaTro anh)
+        {
+            var res = db.AnhNhaTroes.Where(a => a.ma_nt == anh.ma_nt && a.STT == anh.STT).SingleOrDefault();
+            res.mota_anh = anh.mota_anh;
+            db.SaveChanges();
+            return res;
+        }
+        public void Delete(int ma_nt, int STT)
+        {
+            var res = db.AnhNhaTroes.Where(a => a.ma_nt == ma_nt && a.STT == STT).SingleOrDefault();
+            db.AnhNhaTroes.Remove(res);
+            db.SaveChanges();
         }
     }
 }

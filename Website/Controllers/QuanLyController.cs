@@ -169,6 +169,8 @@ namespace Website.Controllers
             if (res == null || user.ma_nd != res.ma_nd)
                 return RedirectToAction("Index");
             var model = new AnhNhaTroDAO().GetAnhNhaTroTheoMaNhaTro(id);
+            ViewBag.NhaTro = res.ten_nt;
+            ViewBag.Ma = res.ma_nt;
             return View(model);
         }
     }

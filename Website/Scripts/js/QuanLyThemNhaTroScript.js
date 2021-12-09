@@ -73,7 +73,7 @@
                             $('#ma_kv').val(el.ma_kv);
                         }
                     });
-                    if (check) {
+                    if (!check) {
                         Swal.fire({
                             icon: 'warning',
                             title: 'Cảnh báo',

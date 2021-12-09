@@ -27,7 +27,7 @@
         }
         else {
             Swal.fire({
-                title: 'Bạn có chắc chắn muốn xóa khu vực ' + name + '?',
+                title: 'Bạn có chắc chắn muốn xóa màu ' + name + '?',
                 showDenyButton: true,
                 showCancelButton: true,
                 confirmButtonText: 'Xóa',

@@ -64,7 +64,7 @@
                     </tr>
                     <tr>
                         <th width="20%">@Html.DisplayNameFor(m => m.ma_nd) :</th>
-                        <td>@Model.NguoiDung.holot_nd @Model.NguoiDung.ten_nd</td>
+                        <td><a href="@Url.Action("Detail", "NguoiDung", new { Area = "Admin", id = Model.ma_nd })">@Model.NguoiDung.holot_nd @Model.NguoiDung.ten_nd</a></td>
                     </tr>
                 </table>
             </div>

@@ -1,0 +1,118 @@
+﻿@model IEnumerable<Website.EF.LoaiBaoCao>
+
+@{
+    ViewBag.Title = "Quản lý loại báo cáo";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@section Style {
+
+}
+@section Scripts {
+    <script src="~/Scripts/js/AdminLoaiBaoCaoScript.js"></script>
+}
+@section breadcrumb{
+    <div class="page-breadcrumb d-none d-md-flex align-items-center mb-3">
+        <div class="breadcrumb-title pr-3">@ViewBag.Title</div>
+        <div class="pl-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0 p-0">
+                    <li class="breadcrumb-item">
+                        <a href="@Url.Action("Index", "Dashboard", new { Area = "Admin" })"><i class="bx bx-home-alt"></i></a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">@ViewBag.Title</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="ml-auto">
+            <div class="btn-group">
+                <a href="#" class="btn btn-primary btncreate" data-toggle="modal" data-target="#createmodel">Thêm mới</a>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="card">
+    <div class="card-header">
+        <h2 class="text-center">@ViewBag.Title</h2>
+    </div>
+    <div class="card-body">
+        <table id="myTable" class="table table-sm table-hover table-striped">
+            <thead>
+                <tr>
+                    <th class="text-center">@Html.DisplayNameFor(m => m.ma_lbc)</th>
+                    <th class="text-center">@Html.DisplayNameFor(m => m.ten_lbc)</th>
+                    <th class="text-center">Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.ma_lbc</td>
+                        <td>@item.ten_lbc</td>
+                        <td class="text-center">
+                            <span data-toggle="tooltip" data-placement="top" title="Chỉnh sửa"><a href="#" class="btn btn-sm btn-light-success btnedit" data-toggle="modal" data-target="#editmodel" data-id="@item.ma_lbc" data-name="@item.ten_lbc"><i class="bx bx-pencil"></i></a></span>
+                            <a href="#" class="btn btn-sm btn-light-danger btndelete" data-toggle="tooltip" data-placement="top" title="Xóa" data-id="@item.ma_lbc" data-name="@item.ten_lbc"><i class="bx bx-trash"></i></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal fade" id="createmodel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Thêm loại báo cáo mới</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("Create", "LoaiBaoCao", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-group row">
+                        <label for="ten_lbc" class="col-sm-2 col-form-label">Tên loại báo cáo</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="lbc.ten_lbc" class="form-control" id="ten_lbc" value="" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-block btn-primary">Lưu</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="editmodel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel2"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("Edit", "LoaiBaoCao", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                <input type="hidden" name="lbc.ma_lbc" class="form-control" id="ma_lbc_edit" value="" />
+                    <div class="form-group row">
+                        <label for="ten_lbc" class="col-sm-2 col-form-label">Tên loại báo cáo</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="lbc.ten_lbc" class="form-control" id="ten_lbc_edit" value="" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-block btn-primary">Lưu</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

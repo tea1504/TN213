@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Website.Controllers;
 using Website.DAO;
 
 namespace Website.Areas.Admin.Controllers
 {
-    public class BaoCaoThongKeController : Controller
+    public class BaoCaoThongKeController : CheckAdminController
     {
         NguoiDungDAO nguoiDungDAO = null;
         NhaTroDAO nhaTroDAO = null;
@@ -15,6 +16,8 @@ namespace Website.Areas.Admin.Controllers
         BaoCaoNguoiDungDAO baoCaoNguoiDungDAO = null;
         BaoCaoNhaTroDAO baoCaoNhaTroDAO = null;
         DanhGiaDAO danhGiaDAO = null;
+        KhuVucDAO khuVucDAO = null;
+        LoaiBaoCaoDAO loaiBaoCaoDAO = null;
         public BaoCaoThongKeController()
         {
             nguoiDungDAO = new NguoiDungDAO();
@@ -23,6 +26,8 @@ namespace Website.Areas.Admin.Controllers
             baoCaoNguoiDungDAO = new BaoCaoNguoiDungDAO();
             baoCaoNhaTroDAO = new BaoCaoNhaTroDAO();
             danhGiaDAO = new DanhGiaDAO();
+            khuVucDAO = new KhuVucDAO();
+            loaiBaoCaoDAO = new LoaiBaoCaoDAO();
         }
         // GET: Admin/BaoCaoThongKe
         public ActionResult NguoiDung()
@@ -49,9 +54,8 @@ namespace Website.Areas.Admin.Controllers
             int total = 0;
             foreach (var item in listVaiTro)
             {
-                var temp = nguoiDungDAO.LayTheoVaiTro(item.ma_vt);
-                data.Add(temp.Count);
-                total += temp.Count;
+                data.Add(item.NguoiDungs.Count);
+                total += item.NguoiDungs.Count;
                 label.Add(item.ten_vt);
             }
             var res = new
@@ -66,10 +70,10 @@ namespace Website.Areas.Admin.Controllers
         {
             var nguoidung = nguoiDungDAO.GetAll();
             var data = new List<object>();
-            foreach(var item in nguoidung)
+            foreach (var item in nguoidung)
             {
                 var baocao = baoCaoNguoiDungDAO.GetTheoNguoiBiBaoCao(item.ma_nd);
-                if(baocao.Count > 0)
+                if (baocao.Count > 0)
                 {
                     var temp = new
                     {
@@ -106,6 +110,124 @@ namespace Website.Areas.Admin.Controllers
                 }
             }
             return Json(data, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult NhaTro()
+        {
+            return View();
+        }
+        public JsonResult NhaTroKhuVuc()
+        {
+            var list = khuVucDAO.GetAllKhuVuc();
+            var data = new List<object>();
+            var label = new List<object>();
+            var color = new List<object>();
+            int total = 0;
+            foreach (var item in list)
+            {
+                data.Add(item.NhaTroes.Count);
+                label.Add(item.ten_kv);
+                color.Add("#" + item.ma_ms);
+                total += item.NhaTroes.Count;
+            }
+            var res = new
+            {
+                data,
+                label,
+                color,
+                total
+            };
+            return Json(res, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult NhaTroDanhGiaTrungBinh()
+        {
+            var list = nhaTroDAO.GetAllNhaTro();
+            var data = new List<int> { 0, 0, 0, 0, 0 };
+            foreach (var item in list)
+            {
+                double sosao = item.DanhGias.Select(dg => dg.sosao).DefaultIfEmpty(0).Average();
+                if (sosao <= 1)
+                { 
+                    data[0]++; 
+                }
+                else if (sosao <= 2)
+                {
+                    data[1]++;
+                }
+                else if (sosao <= 3)
+                {
+                    data[2]++;
+                }
+                else if (sosao <= 4)
+                {
+                    data[3]++;
+                }
+                else
+                {
+                    data[4]++;
+                }
+            }
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult NhaTroDanhGia()
+        {
+            var list = nhaTroDAO.GetAllNhaTro();
+            var data = new List<object>();
+            foreach (var item in list)
+            {
+                double sosao = item.DanhGias.Select(dg => dg.sosao).DefaultIfEmpty(0).Average();
+                if (sosao > 0)
+                {
+                    var temp = new
+                    {
+                        ma = item.ma_nt,
+                        ten = item.ten_nt,
+                        soluong = sosao,
+                    };
+                    data.Add(temp);
+                }
+            }
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult NhaTroViPham()
+        {
+            var listLBC = loaiBaoCaoDAO.GetAllLoaiBaoCao();
+            var listNT = nhaTroDAO.GetAllNhaTro();
+            var label = new List<object>();
+            foreach(var item in listLBC)
+            {
+                label.Add(item.ten_lbc);
+            }
+            var data = new List<object>();
+            foreach (var item in listNT)
+            {
+                int baocao = item.BaoCaoNhaTroes.Count;
+                if (baocao > 0)
+                {
+                    var lanbaocao = new List<int>();
+                    foreach (var i in listLBC)
+                    {
+                        lanbaocao.Add(0);
+                    }
+                    foreach (var i in item.BaoCaoNhaTroes)
+                    {
+                        lanbaocao[listLBC.FindIndex(m => m.ma_lbc == i.ma_lbc)]++;
+                    }
+                    var temp = new
+                    {
+                        data = lanbaocao,
+                        ma = item.ma_nt,
+                        ten = item.ten_nt,
+                        soluong = baocao,
+                    };
+                    data.Add(temp);
+                }
+            }
+            var res = new
+            {
+                label,
+                data,
+            };
+            return Json(res, JsonRequestBehavior.AllowGet);
         }
     }
 }

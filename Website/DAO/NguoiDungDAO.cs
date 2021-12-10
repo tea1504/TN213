@@ -106,5 +106,12 @@ namespace Website.DAO
             db.SaveChanges();
             return res;
         }
+        public NguoiDung DoiMatKhau(string taikhoan, string matkhau)
+        {
+            var res = db.NguoiDungs.Where(nd => nd.taikhoan == taikhoan).SingleOrDefault(); ;
+            res.matkhau = matkhau;
+            db.SaveChanges();
+            return res;
+        }
     }
 }

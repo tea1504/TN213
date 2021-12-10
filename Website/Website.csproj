@@ -1901,6 +1901,7 @@
     <Content Include="Areas\Admin\Views\LoaiBaoCao\Index.cshtml" />
     <Content Include="Areas\Admin\Views\BaoCaoNhaTro\Index.cshtml" />
     <Content Include="Areas\Admin\Views\BaoCaoNguoiDung\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\NguoiDung\CapMK.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -1920,6 +1921,7 @@
     <Content Include="Scripts\js\AdminKhuVucScript.js" />
     <Content Include="Scripts\js\AdminLoaiBaoCaoScript.js" />
     <Content Include="Scripts\js\AdminMauSacScript.js" />
+    <Content Include="Scripts\js\AdminNguoiDungCapMKScript.js" />
     <Content Include="Scripts\js\AdminNguoiDungCreateScript.js" />
     <Content Include="Scripts\js\AdminNguoiDungDetailScript.js" />
     <Content Include="Scripts\js\AdminNguoiDungEditScript.js" />

@@ -12,24 +12,38 @@ namespace Website.Areas.Admin.Controllers
 {
     public class NguoiDungController : CheckAdminController
     {
+        NguoiDungDAO nguoiDungDAO = null;
+        DanhGiaDAO danhGiaDAO = null;
+        BaoCaoNguoiDungDAO baoCaoNguoiDungDAO = null;
+        BaoCaoNhaTroDAO baoCaoNhaTroDAO = null;
+        VaiTroDAO vaiTroDAO = null;
+
+        public NguoiDungController()
+        {
+            nguoiDungDAO = new NguoiDungDAO();
+            danhGiaDAO = new DanhGiaDAO();
+            baoCaoNguoiDungDAO = new BaoCaoNguoiDungDAO();
+            baoCaoNhaTroDAO = new BaoCaoNhaTroDAO();
+            vaiTroDAO = new VaiTroDAO();
+        }
         // GET: Admin/NguoiDung
         public ActionResult Index()
         {
-            var model = new NguoiDungDAO().GetAll();
+            var model = nguoiDungDAO.GetAll();
             return View(model);
         }
         public ActionResult Detail(int id)
         {
-            var model = new NguoiDungDAO().LayNguoiDung(id);
+            var model = nguoiDungDAO.LayNguoiDung(id);
             if(model==null)
             {
                 return RedirectToAction("Index");
             }
-            var danhgia = new DanhGiaDAO().GetTheoNguoiDung(id);
-            var baocao = new BaoCaoNguoiDungDAO().GetTheoNguoiBaoCao(id);
-            var bibaocao = new BaoCaoNguoiDungDAO().GetTheoNguoiBiBaoCao(id);
-            var baocaont = new BaoCaoNhaTroDAO().GetTheoNguoiBaoCao(id);
-            var bibaocaont = new BaoCaoNhaTroDAO().GetTheoChuNhaTro(id);
+            var danhgia = danhGiaDAO.GetTheoNguoiDung(id);
+            var baocao = baoCaoNguoiDungDAO.GetTheoNguoiBaoCao(id);
+            var bibaocao = baoCaoNguoiDungDAO.GetTheoNguoiBiBaoCao(id);
+            var baocaont = baoCaoNhaTroDAO.GetTheoNguoiBaoCao(id);
+            var bibaocaont = baoCaoNhaTroDAO.GetTheoChuNhaTro(id);
             List<HoatDongModel> hoatdong = new List<HoatDongModel>();
             foreach(var item in danhgia)
             {
@@ -81,10 +95,10 @@ namespace Website.Areas.Admin.Controllers
         }
         public ActionResult Create()
         {
-            var vaitro = new VaiTroDAO().GetAll();
+            var vaitro = vaiTroDAO.GetAll();
             SelectList listvaitro = new SelectList(vaitro, "ma_vt", "ten_vt");
             ViewBag.listvaitro = listvaitro;
-            ViewBag.code = new NguoiDungDAO().GetAll().Last().ma_nd + 1;
+            ViewBag.code = nguoiDungDAO.GetAll().Last().ma_nd + 1;
             return View();
         }
         [HttpPost]
@@ -104,7 +118,7 @@ namespace Website.Areas.Admin.Controllers
             {
                 nd.anh_nd = "/Content/avatar.jpg";
             }
-            var res = new NguoiDungDAO().Add(nd);
+            var res = nguoiDungDAO.Add(nd);
             return RedirectToAction("Index");
         }
         public ActionResult Edit(int? id)
@@ -113,12 +127,12 @@ namespace Website.Areas.Admin.Controllers
             {
                 return RedirectToAction("Index");
             }
-            var nd = new NguoiDungDAO().LayNguoiDung(id ?? 1);
+            var nd = nguoiDungDAO.LayNguoiDung(id ?? 1);
             if (nd == null)
             {
                 return RedirectToAction("Index");
             }
-            var vaitro = new VaiTroDAO().GetAll();
+            var vaitro = vaiTroDAO.GetAll();
             SelectList listvaitro = new SelectList(vaitro, "ma_vt", "ten_vt", nd.ma_vt);
             ViewBag.listvaitro = listvaitro;
             return View(nd);
@@ -136,7 +150,7 @@ namespace Website.Areas.Admin.Controllers
 
                 nd.anh_nd = "/Content/ckfinder/userfiles/images/" + anh.FileName;
             }
-            var res = new NguoiDungDAO().Edit(nd);
+            var res = nguoiDungDAO.Edit(nd);
             return RedirectToAction("Index");
         }
         public ActionResult Delete(int id)
@@ -144,9 +158,20 @@ namespace Website.Areas.Admin.Controllers
             var auth = (UserLoginModel)Session["USER_LOGIN"];
             if (auth.ma_nd != id)
             {
-                new NguoiDungDAO().Delete(id);
+                nguoiDungDAO.Delete(id);
             }
             return RedirectToAction("Index");
+        }
+        public ActionResult CapMK()
+        {
+            var model = nguoiDungDAO.GetAll();
+            return View(model);
+        }
+        public JsonResult Pass(string id)
+        {
+            string pass = System.Web.Security.Membership.GeneratePassword(10, 0);
+            var res = nguoiDungDAO.DoiMatKhau(id, pass);
+            return Json(res.matkhau, JsonRequestBehavior.AllowGet);
         }
     }
 }

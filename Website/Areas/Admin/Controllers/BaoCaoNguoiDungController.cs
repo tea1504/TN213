@@ -10,17 +10,22 @@ namespace Website.Areas.Admin.Controllers
 {
     public class BaoCaoNguoiDungController : CheckAdminController
     {
+        BaoCaoNguoiDungDAO baoCaoNguoiDungDAO = null;
+        public BaoCaoNguoiDungController()
+        {
+            baoCaoNguoiDungDAO = new BaoCaoNguoiDungDAO();
+        }
         // GET: Admin/BaoCaoNguoiDung
         public ActionResult Index()
         {
-            var model = new BaoCaoNguoiDungDAO().GetAll();
+            var model = baoCaoNguoiDungDAO.GetAll();
             return View(model);
         }
         public JsonResult Detail(int ma_lbc, int nguoibaocao, int nguoibibaocao, string ngay)
         {
             var d = new DateTime();
             d = DateTime.Parse(ngay, null, System.Globalization.DateTimeStyles.RoundtripKind);
-            var res = new BaoCaoNguoiDungDAO().Get(ma_lbc, nguoibaocao, nguoibibaocao, d);
+            var res = baoCaoNguoiDungDAO.Get(ma_lbc, nguoibaocao, nguoibibaocao, d);
             var data = new
             {
                 nguoibaocao = new
@@ -48,14 +53,14 @@ namespace Website.Areas.Admin.Controllers
         {
             var d = new DateTime();
             d = DateTime.Parse(ngay, null, System.Globalization.DateTimeStyles.RoundtripKind);
-            var res = new BaoCaoNguoiDungDAO().Edit(ma_lbc, nguoibaocao, nguoibibaocao, d);
+            var res = baoCaoNguoiDungDAO.Edit(ma_lbc, nguoibaocao, nguoibibaocao, d);
             return Json("OK", JsonRequestBehavior.AllowGet);
         }
         public JsonResult Delete(int ma_lbc, int nguoibaocao, int nguoibibaocao, string ngay)
         {
             var d = new DateTime();
             d = DateTime.Parse(ngay, null, System.Globalization.DateTimeStyles.RoundtripKind);
-            new BaoCaoNguoiDungDAO().Delete(ma_lbc, nguoibaocao, nguoibibaocao, d);
+            baoCaoNguoiDungDAO.Delete(ma_lbc, nguoibaocao, nguoibibaocao, d);
             return Json("OK", JsonRequestBehavior.AllowGet);
         }
     }

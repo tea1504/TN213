@@ -29,6 +29,16 @@ namespace Website.DAO
             var res = db.NguoiDungs.Find(ma_nd);
             return res;
         }
+        public List<NguoiDung> LayTheoGioiTinh(int gioitinh)
+        {
+            var res = db.NguoiDungs.Where(nd => nd.gioitinh_nd == gioitinh).ToList();
+            return res;
+        }
+        public List<NguoiDung> LayTheoVaiTro(int ma_vt)
+        {
+            var res = db.NguoiDungs.Where(nd => nd.ma_vt == ma_vt).ToList();
+            return res;
+        }
         public int LaySoLuongNguoiDung()
         {
             int res = db.NguoiDungs.Count();

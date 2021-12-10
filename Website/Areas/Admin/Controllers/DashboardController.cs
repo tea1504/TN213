@@ -9,6 +9,10 @@ namespace Website.Areas.Admin.Controllers
 {
     public class DashboardController : CheckAdminController
     {
+        public DashboardController()
+        {
+
+        }
         // GET: Admin/Dashboard
         public ActionResult Index()
         {

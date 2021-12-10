@@ -12,15 +12,22 @@ namespace Website.Areas.Admin.Controllers
 {
     public class TruongHocController : CheckAdminController
     {
+        TruongHocDAO truongHocDAO = null;
+        KhuVucDAO khuVucDAO = null;
+        public TruongHocController()
+        {
+            truongHocDAO = new TruongHocDAO();
+            khuVucDAO = new KhuVucDAO();
+        }
         // GET: Admin/TruongHoc
         public ActionResult Index()
         {
-            var model = new TruongHocDAO().GetAllTruongHoc();
+            var model = truongHocDAO.GetAllTruongHoc();
             return View(model);
         }
         public ActionResult Detail(int id)
         {
-            var model = new TruongHocDAO().GetTruongHoc(id);
+            var model = truongHocDAO.GetTruongHoc(id);
             if (model == null)
             {
                 return RedirectToAction("Index");
@@ -29,7 +36,7 @@ namespace Website.Areas.Admin.Controllers
         }
         public ActionResult Create()
         {
-            var khuvuc = new KhuVucDAO().GetAllKhuVuc();
+            var khuvuc = khuVucDAO.GetAllKhuVuc();
             SelectList list = new SelectList(khuvuc, "ma_kv", "ten_kv");
             ViewBag.list = list;
             return View();
@@ -41,13 +48,13 @@ namespace Website.Areas.Admin.Controllers
             if (String.IsNullOrEmpty(latlng))
             {
                 ModelState.AddModelError("", "Bạn chưa chọn tọa độ");
-                var khuvuc = new KhuVucDAO().GetAllKhuVuc();
+                var khuvuc = khuVucDAO.GetAllKhuVuc();
                 SelectList list = new SelectList(khuvuc, "ma_kv", "ten_kv", th.ma_kv);
                 ViewBag.list = list;
                 return View("Create", th);
             }
             th.toado_th = DbGeometry.FromText(latlng);
-            var res = new TruongHocDAO().Add(th);
+            var res = truongHocDAO.Add(th);
             return RedirectToAction("Index");
         }
         public ActionResult Edit(int? id)
@@ -56,12 +63,12 @@ namespace Website.Areas.Admin.Controllers
             {
                 return RedirectToAction("Index");
             }
-            var th = new TruongHocDAO().GetTruongHoc(id ?? 1);
+            var th = truongHocDAO.GetTruongHoc(id ?? 1);
             if (th == null)
             {
                 return RedirectToAction("Index");
             }
-            var khuvuc = new KhuVucDAO().GetAllKhuVuc();
+            var khuvuc = khuVucDAO.GetAllKhuVuc();
             SelectList list = new SelectList(khuvuc, "ma_kv", "ten_kv", th.ma_kv);
             ViewBag.list = list;
             return View(th);
@@ -73,18 +80,18 @@ namespace Website.Areas.Admin.Controllers
             if (String.IsNullOrEmpty(latlng))
             {
                 ModelState.AddModelError("", "Bạn chưa chọn tọa độ");
-                var khuvuc = new KhuVucDAO().GetAllKhuVuc();
+                var khuvuc = khuVucDAO.GetAllKhuVuc();
                 SelectList list = new SelectList(khuvuc, "ma_kv", "ten_kv", th.ma_kv);
                 ViewBag.list = list;
                 return View("Edit", th);
             }
             th.toado_th = DbGeometry.FromText(latlng);
-            var res = new TruongHocDAO().Edit(th);
+            var res = truongHocDAO.Edit(th);
             return RedirectToAction("Index");
         }
         public ActionResult Delete(int id)
         {
-            new TruongHocDAO().Delete(id);
+            truongHocDAO.Delete(id);
             return RedirectToAction("Index");
         }
     }

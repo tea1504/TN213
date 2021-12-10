@@ -10,17 +10,22 @@ namespace Website.Areas.Admin.Controllers
 {
     public class DanhGiaNhaTroController : CheckAdminController
     {
+        DanhGiaDAO danhGiaDAO = null;
+        public DanhGiaNhaTroController()
+        {
+            danhGiaDAO = new DanhGiaDAO();
+        }
         // GET: Admin/DanhGiaNHa
         public ActionResult Index()
         {
-            var model = new DanhGiaDAO().GetAll();
+            var model = danhGiaDAO.GetAll();
             return View(model);
         }
         public ActionResult Delete(int nt, int nd, string ngay)
         {
             var d = new DateTime();
             d = DateTime.Parse(ngay, null, System.Globalization.DateTimeStyles.RoundtripKind);
-            new DanhGiaDAO().Delete(nt, nd, d);
+            danhGiaDAO.Delete(nt, nd, d);
             return RedirectToAction("Index");
         }
     }

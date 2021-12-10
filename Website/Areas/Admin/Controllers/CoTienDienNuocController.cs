@@ -10,15 +10,20 @@ namespace Website.Areas.Admin.Controllers
 {
     public class CoTienDienNuocController : CheckAdminController
     {
+        CoTienDienNuocDAO coTienDienNuocDAO = null;
+        public CoTienDienNuocController()
+        {
+            coTienDienNuocDAO = new CoTienDienNuocDAO();
+        }
         // GET: Admin/CoTienDienNuoc
         public ActionResult Index()
         {
-            var model = new CoTienDienNuocDAO().GetAll();
+            var model = coTienDienNuocDAO.GetAll();
             return View(model);
         }
         public JsonResult GetTheoNhaTro(int id)
         {
-            var res = new CoTienDienNuocDAO().GetTheoNhaTro(id);
+            var res = coTienDienNuocDAO.GetTheoNhaTro(id);
             var data = new List<object>();
             foreach(var item in res.OrderByDescending(d=>d.ngay).Take(5))
             {

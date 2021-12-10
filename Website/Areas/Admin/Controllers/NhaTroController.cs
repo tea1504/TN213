@@ -11,15 +11,20 @@ namespace Website.Areas.Admin.Controllers
 {
     public class NhaTroController : CheckAdminController
     {
+        NhaTroDAO nhaTroDAO = null;
+        public NhaTroController()
+        {
+            nhaTroDAO = new NhaTroDAO();
+        }
         // GET: Admin/NhaTro
         public ActionResult Index()
         {
-            List<NhaTro> model = new NhaTroDAO().GetAllNhaTro();
+            List<NhaTro> model = nhaTroDAO.GetAllNhaTro();
             return View(model);
         }
         public ActionResult Detail(int id)
         {
-            var model = new NhaTroDAO().GetNhaTro(id);
+            var model = nhaTroDAO.GetNhaTro(id);
             if (model == null)
             {
                 return RedirectToAction("Index");
@@ -28,7 +33,7 @@ namespace Website.Areas.Admin.Controllers
         }
         public ActionResult Delete(int id)
         {
-            new NhaTroDAO().Delete(id);
+            nhaTroDAO.Delete(id);
             return RedirectToAction("Index");
         }
     }

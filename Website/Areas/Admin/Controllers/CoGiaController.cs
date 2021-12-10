@@ -10,15 +10,20 @@ namespace Website.Areas.Admin.Controllers
 {
     public class CoGiaController : CheckAdminController
     {
+        CoGiaDAO coGiaDAO = null;
+        public CoGiaController()
+        {
+            coGiaDAO = new CoGiaDAO();
+        }
         // GET: Admin/CoGia
         public ActionResult Index()
         {
-            var model = new CoGiaDAO().GetAll();
+            var model = coGiaDAO.GetAll();
             return View(model);
         }
         public JsonResult GetTheoNhaTroVaLoaiPhong(int ma_nt, int ma_lp)
         {
-            var res = new CoGiaDAO().GetTheoNhaTroVaLoaiPhong(ma_nt, ma_lp);
+            var res = coGiaDAO.GetTheoNhaTroVaLoaiPhong(ma_nt, ma_lp);
             var data = new List<object>();
             foreach(var item in res.OrderByDescending(cg=>cg.ngay).Take(5))
             {

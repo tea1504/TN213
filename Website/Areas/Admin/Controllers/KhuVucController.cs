@@ -12,15 +12,22 @@ namespace Website.Areas.Admin.Controllers
 {
     public class KhuVucController : CheckAdminController
     {
+        KhuVucDAO khuVucDAO = null;
+        MauSacDAO mauSacDAO = null;
+        public KhuVucController()
+        {
+            khuVucDAO = new KhuVucDAO();
+            mauSacDAO = new MauSacDAO();
+        }
         // GET: Admin/KhuVuc
         public ActionResult Index()
         {
-            var data = new KhuVucDAO().GetAllKhuVuc();
+            var data = khuVucDAO.GetAllKhuVuc();
             return View(data);
         }
         public JsonResult GetKhuVuc(int id)
         {
-            KhuVuc kv = new KhuVucDAO().LayKhuVuc(id);
+            KhuVuc kv = khuVucDAO.LayKhuVuc(id);
             var data = new
             {
                 latlng = kv.toado_kv.AsText(),
@@ -31,7 +38,7 @@ namespace Website.Areas.Admin.Controllers
         }
         public ActionResult Create()
         {
-            List<MauSac> mauSac = new MauSacDAO().GetAll();
+            List<MauSac> mauSac = mauSacDAO.GetAll();
             SelectList listMauSac = new SelectList(mauSac, "ma_ms", "ten_ms");
             ViewBag.listMauSac = listMauSac;
             return View();
@@ -42,7 +49,7 @@ namespace Website.Areas.Admin.Controllers
         {
             if (String.IsNullOrEmpty(polygon))
             {
-                List<MauSac> mauSac = new MauSacDAO().GetAll();
+                List<MauSac> mauSac = mauSacDAO.GetAll();
                 SelectList listMauSac = new SelectList(mauSac, "ma_ms", "ten_ms");
                 ViewBag.listMauSac = listMauSac;
                 ModelState.AddModelError("", "Bạn chưa chọn tọa độ trên bản đồ");
@@ -50,7 +57,7 @@ namespace Website.Areas.Admin.Controllers
             }
             kv.polygon_kv = DbGeometry.FromText(polygon);
             kv.toado_kv = DbGeometry.FromText(latlng);
-            var res = new KhuVucDAO().Add(kv);
+            var res = khuVucDAO.Add(kv);
             return RedirectToAction("Index");
         }
         public ActionResult Edit(int? id)
@@ -59,12 +66,12 @@ namespace Website.Areas.Admin.Controllers
             {
                 return RedirectToAction("Index");
             }
-            KhuVuc kv = new KhuVucDAO().LayKhuVuc(id??1);
+            KhuVuc kv = khuVucDAO.LayKhuVuc(id??1);
             if (kv == null)
             {
                 return RedirectToAction("Index");
             }
-            List<MauSac> mauSac = new MauSacDAO().GetAll();
+            List<MauSac> mauSac = mauSacDAO.GetAll();
             SelectList listMauSac = new SelectList(mauSac, "ma_ms", "ten_ms", kv.ma_ms);
             ViewBag.listMauSac = listMauSac;
             return View(kv);
@@ -75,7 +82,7 @@ namespace Website.Areas.Admin.Controllers
         {
             if (String.IsNullOrEmpty(polygon))
             {
-                List<MauSac> mauSac = new MauSacDAO().GetAll();
+                List<MauSac> mauSac = mauSacDAO.GetAll();
                 SelectList listMauSac = new SelectList(mauSac, "ma_ms", "ten_ms");
                 ViewBag.listMauSac = listMauSac;
                 ModelState.AddModelError("", "Bạn chưa chọn tọa độ trên bản đồ");
@@ -83,12 +90,12 @@ namespace Website.Areas.Admin.Controllers
             }
             kv.polygon_kv = DbGeometry.FromText(polygon);
             kv.toado_kv = DbGeometry.FromText(latlng);
-            var res = new KhuVucDAO().Edit(kv);
+            var res = khuVucDAO.Edit(kv);
             return RedirectToAction("Index");
         }
         public ActionResult Delete(int id)
         {
-            new KhuVucDAO().Delete(id);
+            khuVucDAO.Delete(id);
             return RedirectToAction("Index");
         }
     }

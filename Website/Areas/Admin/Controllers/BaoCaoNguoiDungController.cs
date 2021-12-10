@@ -10,17 +10,22 @@ namespace Website.Areas.Admin.Controllers
 {
     public class BaoCaoNguoiDungController : CheckAdminController
     {
+        BaoCaoNguoiDungDAO baoCaoNguoiDungDAO = null;
+        public BaoCaoNguoiDungController()
+        {
+            baoCaoNguoiDungDAO = new BaoCaoNguoiDungDAO();
+        }
         // GET: Admin/BaoCaoNguoiDung
         public ActionResult Index()
         {
-            var model = new BaoCaoNguoiDungDAO().GetAll();
+            var model = baoCaoNguoiDungDAO.GetAll();
             return View(model);
         }
         public JsonResult Detail(int ma_lbc, int nguoibaocao, int nguoibibaocao, string ngay)
         {
             var d = new DateTime();
             d = DateTime.Parse(ngay, null, System.Globalization.DateTimeStyles.RoundtripKind);
-            var res = new BaoCaoNguoiDungDAO().Get(ma_lbc, nguoibaocao, nguoibibaocao, d);
+            var res = baoCaoNguoiDungDAO.Get(ma_lbc, nguoibaocao, nguoibibaocao, d);
             var data = new
             {
                 nguoibaocao = new
@@ -48,15 +53,33 @@ namespace Website.Areas.Admin.Controllers
         {
             var d = new DateTime();
             d = DateTime.Parse(ngay, null, System.Globalization.DateTimeStyles.RoundtripKind);
-            var res = new BaoCaoNguoiDungDAO().Edit(ma_lbc, nguoibaocao, nguoibibaocao, d);
+            var res = baoCaoNguoiDungDAO.Edit(ma_lbc, nguoibaocao, nguoibibaocao, d);
             return Json("OK", JsonRequestBehavior.AllowGet);
         }
         public JsonResult Delete(int ma_lbc, int nguoibaocao, int nguoibibaocao, string ngay)
         {
             var d = new DateTime();
             d = DateTime.Parse(ngay, null, System.Globalization.DateTimeStyles.RoundtripKind);
-            new BaoCaoNguoiDungDAO().Delete(ma_lbc, nguoibaocao, nguoibibaocao, d);
+            baoCaoNguoiDungDAO.Delete(ma_lbc, nguoibaocao, nguoibibaocao, d);
             return Json("OK", JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult GetBaoCao()
+        {
+            var res = baoCaoNguoiDungDAO.GetTheoTrangThai(1);
+            List<object> data = new List<object>();
+            foreach(var item in res.OrderByDescending(bc=>bc.ngay))
+            {
+                var temp = new
+                {
+                    title = item.NguoiDung.taikhoan + " báo cáo " + item.NguoiDung1.taikhoan,
+                    nodung = item.lydo,
+                    ngay = item.ngay.ToString("yyyy-MM-ddTHH:mm:ss.fff"),
+                    loai = item.LoaiBaoCao.ten_lbc,
+                    ma = item.ma_lbc
+                };
+                data.Add(temp);
+            }
+            return Json(data, JsonRequestBehavior.AllowGet);
         }
     }
 }

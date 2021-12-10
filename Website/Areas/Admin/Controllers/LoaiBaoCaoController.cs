@@ -11,25 +11,30 @@ namespace Website.Areas.Admin.Controllers
 {
     public class LoaiBaoCaoController : CheckAdminController
     {
+        LoaiBaoCaoDAO loaiBaoCaoDAO = null;
+        public LoaiBaoCaoController()
+        {
+            loaiBaoCaoDAO = new LoaiBaoCaoDAO();
+        }
         // GET: Admin/LoaiBaoCao
         public ActionResult Index()
         {
-            var model = new LoaiBaoCaoDAO().GetAllLoaiBaoCao();
+            var model = loaiBaoCaoDAO.GetAllLoaiBaoCao();
             return View(model);
         }
         public ActionResult Create(LoaiBaoCao lbc)
         {
-            var res = new LoaiBaoCaoDAO().Add(lbc);
+            var res = loaiBaoCaoDAO.Add(lbc);
             return RedirectToAction("Index");
         }
         public ActionResult Edit(LoaiBaoCao lbc)
         {
-            var res = new LoaiBaoCaoDAO().Edit(lbc);
+            var res = loaiBaoCaoDAO.Edit(lbc);
             return RedirectToAction("Index");
         }
         public ActionResult Delete(int id)
         {
-            new LoaiBaoCaoDAO().Delete(id);
+            loaiBaoCaoDAO.Delete(id);
             return RedirectToAction("Index");
         }
     }

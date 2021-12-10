@@ -34,6 +34,11 @@ namespace Website.DAO
             var res = db.BaoCaoNguoiDungs.Where(bc => bc.ma_lbc == ma_lbc).ToList();
             return res;
         }
+        public List<BaoCaoNguoiDung> GetTheoTrangThai(int trangthai)
+        {
+            var res = db.BaoCaoNguoiDungs.Where(bc => bc.trangthai == trangthai).ToList();
+            return res;
+        }
         public void Delete(BaoCaoNguoiDung bc)
         {
             db.BaoCaoNguoiDungs.Remove(bc);

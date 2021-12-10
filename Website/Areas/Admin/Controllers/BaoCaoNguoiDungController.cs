@@ -63,5 +63,23 @@ namespace Website.Areas.Admin.Controllers
             baoCaoNguoiDungDAO.Delete(ma_lbc, nguoibaocao, nguoibibaocao, d);
             return Json("OK", JsonRequestBehavior.AllowGet);
         }
+        public JsonResult GetBaoCao()
+        {
+            var res = baoCaoNguoiDungDAO.GetTheoTrangThai(1);
+            List<object> data = new List<object>();
+            foreach(var item in res.OrderByDescending(bc=>bc.ngay))
+            {
+                var temp = new
+                {
+                    title = item.NguoiDung.taikhoan + " báo cáo " + item.NguoiDung1.taikhoan,
+                    nodung = item.lydo,
+                    ngay = item.ngay.ToString("yyyy-MM-ddTHH:mm:ss.fff"),
+                    loai = item.LoaiBaoCao.ten_lbc,
+                    ma = item.ma_lbc
+                };
+                data.Add(temp);
+            }
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
     }
 }

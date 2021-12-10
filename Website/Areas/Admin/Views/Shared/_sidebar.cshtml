@@ -121,11 +121,19 @@
         </li>
         <li class="menu-label">Thống kê</li>
         <li>
-            <a href="widgets.html">
+            <a href="@Url.Action("NguoiDung", "BaoCaoThongKe", new { Area = "Admin" })">
                 <div class="parent-icon icon-color-9">
-                    <i class="bx bx-ghost"></i>
+                    <i class="bx bx-bar-chart"></i>
                 </div>
-                <div class="menu-title">Widgets</div>
+                <div class="menu-title">Người dùng</div>
+            </a>
+        </li>
+        <li>
+            <a href="@Url.Action("NhaTro", "BaoCaoThongKe", new { Area = "Admin" })">
+                <div class="parent-icon icon-color-1">
+                    <i class="bx bx-doughnut-chart"></i>
+                </div>
+                <div class="menu-title">Nhà trọ</div>
             </a>
         </li>
         <li class="menu-label">Tiện ích</li>

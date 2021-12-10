@@ -134,6 +134,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AnhNhaTroController.cs" />
+    <Compile Include="Areas\Admin\Controllers\BaoCaoThongKeController.cs" />
     <Compile Include="Areas\Admin\Controllers\BaoCaoNguoiDungController.cs" />
     <Compile Include="Areas\Admin\Controllers\BaoCaoNhaTroController.cs" />
     <Compile Include="Areas\Admin\Controllers\CoGiaController.cs" />
@@ -1902,6 +1903,8 @@
     <Content Include="Areas\Admin\Views\BaoCaoNhaTro\Index.cshtml" />
     <Content Include="Areas\Admin\Views\BaoCaoNguoiDung\Index.cshtml" />
     <Content Include="Areas\Admin\Views\NguoiDung\CapMK.cshtml" />
+    <Content Include="Areas\Admin\Views\BaoCaoThongKe\NguoiDung.cshtml" />
+    <Content Include="Areas\Admin\Views\BaoCaoThongKe\NhaTro.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -1933,6 +1936,8 @@
     <Content Include="Scripts\js\AdminTruongHocDetailScript.js" />
     <Content Include="Scripts\js\AdminTruongHocEditSrcipt.js" />
     <Content Include="Scripts\js\AdminTruongHocScript.js" />
+    <Content Include="Scripts\js\BaoCaoThongKeNguoiDungScript.js" />
+    <Content Include="Scripts\js\BaoCaoThongKeNhaTroScript.js" />
     <Content Include="Scripts\js\EditUserScript.js" />
     <Content Include="Scripts\js\HomeScript.js" />
     <Content Include="Scripts\js\QuanLyEditnhaTroScript.js" />
@@ -1976,7 +1981,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Admin\Views\DanhGiaNHa\" />
     <Folder Include="Views\Anh\" />
     <Folder Include="Views\BaoCao\" />
     <Folder Include="Views\CheckAdmin\" />

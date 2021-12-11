@@ -152,7 +152,7 @@
                             @foreach (var item in Model.AnhNhaTroes)
                             {
                                 <a href="@item.ten_anh"
-                                   data-fancybox
+                                   data-fancybox="anh"
                                    data-caption="@item.mota_anh"
                                    class="hinhanh nt_@item.ma_nt">
                                     <img src="@item.ten_anh" alt="@item.mota_anh" class="img-thumbnail" />
@@ -250,7 +250,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-5">
+    <div class="col-md-6">
         <div class="card radius-10">
             <div class="card-body">
                 <div class="card-title">
@@ -290,7 +290,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-7">
+    <div class="col-md-6">
         <div class="card radius-10">
             <div class="card-body">
                 <div class="card-title">

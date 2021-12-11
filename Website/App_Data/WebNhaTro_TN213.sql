@@ -333,7 +333,7 @@ values
 go
 insert into LoaiBaoCao(ten_lbc)
 values
-	(N'Người nhà trọ không tồn tại'),
+	(N'Nhà trọ không tồn tại'),
 	(N'Nhà trọ đã đóng cửa/ngừng kinh doanh'),
 	(N'Tiền điện/nước không đúng'),
 	(N'Người dùng quấy rối'),

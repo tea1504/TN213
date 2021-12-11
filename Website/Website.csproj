@@ -1919,6 +1919,7 @@
     <Content Include="Scripts\js\AdminBaoCaoNguoiDungScript.js" />
     <Content Include="Scripts\js\AdminBaoCaoNhaTroScript.js" />
     <Content Include="Scripts\js\AdminDanhGiaScript.js" />
+    <Content Include="Scripts\js\AdminDashBoardScript.js" />
     <Content Include="Scripts\js\AdminKhuVucCreateScript.js" />
     <Content Include="Scripts\js\AdminKhuVucEditScript.js" />
     <Content Include="Scripts\js\AdminKhuVucScript.js" />

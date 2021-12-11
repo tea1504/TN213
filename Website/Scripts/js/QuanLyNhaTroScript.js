@@ -117,4 +117,35 @@
             });
         }
     })
+    const ctx2 = document.getElementById('myChart2').getContext('2d');
+    $.ajax({
+        url: '/DanhGia/ChartData2',
+        data: {
+            'ma_nt': $('#ma_nt').val()
+        },
+        type: 'post',
+        success: res => {
+            res.data.push(0);
+            const myChart = new Chart(ctx2, {
+                type: 'line',
+                data: {
+                    labels: res.label,
+                    datasets: [{
+                        label: 'Đánh giá trung bình',
+                        data: res.data,
+                        backgroundColor: 'rgba(255, 206, 86, 0.2)',
+                        borderColor: 'rgba(255, 206, 86, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    elements: {
+                        line: {
+                            tension: 0
+                        }
+                    }
+                }
+            });
+        }
+    })
 })

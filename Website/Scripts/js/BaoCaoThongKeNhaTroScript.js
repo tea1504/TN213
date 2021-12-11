@@ -17,7 +17,7 @@ $.ajax({
                         label: 'Số người',
                         data: res.data,
                         borderColor: res.color,
-                        backgroundColor: res.color,
+                        backgroundColor: res.color.map(el => { return el + '55'; }),
                     }
                 ]
             },
@@ -42,7 +42,7 @@ $.ajax({
                         label: 'Đánh giá',
                         data: res,
                         borderColor: '#f1c40f',
-                        backgroundColor: '#f1c40fcc',
+                        backgroundColor: '#f1c40f55',
                     }
                 ]
             },
@@ -96,7 +96,7 @@ $.ajax({
                         label: 'Số sao',
                         data: data,
                         borderColor: '#f1c40f',
-                        backgroundColor: '#f1c40fcc',
+                        backgroundColor: '#f1c40f55',
                     }
                 ]
             },
@@ -143,6 +143,7 @@ $.ajax({
             );
         });
         var ind = 0;
+        var color = Math.random() * 11777215;
         res.label.map(el => {
             var tempdata = [];
             data.map(ele => {
@@ -152,9 +153,10 @@ $.ajax({
             datasets.push({
                 label: el,
                 data: tempdata,
-                borderColor: '#' + Math.floor(Math.random() * 16777215).toString(16),
-                backgroundColor: '#' + Math.floor(Math.random() * 16777215).toString(16),
+                borderColor: '#' + Math.floor(color).toString(16),
+                backgroundColor: '#' + Math.floor(color).toString(16) + '55',
             });
+            color += 1000000;
         })
         new Chart(vipham, {
             type: 'bar',

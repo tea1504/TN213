@@ -18,6 +18,11 @@ namespace Website.DAO
             var res = db.DanhGias.Where(dg => dg.ma_nt == ma_nt).Select(dg => dg.sosao).DefaultIfEmpty(0).Average();
             return (float)res;
         }
+        public float TBSoSaoTheoNhaTro(int ma_nt, DateTime d)
+        {
+            var res = db.DanhGias.Where(dg => dg.ma_nt == ma_nt && dg.ngay <= d).Select(dg => dg.sosao).DefaultIfEmpty(0).Average();
+            return (float)res;
+        }
         public int DemSoDanhGiaTheoNhaTro(int ma_nt)
         {
             var res = db.DanhGias.Where(dg => dg.ma_nt == ma_nt).Count();
@@ -67,6 +72,16 @@ namespace Website.DAO
         public int CountStar(int ma_nt, int num)
         {
             var res = db.DanhGias.Where(dg => dg.ma_nt == ma_nt && dg.sosao == num).Count();
+            return res;
+        }
+        public int CountStar(DateTime min, DateTime max, int num)
+        {
+            var res = db.DanhGias.Where(dg => DateTime.Compare(dg.ngay, min) >= 0 && DateTime.Compare(dg.ngay, max) <= 0 && dg.sosao == num).Count();
+            return res;
+        }
+        public DateTime GetFirstDate()
+        {
+            var res = db.DanhGias.Select(dg => dg.ngay).OrderBy(dg => dg).First();
             return res;
         }
         public List<DanhGia> GetAll()

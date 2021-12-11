@@ -59,5 +59,24 @@ namespace Website.Controllers
             };
             return Json(data, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult ChartData2(int ma_nt)
+        {
+            var danhGiaDAO = new DanhGiaDAO();
+            var list = danhGiaDAO.GetTheoNhaTro(ma_nt);
+            var data = new List<object>();
+            var label = new List<object>();
+            foreach(var item in list)
+            {
+                double agv = danhGiaDAO.TBSoSaoTheoNhaTro(ma_nt, item.ngay);
+                data.Add(agv);
+                label.Add("");
+            }
+            var res = new
+            {
+                data,
+                label,
+            };
+            return Json(res, JsonRequestBehavior.AllowGet);
+        }
     }
 }

@@ -48,7 +48,7 @@
                     <tr>
                         <td class="text-center">@item.ngay</td>
                         <td><a href="@Url.Action("Detail", "NhaTro", new { Area = "Admin", id = item.ma_nt })">@item.NhaTro.ten_nt</a></td>
-                        <td>@item.NguoiDung.holot_nd @item.NguoiDung.ten_nd</td>
+                        <td><a href="@Url.Action("Detail", "NguoiDung", new { Area = "Admin", id = item.ma_nd })">@item.NguoiDung.holot_nd @item.NguoiDung.ten_nd</a></td>
                         <td class="text-center">
                             @for (int i = 1; i <= item.sosao; i++)
                             {

@@ -1,0 +1,71 @@
+﻿<!-- header section start here -->
+@using Website.Models
+<header class="header-section header-shadow">
+    <div class="header-top">
+        <div class="container">
+            <div class="header-top-area">
+                <ul class="lab-ul social-icons d-flex align-items-center">
+                    <li><p>Find us on : </p></li>
+                    <li><a href="#" class="fb"><i class="icofont-facebook-messenger"></i></a></li>
+                    <li><a href="#" class="twitter"><i class="icofont-twitter"></i></a></li>
+                    <li><a href="#" class="vimeo"><i class="icofont-vimeo"></i></a></li>
+                    <li><a href="#" class="skype"><i class="icofont-skype"></i></a></li>
+                    <li><a href="#" class="rss"><i class="icofont-rss-feed"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="header-bottom">
+        <div class="container">
+            <div class="header-wrapper">
+                <div class="logo">
+                    <a href="@Url.Action("Index", "Home", new { Area = ""})"><img src="~/Content/img/icon/logo.png" alt="logo"></a>
+                </div>
+                <div class="menu-area">
+                    <div class="menu">
+                        <ul class="lab-ul">
+                            <li class="active">
+                                <a href="@Url.Action("Index", "Home", new { Area = "" })">Trang chủ</a>
+                            </li>
+                            <li><a href="@Url.Action("TimKiem", "DSNhaTro", new { Area = "" })">Tìm nhà trọ</a></li>
+                            <li><a href="@Url.Action("Index", "DSNhaTro", new { Area = "" })">Nhà trọ</a></li>
+                            @if (HttpContext.Current.Session["USER_LOGIN"] != null)
+                            {
+                                var user = (UserLoginModel)HttpContext.Current.Session["USER_LOGIN"];
+                                if (user.ma_vt == 1)
+                                {
+                                    <li><a href="@Url.Action("Index", "Dashboard", new { Area ="Admin" })">Dashboard</a></li>
+                                }
+                                if (user.ma_vt == 2)
+                                {
+                                    <li><a href="@Url.Action("Index", "QuanLy", new { Area ="" })">Quản lý</a></li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                    @if (HttpContext.Current.Session["USER_LOGIN"] == null)
+                    {
+                        <a href="@Url.Action("Index", "Login", new { Area = "" })" class="login"><i class="icofont-login"></i> <span>LOG IN</span> </a>
+                        <a href="@Url.Action("Index", "Register", new { Area = "" })" class="signup"><i class="icofont-edit"></i> <span>SIGN UP</span> </a>
+                    }
+                    else
+                    {
+                        var user = (UserLoginModel)HttpContext.Current.Session["USER_LOGIN"];
+                        <a href="@Url.Action("Index", "User", new { Area = "" })" class="login"><i class="icofont-user"></i> <span>@user.holot_nd @user.ten_nd</span> </a>
+                        <a href="@Url.Action("Dangxuat", "Login", new { Area = "", HttpContext.Current.Request.Url.AbsolutePath })" class="signup"><i class="icofont-logout"></i> <span>Đăng xuất</span> </a>
+                    }
+                    <!-- toggle icons -->
+                    <div class="header-bar d-lg-none">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <div class="ellepsis-bar d-lg-none">
+                        <i class="icofont-info-square"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- header section ending here -->

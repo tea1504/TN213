@@ -1,0 +1,195 @@
+﻿@model Website.EF.NguoiDung
+
+@{
+    ViewBag.Title = Model.holot_nd + " " + Model.ten_nd;
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+@section style{
+    <style>
+        .modal {
+            background: #000000cc !important;
+        }
+    </style>
+}
+@section scripts{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/js/UserScript.js"></script>
+}
+@section  breadcrumb{
+    <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home", new { Area = "" })">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">@ViewBag.Title</li>
+}
+@Html.ValidationSummary(true)
+<!-- instructor Single Section Starts Here -->
+<section class="instructor-single-section padding-tb section-bg">
+    <div class="container">
+        <div class="instructor-wrapper">
+            <div class="instructor-single-top">
+                <div class="instructor-single-item d-flex flex-wrap justify-content-between">
+                    <div class="instructor-single-thumb">
+                        <img src="@Model.anh_nd" alt="instructor">
+                    </div>
+                    <div class="instructor-single-content">
+                        <h4 class="title">@Model.holot_nd @Model.ten_nd</h4>
+                        <p class="ins-dege">@Model.VaiTro.ten_vt</p>
+                        <button class="btn btn-success" data-toggle="modal" data-target="#edit" id="btnedit">Đổi tài khoản/mật khẩu</button>
+                        <br />
+                        <hr />
+                        <h6 class="subtitle">Thông tin cá nhân <a class="btn btn-sm" href="@Url.Action("Edit", "User", new { Area = "" })" data-toggle="tooltip" data-placement="top" title="Chỉnh sửa"><i class="icofont-edit text-secondary icofont-2x"></i></a></h6>
+                        <ul class="lab-ul">
+                            <li class="d-flex flex-wrap justify-content-start">
+                                <span class="list-name">Giới tính</span>
+                                @if (Model.gioitinh_nd == 0)
+                                {
+                                    <span class="list-attr">Nữ</span>
+                                }
+                                else
+                                {
+                                    <span class="list-attr">Nam</span>
+                                }
+                            </li>
+                            <li class="d-flex flex-wrap justify-content-start">
+                                <span class="list-name">Số điện thoại</span>
+                                <span class="list-attr">@Model.sdt_nd</span>
+                            </li>
+                            <li class="d-flex flex-wrap justify-content-start">
+                                <span class="list-name">Email</span>
+                                <span class="list-attr">@Model.email</span>
+                            </li>
+                            <li class="d-flex flex-wrap justify-content-start">
+                                <span class="list-name">Địa chỉ</span>
+                                <span class="list-attr">@Model.diachi</span>
+                            </li>
+                            <li class="d-flex flex-wrap justify-content-start">
+                                <span class="list-name">Follow Us</span>
+                                <ul class="lab-ul list-attr d-flex flex-wrap justify-content-start">
+                                    <li>
+                                        <a class="twitter" href="#"><i class="icofont-twitter"></i></a>
+                                    </li>
+                                    <li>
+                                        <a class="instagram" href="#"><i class="icofont-instagram"></i></a>
+                                    </li>
+                                    <li>
+                                        <a class="basketball" href="#"><i class="icofont-basketball"></i></a>
+                                    </li>
+                                    <li>
+                                        <a class="vimeo" href="#"><i class="icofont-vimeo"></i></a>
+                                    </li>
+                                    <li>
+                                        <a class="beahnce" href="#"><i class="icofont-behance"></i></a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="instructor-single-bottom d-flex flex-wrap mt-4">
+                <div class="col-xl-12 pb-5 pb-xl-0 justify-content-lg-start justify-content-between">
+                    <h4 class="subtitle">Hoạt động</h4>
+                    <div class="row justify-content-center">
+                        <div class="col">
+                            <div class="count-item">
+                                <div class="count-inner">
+                                    <div class="count-content">
+                                        <h2><span class="count" data-to="@Model.DanhGias.Count" data-speed="500">@Model.DanhGias.Count</span></h2>
+                                        <p>Lần đánh giá</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="count-item">
+                                <div class="count-inner">
+                                    <div class="count-content">
+                                        <h2><span class="count" data-to="@Model.BaoCaoNguoiDungs.Count" data-speed="500">@Model.BaoCaoNguoiDungs.Count</span></h2>
+                                        <p>Lần báo cáo</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="count-item">
+                                <div class="count-inner">
+                                    <div class="count-content">
+                                        <h2><span class="count" data-to="@Model.BaoCaoNguoiDungs1.Count" data-speed="500">@Model.BaoCaoNguoiDungs1.Count</span></h2>
+                                        <p>Lần bị báo cáo</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- instructor Single Section Ends Here -->
+<!-- Modal -->
+<div class="modal" id="edit" tabindex="-1" role="dialog" aria-labelledby="title" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="title">Đổi tài khoản/mật khẩu</h5>
+                <button type="button" class="close btn-close btndong" data-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("Update", "User", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(m=>m.ma_nd)
+                    <div class="form-group row mt-2">
+                        <label for="taikhoan" class="col-sm-2 col-form-label">Tài khoản</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="taikhoan" id="taikhoan" value="@Model.taikhoan" class="form-control" placeholder="Tài khoản" data-val="true" data-val-length="Tài khoản chỉ chứa tối đa 50 ký tự" data-val-length-max="50" data-val-required="Bạn phải nhập tài khoản" />
+                            <div>
+                                <small>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="taikhoan" data-valmsg-replace="true"></span>
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row mt-2">
+                        <label for="matkhau" class="col-sm-2 col-form-label">Mật khẩu cũ</label>
+                        <div class="col-sm-10">
+                            <input type="password" name="matkhau" id="matkhau" value="" class="form-control" placeholder="Mật khẩu cũ" data-val="true" data-val-length="Mật khẩu chỉ chứa tối đa 100 ký tự" data-val-length-max="100" data-val-required="Bạn phải nhập mật khẩu" />
+                            <div>
+                                <small>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="matkhau" data-valmsg-replace="true"></span>
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row mt-2">
+                        <label for="matkhaumoi" class="col-sm-2 col-form-label">Mật khẩu mới</label>
+                        <div class="col-sm-10">
+                            <input type="password" name="matkhaumoi" id="matkhaumoi" value="" class="form-control" placeholder="Mật khẩu" data-val="true" data-val-length="Mật khẩu chỉ chứa tối đa 100 ký tự" data-val-length-max="100" data-val-required="Bạn phải nhập mật khẩu" />
+                            <div>
+                                <small>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="matkhaumoi" data-valmsg-replace="true"></span>
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row mt-2">
+                        <label for="confirm" class="col-sm-2 col-form-label">Nhập lại mật khẩu mới</label>
+                        <div class="col-sm-10">
+                            <input type="password" name="confirm" id="confirm" class="form-control" placeholder="Xác nhận lại mật khẩu" data-val="true" data-val-equalto="Mật khẩu xác nhận không khớp mời nhập lại" data-val-equalto-other="*.matkhaumoi" data-val-required="Bạn phải nhập xác nhận mật khẩu" />
+                            <div>
+                                <small>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="confirm" data-valmsg-replace="true"></span>
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group mt-2">
+                        <button class="btn btn-primary w-100">Cập nhật</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

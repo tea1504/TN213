@@ -1,0 +1,137 @@
+﻿@model IEnumerable<Website.EF.AnhNhaTro>
+
+@{
+    ViewBag.Title = "Quản lý ảnh " + ViewBag.NhaTro;
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+@section style{
+    <link href="~/Content/admin/assets/plugins/datatable/css/buttons.bootstrap4.min.css" rel="stylesheet" />
+    <link href="~/Content/admin/assets/plugins/datatable/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <style>
+        .modal {
+            background: #000000cc !important;
+        }
+    </style>
+}
+@section scripts{
+    <script src="~/Content/ckfinder/ckfinder.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Content/admin/assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/js/QuanLyNhaTroHinhAnh.js"></script>
+}
+@section  breadcrumb{
+    <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home", new { Area = "" })">Home</a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("Index", "QuanLy", new { Area = "" })">Quản lý</a></li>
+    <li class="breadcrumb-item active" aria-current="page">@ViewBag.Title</li>
+}
+
+
+<div class="container my-2">
+    <div class="row">
+        <div class="col-md-12">
+            <button class="btn btn-success mb-3 btncreate" data-toggle="model" data-target="#createmodel">Thêm ảnh</button>
+            <table id="myTable" class="table table-sm table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th class="text-center">@Html.DisplayNameFor(m => m.STT)</th>
+                        <th class="text-center">Ảnh</th>
+                        <th class="text-center">@Html.DisplayNameFor(m => m.mota_anh)</th>
+                        <th class="text-center">Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="text-center">@item.STT</td>
+                            <td class="text-center">
+                                <div data-src="@item.ten_anh" data-fancybox="gallery" data-caption="@item.mota_anh">
+                                    <img src="@item.ten_anh" style="height: 100px;" />
+                                </div>
+                            </td>
+                            <td>@item.mota_anh</td>
+                            <td class="text-center">
+                                <span data-toggle="tooltip" data-placement="top" title="Chỉnh sửa">
+                                    <button data-toggle="modal" data-target="editmodal" class="btn btn-sm btn-success  btnedit" data-stt="@item.STT" data-nt="@item.ma_nt" data-anh="@item.ten_anh" data-mota="@item.mota_anh"><i class="icofont-pencil"></i></button>
+                                </span>
+                                <button class="btn btn-sm btn-danger btndelete" data-toggle="tooltip" data-placement="top" title="Xóa" data-stt="@item.STT" data-nt="@item.ma_nt"><i class="icofont-trash"></i></button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="createmodal" tabindex="-1" role="dialog" aria-labelledby="title" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="title">Thêm mới ảnh</h5>
+                <button type="button" class="close btn-close btndong" data-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("Create", "Anh", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="create.ten_anh" id="create_ten_anh" />
+                    <input type="hidden" name="create.ma_nt" value="@ViewBag.Ma" />
+                    <div class="form-group text-center">
+                        <button class="btn btn-primary mb-1" id="btn-chonanh">Chọn ảnh</button>
+                        <br />
+                        <img id="containerImgCreate" alt="Ảnh" style="height: 200px;" class="img-thumbnail" />
+                    </div>
+                    <div class="form-group mt-2">
+                        <textarea name="create.mota_anh" id="create_mota" placeholder="Nhập mô tả" data-val="true" data-val-required="Bạn phải nhập mô tả"></textarea>
+                        <div>
+                            <small>
+                                <span class="field-validation-valid text-danger" data-valmsg-for="create.mota_anh" data-valmsg-replace="true"></span>
+                            </small>
+                        </div>
+                    </div>
+                    <div class="form-group mt-3">
+                        <button class="btn btn-primary w-100">Thêm mới</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="title" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="title">Chỉnh sửa ảnh</h5>
+                <button type="button" class="close btn-close btndong" data-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("Edit", "Anh", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="edit.STT" id="edit_STT" />
+                    <input type="hidden" name="edit.ten_anh" id="edit_ten_anh" />
+                    <input type="hidden" name="edit.ma_nt" id="edit_ma_nt" />
+                    <div class="form-group text-center">
+                        <img src="#" id="containerImgEdit" alt="Alternate Text" style="height: 200px;" class="img-thumbnail" />
+                    </div>
+                    <div class="form-group mt-2">
+                        <textarea name="edit.mota_anh" id="edit_mota" placeholder="Nhập mô tả" data-val="true" data-val-required="Bạn phải nhập mô tả"></textarea>
+                        <div>
+                            <small>
+                                <span class="field-validation-valid text-danger" data-valmsg-for="edit.mota_anh" data-valmsg-replace="true"></span>
+                            </small>
+                        </div>
+                    </div>
+                    <div class="form-group mt-3">
+                        <button class="btn btn-primary w-100">Chỉnh sửa</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

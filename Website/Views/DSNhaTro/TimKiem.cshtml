@@ -1,0 +1,114 @@
+﻿
+@{
+    ViewBag.Title = "Tìm kiếm nhà trọ";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+@section style{
+    <link href="~/Content/css/TimKiemNhaTroStyle.css" rel="stylesheet" />
+}
+@section scripts{
+    <script src="~/Scripts/js/TimKiemNhaTroScript.js"></script>
+}
+<div class="container-fluid h-100">
+    <div class="row h-100">
+        <div class="col-md-12 h-25 overflow-auto">
+            <h3>@ViewBag.Title</h3>
+            <div class="row">
+                <div class="col-md-3 mb-1">
+                    @Html.DropDownList("ma_kv", (IEnumerable<SelectListItem>)ViewBag.listKhuVuc, "Tất cả khu vực", new { @class = "form-control" })
+                </div>
+                <div class="col-md-3 mb-1">
+                    @Html.TextBox("ten_nt", null, new { @class = "form-control", @placeholder = "Nhập tên nhà trọ" })
+                </div>
+                <div class="col-md-3 mb-1">
+                    @Html.TextBox("diachi_nt", null, new { @class = "form-control", @placeholder = "Nhập địa chỉ nhà trọ" })
+                </div>
+                <div class="col-md-3 mb-1">
+                    @Html.TextBox("ten_nd", null, new { @class = "form-control", @placeholder = "Nhập tên chủ nhà trọ" })
+                </div>
+
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-md-6 mb-1">
+                    @Html.DropDownList("ma_th", (IEnumerable<SelectListItem>)ViewBag.listTruongHoc, "Chọn trường học", new { @class = "form-control" })
+                </div>
+                <div class="col-md-6 mb-1">
+                    @Html.TextBox("khoancach", null, new { @class = "form-control", @placeholder = "Nhập khoản cách (km)", @type = "number", @min = "0" })
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-md-6">
+                    <button class="btn w-100 btn-primary" id="sreach">Tìm kiếm</button>
+                </div>
+                <div class="col-md-6">
+                    <a href="@Url.Action("Index", "Home", new { Area = "" })" class="btn btn-outline-secondary w-100">Trang chủ</a>
+                </div>
+            </div>
+        </div>
+        <div class="overflow-auto position-relative" style="display: none;" id="container-info">
+                <button class="btn-close position-fixed btn btn-secondary" style="top: 250px; left: 430px;"></button>
+            <div class="row p-0 m-0">
+                <div class="col-md-12 p-0 m-0">
+                    <div data-src="/Content/user/assets/images/course/01.jpg" data-fancybox="avatar" data-caption="Ảnh bìa" id="anhbia">
+                        <img src="/Content/user/assets/images/course/01.jpg" alt="Alternate Text" class="w-100" />
+                    </div>
+                </div>
+                <div class="col-md-12 px-0 m-0">
+                    <h5 class="display-5" id="ten_nha_tro"><a href="/DSNhaTro/NhaTro/1">Tên nhà trọ</a></h5>
+                    <span id="sosao">
+                        <i class="icofont-ui-rating"></i>
+                        <i class="icofont-ui-rating"></i>
+                        <i class="icofont-ui-rating"></i>
+                        <i class="icofont-ui-rate-blank"></i>
+                        <i class="icofont-ui-rate-blank"></i>
+                    </span>
+                    <span id="sodg">5</span> đánh giá
+                </div>
+                <hr class="my-2" />
+                <div class="col-md-12 px-0 m-0" id="chutro">
+                    <div data-src="/Content/user/assets/images/course/01.jpg" data-fancybox="avatar-user" data-caption="Mo ta">
+                        <img src="/Content/user/assets/images/course/01.jpg" alt="Alternate Text" />
+                    </div>
+                    <span>Tên chủ trọ</span>
+                </div>
+                <hr class="my-2" />
+                <div class="col-md-12 px-0 m-0" id="info">
+                    <div id="diachinhatro">
+                        <i class="icofont-google-map icofont-2x"></i> 
+                    </div>
+                    <div id="sdt">
+                        <i class="icofont-phone icofont-2x"></i> 
+                    </div>
+                </div>
+                <hr class="my-2" />
+                <h5>Ảnh</h5>
+                <div class="col-md-12 px-0 m-0" id="image">
+                    <div data-src="/Content/user/assets/images/course/01.jpg" data-fancybox="avatar-1" data-caption="Mo ta">
+                        <img src="/Content/user/assets/images/course/01.jpg" alt="Alternate Text" />
+                    </div>
+                    <div data-src="/Content/user/assets/images/course/01.jpg" data-fancybox="avatar-1" data-caption="Mo ta">
+                        <img src="/Content/user/assets/images/course/01.jpg" alt="Alternate Text" />
+                    </div>
+                    <div data-src="/Content/user/assets/images/course/01.jpg" data-fancybox="avatar-1" data-caption="Mo ta">
+                        <img src="/Content/user/assets/images/course/01.jpg" alt="Alternate Text" />
+                    </div>
+                    <div data-src="/Content/user/assets/images/course/01.jpg" data-fancybox="avatar-1" data-caption="Mo ta">
+                        <img src="/Content/user/assets/images/course/01.jpg" alt="Alternate Text" />
+                    </div>
+                </div>
+                <hr class="my-2" />
+                <h5>Đánh giá</h5>
+                <div class="col-md-12 px-0 m-0" id="cmt">
+                    
+                </div>
+                <hr class="my-2" />
+            </div>
+        </div>
+        <div class="col-md-12 h-75 overflow-hidden" id="container-map">
+            <div id="map"></div>
+        </div>
+    </div>
+</div>
+

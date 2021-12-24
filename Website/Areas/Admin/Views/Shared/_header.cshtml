@@ -1,0 +1,100 @@
+﻿<!--header-->
+@using Website.Models
+<header class="top-header">
+    <nav class="navbar navbar-expand">
+        <div class="left-topbar d-flex align-items-center">
+            <a href="javascript:;" class="toggle-btn">
+                <i class="bx bx-menu"></i>
+            </a>
+        </div>
+        <div class="flex-grow-1 search-bar">
+            <div class="input-group">
+                <div class="input-group-prepend search-arrow-back">
+                    <button class="btn btn-search-back" type="button">
+                        <i class="bx bx-arrow-back"></i>
+                    </button>
+                </div>
+                <input type="text" class="form-control" placeholder="search" />
+                <div class="input-group-append">
+                    <button class="btn btn-search" type="button">
+                        <i class="lni lni-search-alt"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="right-topbar ml-auto">
+            <ul class="navbar-nav">
+                <li class="nav-item search-btn-mobile">
+                    <a class="nav-link position-relative" href="javascript:;">
+                        <i class="bx bx-search vertical-align-middle"></i>
+                    </a>
+                </li>
+                <li class="nav-item dropdown dropdown-lg">
+                    <a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative" href="javascript:;" data-toggle="dropdown">
+                        <span class="msg-count nt-count">6</span>
+                        <i class="bx bx-comment-detail vertical-align-middle"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a href="javascript:;">
+                            <div class="msg-header">
+                                <h6 class="msg-header-title"><span class="nt-count">6</span> Tin</h6>
+                                <p class="msg-header-subtitle">Báo cáo nhà trọ</p>
+                            </div>
+                        </a>
+                        <div class="header-message-list">
+
+                        </div>
+                        <a href="@Url.Action("Index", "BaoCaoNhaTro", new { Area = "Admin" })">
+                            <div class="text-center msg-footer">Xem tất cả</div>
+                        </a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown dropdown-lg">
+                    <a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative" href="javascript:;" data-toggle="dropdown">
+                        <i class="bx bx-bell vertical-align-middle"></i>
+                        <span class="msg-count nd-count">8</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a href="javascript:;">
+                            <div class="msg-header">
+                                <h6 class="msg-header-title"><span class="nd-count">8</span> Tin</h6>
+                                <p class="msg-header-subtitle">Báo cáo người dùng</p>
+                            </div>
+                        </a>
+                        <div class="header-notifications-list">
+                        </div>
+                        <a href="@Url.Action("Index", "BaoCaoNguoiDung", new { Area = "Admin" })">
+                            <div class="text-center msg-footer">Xem tất cả</div>
+                        </a>
+                    </div>
+                </li>
+                @if (HttpContext.Current.Session["USER_LOGIN"] != null)
+                {
+                    <li class="nav-item dropdown dropdown-user-profile">
+                        <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="javascript:;" data-toggle="dropdown">
+                            <div class="media user-box align-items-center">
+                                @{
+                                    UserLoginModel user = (UserLoginModel)HttpContext.Current.Session["USER_LOGIN"];
+                                }
+                                <div class="media-body user-info">
+                                    <p class="user-name mb-0">@user.holot_nd @user.ten_nd</p>
+                                    <p class="designattion mb-0">Đang online</p>
+                                </div>
+                                <img src="@user.anh_nd" class="user-img" alt="user avatar">
+                            </div>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="@Url.Action("Index", "User", new { Area = "" })">
+                                <i class="bx bx-user"></i><span>Profile</span>
+                            </a>
+                            <div class="dropdown-divider mb-0"></div>	<a class="dropdown-item" href="@Url.Action("DangXuat", "Login", new { Area = "" })">
+                                <i class="bx bx-power-off"></i><span>Logout</span>
+                            </a>
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+    </nav>
+</header>
+<!--end header-->

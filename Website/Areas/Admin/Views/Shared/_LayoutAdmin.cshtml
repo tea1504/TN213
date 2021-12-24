@@ -1,0 +1,100 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Admin - @ViewBag.Title</title>
+    <!--favicon-->
+    <link rel="icon" href="~/Content/admin/assets/images/favicon-32x32.png" type="image/png" />
+    <!-- Vector CSS -->
+    <link href="~/Content/admin/assets/plugins/vectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
+    <!--plugins-->
+    <link href="~/Content/admin/assets/plugins/simplebar/css/simplebar.css" rel="stylesheet" />
+    <link href="~/Content/admin/assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet" />
+    <link href="~/Content/admin/assets/plugins/metismenu/css/metisMenu.min.css" rel="stylesheet" />
+    <!-- loader-->
+    <link href="~/Content/admin/assets/css/pace.min.css" rel="stylesheet" />
+    <script src="~/Content/admin/assets/js/pace.min.js"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/Content/admin/assets/css/bootstrap.min.css" />
+    <!-- Icons CSS -->
+    <link rel="stylesheet" href="~/Content/admin/assets/css/icons.css" />
+    <link href="~/Content/admin/assets/plugins/datatable/css/buttons.bootstrap4.min.css" rel="stylesheet" />
+    <link href="~/Content/admin/assets/plugins/datatable/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <!-- App CSS -->
+    <link rel="stylesheet" href="~/Content/admin/assets/css/app.css" />
+    <link rel="stylesheet" href="~/Content/admin/assets/css/dark-sidebar.css" />
+    <link rel="stylesheet" href="~/Content/admin/assets/css/dark-theme.css" />
+    <link href="~/Content/leaflet/css/leaflet.css" rel="stylesheet" />
+    <link href="~/Content/leaflet/css/leaflet.draw.css" rel="stylesheet" />
+    <link href="~/Content/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+
+    @RenderSection("Style", false)
+</head>
+
+<body>
+    <!-- wrapper -->
+    <div class="wrapper">
+        @Html.Partial("~/Areas/Admin/Views/Shared/_sidebar.cshtml")
+        @Html.Partial("~/Areas/Admin/Views/Shared/_header.cshtml")
+        <!--page-wrapper-->
+        <div class="page-wrapper">
+            <!--page-content-wrapper-->
+            <div class="page-content-wrapper">
+                <div class="page-content">
+                    @RenderSection("breadcrumb", false)
+                    @RenderBody()
+                </div>
+            </div>
+            <!--end page-content-wrapper-->
+        </div>
+        <!--end page-wrapper-->
+        <!--start overlay-->
+        <div class="overlay toggle-btn-mobile"></div>
+        <!--end overlay-->
+        <!--Start Back To Top Button--> <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
+        <!--End Back To Top Button-->
+        @Html.Partial("~/Areas/Admin/Views/Shared/_footer.cshtml")
+    </div>
+    <!-- end wrapper -->
+    <!-- JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="~/Content/admin/assets/js/jquery.min.js"></script>
+    <script src="~/Content/admin/assets/js/popper.min.js"></script>
+    <script src="~/Content/admin/assets/js/bootstrap.min.js"></script>
+    <!--plugins-->
+    <script src="~/Content/admin/assets/plugins/simplebar/js/simplebar.min.js"></script>
+    <script src="~/Content/admin/assets/plugins/metismenu/js/metisMenu.min.js"></script>
+    <script src="~/Content/admin/assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
+    <!-- Vector map JavaScript -->
+    <script src="~/Content/admin/assets/plugins/vectormap/jquery-jvectormap-2.0.2.min.js"></script>
+    <script src="~/Content/admin/assets/plugins/vectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="~/Content/admin/assets/plugins/vectormap/jquery-jvectormap-in-mill.js"></script>
+    <script src="~/Content/admin/assets/plugins/vectormap/jquery-jvectormap-us-aea-en.js"></script>
+    <script src="~/Content/admin/assets/plugins/vectormap/jquery-jvectormap-uk-mill-en.js"></script>
+    <script src="~/Content/admin/assets/plugins/vectormap/jquery-jvectormap-au-mill.js"></script>
+    @*<script src="~/Content/admin/assets/plugins/apexcharts-bundle/js/apexcharts.min.js"></script>*@
+    <script src="~/Content/admin/assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
+    @*<script src="~/Content/admin/assets/js/index.js"></script>*@
+    <!-- App JS -->
+    <script src="~/Content/admin/assets/js/app.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script>
+        new PerfectScrollbar('.dashboard-social-list');
+        new PerfectScrollbar('.dashboard-top-countries');
+    </script>
+    <script src="~/Content/leaflet/js/leaflet.js"></script>
+    <script src="~/Content/leaflet/js/leaflet.draw.js"></script>
+    <script src="~/Content/sweetalert2/sweetalert2.min.js"></script>
+    <script src="~/Scripts/js/AdminScript.js"></script>
+    @RenderSection("Scripts", false)
+</body>
+
+</html>

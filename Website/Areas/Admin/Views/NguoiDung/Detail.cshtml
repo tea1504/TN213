@@ -1,0 +1,199 @@
+﻿@model Website.EF.NguoiDung
+
+@{
+    ViewBag.Title = Model.holot_nd + " " + Model.ten_nd;
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@section Style {
+    <link href="~/Content/FancyBox/fancybox.css" rel="stylesheet" />
+}
+@section Scripts {
+    <script src="~/Content/FancyBox/fancybox.umd.js"></script>
+    <script src="~/Scripts/js/AdminNguoiDungDetailScript.js"></script>
+}
+@section breadcrumb{
+    <div class="page-breadcrumb d-none d-md-flex align-items-center mb-3">
+        <div class="breadcrumb-title pr-3">@ViewBag.Title</div>
+        <div class="pl-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0 p-0">
+                    <li class="breadcrumb-item">
+                        <a href="@Url.Action("Index", "Dashboard", new { Area = "Admin" })"><i class="bx bx-home-alt"></i></a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="@Url.Action("Index", "NguoiDung", new { Area = "Admin" })">Quản lý người dùng</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">@ViewBag.Title</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+}
+
+@Html.Hidden("auth", ((Website.Models.UserLoginModel)HttpContext.Current.Session["USER_LOGIN"]).ma_nd)
+
+<div class="user-profile-page">
+    <div class="card radius-15">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12 col-lg-7 border-right">
+                    <div class="d-md-flex align-items-center">
+                        <div class="mb-md-0 mb-3">
+                            <img src="@Model.anh_nd" class="rounded-circle shadow" width="130" height="130" alt="" />
+                        </div>
+                        <div class="ml-md-4 flex-grow-1">
+                            <div class="d-flex align-items-center mb-1">
+                                <h4 class="mb-0">@Model.holot_nd @Model.ten_nd</h4>
+                            </div>
+                            <p class="mb-0 text-muted">#@Model.taikhoan</p>
+                            <p class="text-primary"><i class='bx bx-buildings'></i> @Model.VaiTro.ten_vt</p>
+                            <a href="@Url.Action("Edit", "NguoiDung", new { Area = "Admin", id = Model.ma_nd })" class="btn btn-primary">Cập nhật</a>
+                            <button type="button" class="btn btn-outline-danger ml-2 btndelete" data-id="@Model.ma_nd" data-name="@Model.holot_nd @Model.ten_nd">Xóa</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-5">
+                    <table class="table table-sm table-borderless mt-md-0 mt-3">
+                        <tbody>
+                            <tr>
+                                <th>@Html.DisplayNameFor(m => m.gioitinh_nd):</th>
+                                <td>
+                                    @if (Model.gioitinh_nd == 0)
+                                    {
+                                        <span>nữ</span>
+                                    }
+                                    else
+                                    {
+                                        <span>nam</span>
+                                    }
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>@Html.DisplayNameFor(m => m.sdt_nd):</th>
+                                <td>@Model.sdt_nd</td>
+                            </tr>
+                            <tr>
+                                <th>@Html.DisplayNameFor(m => m.diachi):</th>
+                                <td>@Model.diachi</td>
+                            </tr>
+                            <tr>
+                                <th>@Html.DisplayNameFor(m => m.email):</th>
+                                <td>@Model.email</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="mb-3 mb-lg-0">
+                        <a href="javascript:;" class="btn btn-sm btn-link"><i class='bx bxl-github'></i></a>
+                        <a href="javascript:;" class="btn btn-sm btn-link"><i class='bx bxl-twitter'></i></a>
+                        <a href="javascript:;" class="btn btn-sm btn-link"><i class='bx bxl-facebook'></i></a>
+                        <a href="javascript:;" class="btn btn-sm btn-link"><i class='bx bxl-linkedin'></i></a>
+                        <a href="javascript:;" class="btn btn-sm btn-link"><i class='bx bxl-dribbble'></i></a>
+                        <a href="javascript:;" class="btn btn-sm btn-link"><i class='bx bxl-stack-overflow'></i></a>
+                    </div>
+                </div>
+            </div>
+            <!--end row-->
+            <ul class="nav nav-pills">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#Experience"><span class="p-tab-name">Danh sách nhà trọ</span><i class='bx bx-donate-blood font-24 d-sm-none'></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#Biography"><span class="p-tab-name">Các hoạt động</span><i class='bx bxs-user-rectangle font-24 d-sm-none'></i></a>
+                </li>
+            </ul>
+            <div class="tab-content mt-3">
+                <div class="tab-pane fade show active" id="Experience">
+                    <div class="card shadow-none border mb-0 radius-15">
+                        <div class="card-body">
+                            <div class="d-sm-flex align-items-center mb-3">
+                                <h4 class="mb-0">Danh sách nhà trọ</h4>
+                                <p class="mb-0 ml-sm-3 text-muted">@Model.NhaTroes.Count() nhà trọ</p>
+                            </div>
+                            <div class="row">
+                                @foreach (var item in Model.NhaTroes)
+                                {
+                                    string UrlImage = "/Content/user/assets/images/course/01.jpg";
+                                    if (item.AnhNhaTroes.Count > 0)
+                                    {
+                                        UrlImage = item.AnhNhaTroes.ElementAt(0).ten_anh;
+                                    }
+                                    <div class="col-lg-3">
+                                        <div class="card radius-15 bg-light-warning">
+                                            <div class="card-body text-center">
+                                                <img src="@UrlImage" width="100" height="100" class="rounded-circle p-1 border bg-white" alt="">
+                                                <h5 class="mb-0 mt-4"><a href="@Url.Action("Detail", "NhaTro", new { Area = "Admin", id = item.ma_nt })">@item.ten_nt</a></h5>
+                                                <p class="mb-0">@item.diachi_nt</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="Biography">
+                    <div class="card shadow-none border mb-0 radius-15">
+                        <div class="card-body">
+                            <div class="">
+                                <div class="">
+                                    <div class="container py-2">
+                                        <h2 class="font-weight-light text-center text-muted py-3">Các hoạt động của @Model.holot_nd @Model.ten_nd</h2>
+                                        @foreach (var item in ((List<Website.Models.HoatDongModel>)ViewBag.HoatDong).OrderByDescending(hd => hd.Ngay))
+                                        {
+                                            string classBg = "";
+                                            switch (item.Type)
+                                            {
+                                                case 1:
+                                                    classBg = "warning";
+                                                    break;
+                                                case 2:
+                                                    classBg = "info";
+                                                    break;
+                                                case 3:
+                                                    classBg = "success";
+                                                    break;
+                                                case 4:
+                                                    classBg = "danger";
+                                                    break;
+                                                default:
+                                                    classBg = "primary";
+                                                    break;
+                                            }
+
+                                            <div class="row">
+                                                <div class="col-auto text-center flex-column d-none d-sm-flex">
+                                                    <div class="row h-50">
+                                                        <div class="col border-right">&nbsp;</div>
+                                                        <div class="col">&nbsp;</div>
+                                                    </div>
+                                                    <h5 class="m-2">
+                                                        <span class="badge badge-pill bg-@classBg">&nbsp;</span>
+                                                    </h5>
+                                                    <div class="row h-50">
+                                                        <div class="col border-right">&nbsp;</div>
+                                                        <div class="col">&nbsp;</div>
+                                                    </div>
+                                                </div>
+                                                <div class="col py-2">
+                                                    <div class="card border-@classBg shadow radius-15">
+                                                        <div class="card-body">
+                                                            <div class="float-right text-primary">@item.Ngay</div>
+                                                            <h4 class="card-title text-primary">@item.TieuDe</h4>
+                                                            <p class="card-text">@item.NoiDung</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                    <!--container-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

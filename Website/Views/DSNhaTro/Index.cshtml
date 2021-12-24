@@ -1,0 +1,223 @@
+﻿@model IEnumerable<Website.Models.DSNhaTroModel>
+@using Website.Models
+@{
+    ViewBag.Title = "Nhà trọ";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+@section style{
+}
+@section scripts{
+}
+@section  breadcrumb{
+    <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home", new { Area = "" })">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">@ViewBag.Title</li>
+}
+<!-- group select section start here -->
+<div class="group-select-section">
+    <div class="container">
+        @using (Html.BeginForm("Index", "DSNhaTro", FormMethod.Get, new { Area = "" }))
+        {
+            <div class="section-wrapper">
+                <div class="row align-items-center g-4">
+
+                    <div class="col-md-1">
+                        <div class="group-select-left">
+                            <button type="submit">Lọc</button>
+                        </div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="group-select-right">
+                            <div class="row g-2 row-cols-lg-4 row-cols-sm-2 row-cols-1">
+                                <div class="col">
+                                    <div class="select-item">
+                                        @Html.DropDownList("ma_kv", (IEnumerable<SelectListItem>)ViewBag.khuVucList, "Tất cả")
+                                        <div class="select-icon">
+                                            <i class="icofont-rounded-down"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="select-item">
+                                        @Html.TextBox("tiendien", "", new { @placeholder = "Tiền điện" })
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="select-item">
+                                        @Html.TextBox("tiennuoc", "", new { @placeholder = "Tiền nước" })
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="select-item">
+                                        @Html.TextBox("giaphong", "", new { @placeholder = "Giá phòng" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<!-- group select section ending here -->
+<!-- course section start here -->
+<div class="course-section padding-tb section-bg">
+    <div class="container">
+        <div class="section-wrapper">
+            <div class="course-showing-part">
+                <div class="d-flex flex-wrap align-items-center justify-content-between">
+                    <div class="course-showing-part-left">
+                        @{ 
+                            int start = 6 * (ViewBag.page - 1) + 1;
+                            int end = 6 * ViewBag.page;
+                            end = (end > ViewBag.total) ? ViewBag.total : end;
+                        }
+                        <p>Hiển thị từ @start đến @end trong @ViewBag.total kết quả</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row g-4 justify-content-center row-cols-xl-3 row-cols-md-2 row-cols-1">
+                @foreach (var m in Model)
+                {
+                    <div class="col">
+                        <div class="course-item">
+                            <div class="course-inner">
+                                <div class="course-thumb">
+                                    @{
+                                        string UrlImage = "/Content/user/assets/images/course/01.jpg";
+                                        if (m.anhNhaTro.Count > 0)
+                                        {
+                                            UrlImage = m.anhNhaTro[0].ten_anh;
+                                        }
+                                    }
+                                    <img src="@UrlImage" alt="course" style="height: 250px" />
+                                </div>
+                                <div class="course-content">
+                                    <div class="course-category">
+                                        <div class="course-cate">
+                                            <a href="#" style='background-color: #@m.khuVuc.ma_ms;'>@m.khuVuc.ten_kv</a>
+                                        </div>
+                                        <div class="course-reiew">
+                                            <span class="ratting">
+                                                @for (int i = 1; i <= (int)m.soSao; i++)
+                                                {
+                                                    <i class="icofont-ui-rating"></i>
+                                                }
+                                                @for (int i = 1; i <= 5 - (int)m.soSao; i++)
+                                                {
+                                                    <i class="icofont-ui-rating" style="color: #808080"></i>
+                                                }
+                                            </span>
+                                            <span class="ratting-count">
+                                                @m.soDanhGia reviews
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <a href="@Url.Action("NhaTro","DSNhaTro", new { Area = "", id = m.nhaTro.ma_nt })"><h5>@m.nhaTro.ten_nt</h5></a>
+                                    <div class="course-details">
+                                        <div class="couse-count"><i class="icofont-google-map"></i> @m.nhaTro.diachi_nt</div>
+                                        <div class="couse-topic"><i class="icofont-phone"></i> @m.nhaTro.sdt_nt</div>
+                                    </div>
+                                    <div class="course-footer">
+                                        <div class="course-author">
+                                            <img src="@m.nguoiDung.anh_nd" style="height: 30px" alt="course author">
+                                            <a href="team-single.html" class="ca-name">@m.nguoiDung.holot_nd @m.nguoiDung.ten_nd</a>
+                                        </div>
+                                        <div class="course-btn">
+                                            <a href="@Url.Action("NhaTro","DSNhaTro", new { Area = "", id = m.nhaTro.ma_nt })" class="lab-btn-text">Xem thêm <i class="icofont-external-link"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <ul class="default-pagination lab-ul">
+                <li>
+                    <a href="@Url.Action("Index", "DSNhaTro", new { Area = "", page = 1, ma_kv = Request.Params["ma_kv"], tiendien = Request.Params["tiendien"], tiennuoc = Request.Params["tiennuoc"], giaphong = Request.Params["giaphong"]})"><i class="icofont-rounded-left"></i></a>
+                </li>
+                @if (ViewBag.maxpage <= 5)
+                {
+                    for (int i = 1; i <= ViewBag.maxpage; i++)
+                    {
+                        if (i == ViewBag.page)
+                        {
+                            <li>
+                                <a href="@Url.Action("Index", "DSNhaTro", new { Area = "", page = i, ma_kv = Request.Params["ma_kv"], tiendien = Request.Params["tiendien"], tiennuoc = Request.Params["tiennuoc"], giaphong = Request.Params["giaphong"]})" class="active">@i</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li>
+                                <a href="@Url.Action("Index", "DSNhaTro", new { Area = "", page = i, ma_kv = Request.Params["ma_kv"], tiendien = Request.Params["tiendien"], tiennuoc = Request.Params["tiennuoc"], giaphong = Request.Params["giaphong"]})">@i</a>
+                            </li>
+                        }
+                    }
+                }
+                else
+                {
+                    if (ViewBag.page <= 3)
+                    {
+                        for (int i = 1; i <= 5; i++)
+                        {
+                            if (i == ViewBag.page)
+                            {
+                                <li>
+                                    <a href="@Url.Action("Index", "DSNhaTro", new { Area = "", page = i, ma_kv = Request.Params["ma_kv"], tiendien = Request.Params["tiendien"], tiennuoc = Request.Params["tiennuoc"], giaphong = Request.Params["giaphong"]})" class="active">@i</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li>
+                                    <a href="@Url.Action("Index", "DSNhaTro", new { Area = "", page = i, ma_kv = Request.Params["ma_kv"], tiendien = Request.Params["tiendien"], tiennuoc = Request.Params["tiennuoc"], giaphong = Request.Params["giaphong"]})">@i</a>
+                                </li>
+                            }
+                        }
+                    }
+                    else if (ViewBag.page >= ViewBag.maxpage - 2)
+                    {
+                        for (int i = ViewBag.maxpage - 4; i <= ViewBag.maxpage; i++)
+                        {
+                            if (i == ViewBag.page)
+                            {
+                                <li>
+                                    <a href="@Url.Action("Index", "DSNhaTro", new { Area = "", page = i, ma_kv = Request.Params["ma_kv"], tiendien = Request.Params["tiendien"], tiennuoc = Request.Params["tiennuoc"], giaphong = Request.Params["giaphong"]})" class="active">@i</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li>
+                                    <a href="@Url.Action("Index", "DSNhaTro", new { Area = "", page = i, ma_kv = Request.Params["ma_kv"], tiendien = Request.Params["tiendien"], tiennuoc = Request.Params["tiennuoc"], giaphong = Request.Params["giaphong"]})">@i</a>
+                                </li>
+                            }
+                        }
+                    }
+                    else
+                    {
+                        for (int i = ViewBag.page - 2; i <= ViewBag.page + 2; i++)
+                        {
+                            if (i == ViewBag.page)
+                            {
+                                <li>
+                                    <a href="@Url.Action("Index", "DSNhaTro", new { Area = "", page = i, ma_kv = Request.Params["ma_kv"], tiendien = Request.Params["tiendien"], tiennuoc = Request.Params["tiennuoc"], giaphong = Request.Params["giaphong"]})" class="active">@i</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li>
+                                    <a href="@Url.Action("Index", "DSNhaTro", new { Area = "", page = i, ma_kv = Request.Params["ma_kv"], tiendien = Request.Params["tiendien"], tiennuoc = Request.Params["tiennuoc"], giaphong = Request.Params["giaphong"]})">@i</a>
+                                </li>
+                            }
+                        }
+                    }
+                }
+
+                <li>
+                    <a href="@Url.Action("Index", "DSNhaTro", new { Area = "", page = ViewBag.maxpage, ma_kv = Request.Params["ma_kv"], tiendien = Request.Params["tiendien"], tiennuoc = Request.Params["tiennuoc"], giaphong = Request.Params["giaphong"]})"><i class="icofont-rounded-right"></i></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- course section ending here -->

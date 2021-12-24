@@ -1,0 +1,366 @@
+﻿@model Website.EF.NhaTro
+
+@{
+    ViewBag.Title = Model.ten_nt;
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+    float soSao = 0;
+    int count = 0;
+    int total = 0;
+    foreach (var item in Model.DanhGias)
+    {
+        count += item.sosao;
+        total++;
+    }
+    soSao = (total > 0) ? count / total : soSao;
+    string UrlImage = "/Content/user/assets/images/course/01.jpg";
+    if (Model.AnhNhaTroes.Count > 0)
+    {
+        UrlImage = Model.AnhNhaTroes.ElementAt(0).ten_anh;
+    }
+}
+@section style{
+    <link href="~/Content/css/NhaTroStyle.css" rel="stylesheet" />
+}
+@section scripts{
+    <script src="~/Scripts/NhaTroScript.js"></script>
+}
+@section  breadcrumb{
+    <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home", new { Area = "" })">Home</a></li>
+    <li class="breadcrumb-item" aria-current="page"><a href="@Url.Action("Index", "DSNhaTro", new { Area = "" })">Nhà trọ</a></li>
+    <li class="breadcrumb-item active" aria-current="page">@ViewBag.Title</li>
+}
+<input type="hidden" value="@Model.toado_nt.XCoordinate" id="_lng" />
+<input type="hidden" value="@Model.toado_nt.YCoordinate" id="_lat" />
+<input type="hidden" value="@Model.ten_nt" id="_ten" />
+<input type="hidden" value="@Model.diachi_nt" id="_diachi" />
+<input type="hidden" value="@UrlImage" id="_img" />
+<!-- Page Header section start here -->
+<div class="pageheader-section style-2">
+    <div class="container">
+        <div class="row justify-content-center justify-content-lg-between align-items-center flex-row-reverse">
+            <div class="col-lg-7 col-12">
+                <div class="pageheader-thumb">
+                    <img src="@UrlImage" alt="rajibraj91" class="w-100">
+                </div>
+            </div>
+            <div class="col-lg-5 col-12">
+                <div class="pageheader-content">
+                    <div class="course-category">
+                        <a href="#" class="course-cate" style="background-color: #@Model.KhuVuc.ma_ms">@Model.KhuVuc.ten_kv</a>
+                    </div>
+                    <h2 class="phs-title">@Model.ten_nt</h2>
+                    <p class="phs-desc">@Model.diachi_nt</p>
+                    <div class="phs-thumb">
+                        <img src="@Model.NguoiDung.anh_nd" alt="@Model.NguoiDung.ten_nd">
+                        <span>@Model.NguoiDung.holot_nd @Model.NguoiDung.ten_nd</span>
+                        <div class="course-reiew">
+                            <span class="ratting">
+                                @for (int i = 1; i <= (int)soSao; i++)
+                                {
+                                    <i class="icofont-ui-rating"></i>
+                                }
+                                @for (int i = 1; i <= 5 - (int)soSao; i++)
+                                {
+                                    <i class="icofont-ui-rating" style="color:#808080"></i>
+                                }
+                            </span>
+                            <span class="ratting-count">
+                                @total đánh giá
+                            </span>
+                        </div>
+                        <br />
+                        <div class="mt-3">
+                            @if (HttpContext.Current.Session["USER_LOGIN"] != null)
+                            {
+                                var nd = (Website.Models.UserLoginModel)HttpContext.Current.Session["USER_LOGIN"];
+                                if (nd.ma_nd != Model.ma_nd)
+                                {
+                                    <button class="btn btn-warning" onclick="fbaocaonhatro(@Model.ma_nt, @nd.ma_nd)">Báo cáo nhà trọ này</button>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page Header section ending here -->
+<!-- sponsor section start here -->
+@if (Model.AnhNhaTroes.Count > 0)
+{
+    <div class="sponsor-section section-bg">
+        <div class="container">
+            <div class="section-wrapper">
+                <div class="sponsor-slider pt-5">
+                    <div class="swiper-wrapper">
+                        @foreach (var item in Model.AnhNhaTroes)
+                        {
+                            <div class="swiper-slide">
+                                <div class="sponsor-iten">
+                                    <div class="sponsor-thumb">
+                                        <div data-src="@item.ten_anh" data-fancybox="gallery" data-caption="@item.mota_anh">
+                                            <img src="@item.ten_anh" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<!-- sponsor section ending here -->
+<!-- course section start here -->
+<div class="course-single-section padding-tb section-bg">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="main-part">
+                    <div class="course-item">
+                        <div class="course-inner">
+                            <div class="course-content">
+                                <div id="zoomcontrol"><div id="map"></div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="authors">
+                        <div class="author-thumb">
+                            <img src="@Model.NguoiDung.anh_nd" alt="@Model.NguoiDung.ten_nd">
+                        </div>
+                        <div class="author-content">
+                            <h5>@Model.NguoiDung.holot_nd @Model.NguoiDung.ten_nd</h5>
+                            <span>Chủ nhà trọ</span>
+                            <table width="100%">
+                                <tr>
+                                    <td>@Html.LabelFor(m => m.NguoiDung.sdt_nd)</td>
+                                    <td>@Model.NguoiDung.sdt_nd</td>
+                                </tr>
+                                <tr>
+                                    <td>@Html.LabelFor(m => m.NguoiDung.diachi)</td>
+                                    <td>@Model.NguoiDung.diachi</td>
+                                </tr>
+                                <tr>
+                                    <td>@Html.LabelFor(m => m.NguoiDung.email)</td>
+                                    <td>@Model.NguoiDung.email</td>
+                                </tr>
+                            </table>
+                            <ul class="lab-ul social-icons">
+                                <li>
+                                    <a href="#" class="facebook"><i class="icofont-facebook"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#" class="twitter"><i class="icofont-twitter"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#" class="linkedin"><i class="icofont-linkedin"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#" class="instagram"><i class="icofont-instagram"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#" class="pinterest"><i class="icofont-pinterest"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div id="respond" class="comment-respond mb-lg-0">
+                        <h4 class="title-border">Để lại bình luận</h4>
+                        <div class="add-comment">
+                            @if (HttpContext.Current.Session["USER_LOGIN"] != null)
+                            {
+                                var nd = (Website.Models.UserLoginModel)HttpContext.Current.Session["USER_LOGIN"];
+                                <form name="form_cmt" id="form_cmt" method="post" class="comment-form">
+                                    <input type="hidden" id="sosao" name="sosao" value="5" />
+                                    <input type="hidden" name="ma_nd" value="@nd.ma_nd" />
+                                    <input type="hidden" name="ma_nt" value="@Model.ma_nt" />
+                                    <div class="ranking mb-3">
+                                        <i class="icofont-ui-rating" style="color:#f16126" data-rank="1"></i>
+                                        <i class="icofont-ui-rating" style="color:#f16126" data-rank="2"></i>
+                                        <i class="icofont-ui-rating" style="color:#f16126" data-rank="3"></i>
+                                        <i class="icofont-ui-rating" style="color:#f16126" data-rank="4"></i>
+                                        <i class="icofont-ui-rating" style="color:#f16126" data-rank="5"></i>
+                                    </div>
+                                    <textarea rows="5" placeholder="review summary" name="danhgia1"></textarea>
+                                    <button class="lab-btn" id="comment"><span>Gửi đánh giá</span></button>
+                                </form>
+                            }
+                            else
+                            {
+                                <strong>Bạn phải <a href="@Url.Action("Index", "Login", new { Area = "", path = @HttpContext.Current.Request.Url.AbsolutePath })" style="color: #f16126">đăng nhập</a> mới có thể bình luận</strong>
+                            }
+                        </div>
+                    </div>
+
+                    <div id="comments" class="comments">
+                        <h4 class="title-border" id="tong_dg" data-total="@total">@total đánh giá</h4>
+                        <ul class="comment-list" style="max-height: 500px; overflow: auto;">
+                            @foreach (var cmt in Model.DanhGias.OrderByDescending(dg => dg.ngay))
+                            {
+                                string id = cmt.ma_nd + "_" + cmt.ma_nt + "_" + cmt.ngay.ToString("yyyy-MM-ddTHH:mm:ss.fff");
+                                <li class="comment" id="@id">
+                                    <div class="com-thumb">
+                                        <img alt="@cmt.NguoiDung.ten_nd" src="@cmt.NguoiDung.anh_nd">
+                                    </div>
+                                    <div class="com-content">
+                                        <div class="com-title">
+                                            <div class="com-title-meta">
+                                                <h6>@cmt.NguoiDung.holot_nd @cmt.NguoiDung.ten_nd</h6>
+                                                <span> @cmt.ngay </span>
+                                            </div>
+                                            <span class="ratting">
+                                                @for (int i = 1; i <= cmt.sosao; i++)
+                                                {
+                                                    <i class="icofont-ui-rating"></i>
+                                                }
+                                                @for (int i = 1; i <= 5 - cmt.sosao; i++)
+                                                {
+                                                    <i class="icofont-ui-rating" style="color:#808080"></i>
+                                                }
+                                            </span>
+                                        </div>
+                                        <p>@cmt.danhgia1</p>
+                                        @if (HttpContext.Current.Session["USER_LOGIN"] != null)
+                                        {
+                                            var nd = (Website.Models.UserLoginModel)HttpContext.Current.Session["USER_LOGIN"];
+                                            if (cmt.ma_nd != nd.ma_nd)
+                                            {
+                                                <button class="btn btn-sm btn-warning baocao" data-toggle="tooltip" title="Báo cáo người dùng này" data-ma_nd="@cmt.ma_nd" onclick="fbaocaonguoidung(@nd.ma_nd, @cmt.ma_nd, '@cmt.NguoiDung.holot_nd @cmt.NguoiDung.ten_nd')" data-target="#baocaonguoidung"><i class="icofont-hand"></i></button>
+                                            }
+                                            if (nd.ma_vt == 1 || Model.ma_nd == nd.ma_nd || cmt.ma_nd == nd.ma_nd)
+                                            {
+                                                <button class="btn btn-sm btn-danger del-cmt" data-toggle="tooltip" title="Xóa đánh giá này" data-ma_nd="@cmt.ma_nd" data-ma_nt="@cmt.ma_nt" data-ngay="@cmt.ngay.ToString("yyyy-MM-ddTHH:mm:ss.fff")" data-danhgia="@cmt.danhgia1" data-sosao="@cmt.sosao"><i class="icofont-ui-delete"></i></button>
+                                            }
+                                        }
+                                        <hr />
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="sidebar-part">
+                    <div class="course-side-detail">
+                        <div class="csd-title">
+                            <div class="csdt-left">
+                                <h4 class="mb-0">Thông tin nhà trọ</h4>
+                            </div>
+                        </div>
+                        <div class="csd-content">
+                            <div class="csdc-lists">
+                                <ul class="lab-ul">
+                                    <li>
+                                        <div class="csdc-left"><i class="icofont-phone"></i>@Html.LabelFor(m => m.sdt_nt)</div>
+                                        <div class="csdc-right">@Model.sdt_nt</div>
+                                    </li>
+                                    <li>
+                                        <div class="csdc-left"><i class="icofont-electron"></i>Tiền điện</div>
+                                        <div class="csdc-right money">@ViewBag.tiendien</div>
+                                    </li>
+                                    <li>
+                                        <div class="csdc-left"><i class="icofont-water-drop"></i>Tiền nước</div>
+                                        <div class="csdc-right money">@ViewBag.tiennuoc</div>
+                                    </li>
+                                    @foreach (var item in (new Website.DAO.CoGiaDAO().GetGiaPhongGanDayTheoNhaTro(Model.ma_nt)))
+                                    {
+                                        <li>
+                                            <div class="csdc-left"><i class="icofont-ui-home"></i>@item.LoaiPhong.ten_lp</div>
+                                            <div class="csdc-right money">@item.giaphong</div>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="course-side-cetagory">
+                        <div class="csc-title">
+                            <h5 class="mb-0">Khu vực khác</h5>
+                        </div>
+                        <div class="csc-content">
+                            <div class="csdc-lists">
+                                <ul class="lab-ul">
+                                    @foreach (var item in new Website.DAO.KhuVucDAO().GetAllKhuVuc())
+                                    {
+                                        <li>
+                                            <div class="csdc-left"><a href="@Url.Action("Index", "DSNhaTro", new { Area = "", ma_kv = item.ma_kv})">@item.ten_kv</a></div>
+                                            <div class="csdc-right">@item.NhaTroes.Count()</div>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- course section ending here -->
+<div class="modal fade" id="baocaonguoidung" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Báo cáo người dùng <span id="ten_nguoi_dung"></span></h5>
+                <button type="button" class="close modal-close" data-dismiss="modal" style="background-color: white;" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form name="baocaonguoidung" method="post">
+                    <input type="hidden" name="nguoi_bao_cao" id="nguoi_bao_cao" />
+                    <input type="hidden" name="nguoi_bi_bao_cao" id="nguoi_bi_bao_cao" />
+                    <div class="form-group">
+                        <label>Loại báo cáo</label>
+                        @Html.DropDownList("ma_lbc", (IEnumerable<SelectListItem>)ViewBag.loaiBaoCaoList, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label>Lý do báo cáo</label>
+                        <textarea class="form-control" name="lydobaocaonguoidung" id="lydobaocaonguoidung"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary modal-close" data-dismiss="modal">Hủy báo cáo</button>
+                <button type="button" class="btn btn-primary" onclick="guibaocaonguoidung()">Báo cáo</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="baocaonhatro" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Báo cáo @Model.ten_nt</h5>
+                <button type="button" class="close modal-close" data-dismiss="modal" style="background-color: white;" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form name="baocaonguoidung" method="post">
+                    <input type="hidden" name="nguoi_bao_cao_nha_tro" id="nguoi_bao_cao_nha_tro" />
+                    <input type="hidden" name="ma_nha_tro_bi_bao_cao" id="ma_nha_tro_bi_bao_cao" />
+                    <div class="form-group">
+                        <label>Loại báo cáo</label>
+                        @Html.DropDownList("ma_lbc_nt", (IEnumerable<SelectListItem>)ViewBag.loaiBaoCaoList, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label>Lý do báo cáo</label>
+                        <textarea class="form-control" name="lydobaocaonhatro" id="lydobaocaonhatro"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary modal-close" data-dismiss="modal">Hủy báo cáo</button>
+                <button type="button" class="btn btn-primary" onclick="guibaocaonhatro()">Báo cáo</button>
+            </div>
+        </div>
+    </div>
+</div>
